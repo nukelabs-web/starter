@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project 22: Reaction Timer Game | Nukelabs</title>
+  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head><body>
+<header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs Logo"><span>Nukelabs</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
+<main class="project-page"><div class="container">
+  <div class="project-header"><h1 class="project-title">Project 22: Reaction Timer Game</h1><p class="project-subtitle">Arduino Uno R3 project</p><div class="project-meta"><div class="project-meta-item"><i class="fas fa-bolt"></i><span>Difficulty: Medium</span></div><div class="project-meta-item"><i class="fas fa-book"></i><span>Concepts: Timing, user interaction</span></div><div class="project-meta-item"><i class="fas fa-clock"></i><span>Time: 15-45 minutes</span></div></div></div>
+
+  <section class="project-section"><div class="section-header"><i class="fas fa-info-circle"></i><h2>Project Summary</h2></div><p>This project demonstrates Timing, user interaction. Build it to learn practical aspects of timing, user interaction.</p></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-microchip"></i><h2>Components Required</h2></div><div class="components-grid"><div class="component-card"><div class="component-icon"><i class="fas fa-microchip"></i></div><h3>Key Components</h3><p>Arduino Uno R3, LED, Push Button, 7-Segment Display, Resistors, Jumper Wires, Breadboard</p></div></div></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-project-diagram"></i><h2>Circuit Diagram</h2></div><div class="circuit-diagram"><img src="../images/project22-circuit.png" alt="Circuit Diagram for project 22"><p>Replace placeholder by adding <code>project22-circuit.png</code> to images/</p></div></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-plug"></i><h2>Pin Connections</h2></div><table class="pin-table"><thead><tr><th>Arduino Pin</th><th>Component Connection</th></tr></thead><tbody><tr><td>Segments</td><td>Digital pins 2-8 (via resistors)</td></tr><tr><td>Common</td><td>GND or VCC</td></tr></tbody></table></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-list-ol"></i><h2>Step-by-Step Instructions</h2></div><ol class="steps-list"><li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li><li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li><li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li><li>Use Serial Monitor for calibration if the sketch prints values.</li></ol></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-code"></i><h2>Arduino Code</h2></div><div class="code-block"><pre><code>/* Project 22 - Reaction Timer Game (basic sketch)
+ * Replace placeholders and expand as needed.
+ */
+void setup() {{ Serial.begin(9600); }}
+void loop() {{ Serial.println("Project 22 - Reaction Timer Game"); delay(1000); }}
+</code></pre></div></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-cogs"></i><h2>How It Works</h2></div>
+    <div class="accordion"><div class="accordion-header"><span>Understanding the Code (line-by-line)</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><pre>This is a placeholder sketch. Replace with project-specific code as required.</pre></div></div>
+    <div class="accordion"><div class="accordion-header"><span>Digital / Analog I/O & Design Notes</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><p>Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.</p></div></div>
+  </section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-lightbulb"></i><h2>Expected Output</h2></div><p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-graduation-cap"></i><h2>What You Learned</h2></div><ul><li>How to wire circuits and use a breadboard</li><li>How to program Arduino digital and analog pins</li><li>How to debug using Serial Monitor</li></ul></section>
+  <section class="project-section"><div class="section-header"><i class="fas fa-arrow-right"></i><h2>Next Steps / Extension Ideas</h2></div><p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p></section>
+</div></main>
+<footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs Logo"><h3>Nukelabs</h3><p>Empowering makers and electronics enthusiasts</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li><li><a href="tel:+918089252039"><i class="fas fa-phone"></i> +91-8089252039</a></li><li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li></ul></div></div><div class="copyright"><div class="container"><p>&copy; 2025 Nukelabs. All rights reserved.</p></div></div></footer>
+<script src="../js/script.js"></script></body></html>

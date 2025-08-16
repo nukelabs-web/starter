@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | Nukelabs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f1f1f1;
+    }
+
+    /* Header */
+    .header {
+      background: #000;
+      padding: 15px 20px;
+      border-bottom: 2px solid #ff6600;
+    }
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ff6600;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #f1f1f1;
+      transition: color 0.3s;
+    }
+    .navbar ul li a.active,
+    .navbar ul li a:hover {
+      color: #ff6600;
+    }
+    .mobile-toggle {
+      display: none;
+      font-size: 24px;
+      color: #ff6600;
+      cursor: pointer;
+    }
+
+    /* Page */
+    .support-page {
+      padding: 60px 20px;
+    }
+    .support-page .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .support-page h1 {
+      color: #ff6600;
+    }
+
+    /* Cards */
+    .support-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .support-card {
+      background: #1e1e1e;
+      border: 1px solid #ff6600;
+      border-radius: 12px;
+      padding: 25px;
+      flex: 1 1 calc(50% - 40px);
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(255,102,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .support-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(255,102,0,0.4);
+    }
+    .support-card i {
+      font-size: 40px;
+      color: #ff6600;
+      margin-bottom: 15px;
+    }
+    .support-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .support-card p {
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+    .support-card .btn {
+      display: inline-block;
+      background: #ff6600;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .support-card .btn:hover {
+      background: #e55a00;
+    }
+
+    /* Footer */
+    .footer {
+      background: #000;
+      padding: 40px 20px;
+      color: #ccc;
+    }
+    .footer h3, .footer h4 {
+      color: #ff6600;
+    }
+    .footer a {
+      color: #f1f1f1;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer a:hover {
+      color: #ff6600;
+    }
+    .footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-brand, .footer-links, .footer-newsletter {
+      flex: 1 1 250px;
+    }
+    .footer-newsletter input {
+      padding: 8px;
+      width: 70%;
+      border: none;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+    .footer-newsletter button {
+      padding: 8px 15px;
+      border: none;
+      background: #ff6600;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .footer-newsletter button:hover {
+      background: #e55a00;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .support-card {
+        flex: 1 1 100%;
+      }
+      .navbar {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .navbar.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Nukelabs Logo">
+        <span>Nukelabs</span>
+      </a>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="support.html" class="active">Support</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <!-- Support Content -->
+  <main class="support-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Support</h1>
+        <p>Need help with projects, components, or tutorials? Reach out to us anytime!</p>
+      </div>
+
+      <section class="support-section">
+        <div class="support-card">
+          <i class="fab fa-whatsapp"></i>
+          <h3>WhatsApp Support</h3>
+          <p>Chat directly with our support team on WhatsApp.</p>
+          <a href="https://wa.me/918089252039" target="_blank" class="btn">Chat Now</a>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-phone"></i>
+          <h3>Contact Phone</h3>
+          <p>For urgent support, call us at:</p>
+          <a href="tel:+918590342039" class="btn">+91-8590342039</a>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-envelope"></i>
+          <h3>Email Support</h3>
+          <p>Send us your queries, and we’ll respond promptly.</p>
+          <a href="mailto:makers.nukelabs@gmail.com" class="btn">makers.nukelabs@gmail.com</a>
+        </div>
+
+        <div class="support-card">
+          <i class="fab fa-whatsapp"></i>
+          <h3>Support Group</h3>
+          <p>Join our community group for discussions and help.</p>
+          <a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t" target="_blank" class="btn">Join Group</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Nukelabs Logo" style="height:50px;">
+        <h3>Nukelabs</h3>
+        <p>Empowering makers and electronics enthusiasts</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li>
+          <li><a href="tel:+918590342039"><i class="fas fa-phone"></i> +91-8590342039</a></li>
+          <li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li>
+          <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://instagram.com/nuke.labs" target="_blank"><i class="fab fa-instagram"></i> nuke.labs</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to our newsletter for project updates</p>
+        <form>
+          <input type="email" placeholder="Your Email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navbar = document.querySelector('.navbar');
+      mobileToggle.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
