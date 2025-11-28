@@ -201,33 +201,60 @@ img { max-width: 100%; display: block; }
 }
 .project-section ul li:hover { background: #fff; color: #000; }
 
-/* 3. Step by Step - TABLE LOOK (Simulated using Ordered List) */
-.steps-list {
-    text-align: left; /* Keep text left aligned inside the box */
-    padding: 0 !important; /* Reset generic padding */
-    overflow: hidden;
+/* 3. Step by Step - TABLE LOOK (Simulated using standard OL) */
+
+/* The Container (Table Border) */
+.project-section ol {
+    text-align: left; /* Text stays left aligned */
+    padding: 0 !important; /* Remove default padding */
+    list-style: none; /* Hide default numbers */
+    counter-reset: step-counter; /* Initialize counter */
+    overflow: hidden; /* rounded corners fix */
 }
 
-.step-item {
+/* The Rows */
+.project-section ol li {
     display: flex;
     align-items: flex-start;
-    padding: 20px 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Row Divider Line */
     margin: 0;
+    color: #e0e0e0;
 }
 
-.step-item:last-child { border-bottom: none; }
+/* Remove border from the last item */
+.project-section ol li:last-child {
+    border-bottom: none;
+}
 
-/* This creates the "STEP X" column */
-.step-item::before {
+/* The Left Column ("STEP 1") */
+.project-section ol li::before {
+    counter-increment: step-counter;
     content: "STEP " counter(step-counter);
     font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 0.85rem;
     color: #fff;
-    min-width: 100px; /* Fixed width for the "Column" */
+    min-width: 120px; /* Width of the left column */
     margin-right: 30px;
-    border-right: 1px solid rgba(255,255,255,0.1); /* Vertical divider */
+    border-right: 2px solid rgba(255, 255, 255, 0.15); /* Vertical Divider Line */
     padding-right: 20px;
+    letter-spacing: 1px;
+}
+
+/* Mobile Responsive Fix for Table */
+@media (max-width: 768px) {
+    .project-section ol li {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .project-section ol li::before {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
 }
 
 /* 4. Circuit Diagram */
@@ -278,3 +305,4 @@ img { max-width: 100%; display: block; }
     .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
 }
 @media (min-width: 769px) { .mobile-toggle { display: none; } }
+
