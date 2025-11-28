@@ -27,7 +27,6 @@ const projectsData = [
   { id: 25, title: "LED Chase", difficulty: "Easy", concept: "Looping, sequencing" }
 ];
 
-// Generate project cards (Redesigned for Nuke Labs Aesthetic)
 function generateProjectCards() {
   const grid = document.querySelector('.grid');
   if (!grid) return;
@@ -35,11 +34,7 @@ function generateProjectCards() {
   projectsData.forEach(project => {
     const card = document.createElement('div');
     card.className = 'project-card';
-
-    // Formatted ID (e.g., 01, 02)
     const formattedId = project.id.toString().padStart(2, '0');
-    
-    // Circuit image path
     const imgPath = `images/project${project.id}-circuit.png`;
 
     card.innerHTML = `
@@ -56,22 +51,18 @@ function generateProjectCards() {
         </a>
       </div>
     `;
-
     grid.appendChild(card);
   });
 }
 
-// Mobile menu toggle
 function setupMobileMenu() {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navbar = document.querySelector('.navbar');
-  
   if (!mobileToggle || !navbar) return;
 
   mobileToggle.addEventListener('click', () => {
     navbar.classList.toggle('active');
     const icon = mobileToggle.querySelector('i');
-    
     if (navbar.classList.contains('active')) {
         icon.classList.remove('fa-bars');
         icon.classList.add('fa-times');
@@ -82,7 +73,44 @@ function setupMobileMenu() {
   });
 }
 
-// Active Link Highlighter
+// Function to Make Code Blocks Copyable & Glassy
+function enhanceCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('.code-block');
+    
+    codeBlocks.forEach(block => {
+        // Create the container
+        const container = document.createElement('div');
+        container.className = 'code-container';
+        
+        // Create header with language label and copy button
+        const header = document.createElement('div');
+        header.className = 'code-header';
+        header.innerHTML = `<span>Arduino / C++</span>`;
+        
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+        
+        // Copy Functionality
+        copyBtn.addEventListener('click', () => {
+            const codeText = block.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
+        });
+
+        header.appendChild(copyBtn);
+        
+        // Insert container before code block, then move code block inside
+        block.parentNode.insertBefore(container, block);
+        container.appendChild(header);
+        container.appendChild(block);
+    });
+}
+
 function highlightActiveNav() {
   const navLinks = document.querySelectorAll('.navbar a');
   const currentPath = window.location.pathname.split("/").pop();
@@ -96,25 +124,9 @@ function highlightActiveNav() {
   });
 }
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
   generateProjectCards();
   setupMobileMenu();
   highlightActiveNav();
-
-  // Smooth Scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: 'smooth'
-        });
-        // Close mobile menu if open
-        document.querySelector('.navbar').classList.remove('active');
-      }
-    });
-  });
+  enhanceCodeBlocks(); // Run the new code enhancer
 });
