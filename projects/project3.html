@@ -52,8 +52,8 @@
                 <ul>
                     <li>Arduino Uno R3</li>
                     <li>Push Button</li>
-                    <li>Resistor (10kΩ)</li>
-                    <li>LED & Resistor (220Ω)</li>
+                    <li>Resistors</li>
+                    <li>LED</li>
                     <li>Breadboard & Wires</li>
                 </ul>
             </section>
@@ -74,15 +74,15 @@
                     </tr>
                     <tr>
                         <td>Pin 2</td>
-                        <td>Wire &rarr; Resistor &rarr; LED Anode (+)</td>
+                        <td>Wire to LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>Pin 3</td>
-                        <td>Wire &rarr; Button Leg (Signal)</td>
+                        <td>Wire to Button Leg (Signal)</td>
                     </tr>
                     <tr>
                         <td>5V</td>
-                        <td>Wire &rarr; Button Leg (Power)</td>
+                        <td>Wire to Button Leg (Power)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
@@ -94,12 +94,12 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Connect the Arduino <strong>5V</strong> and <strong>GND</strong> to the bottom Power Rails (+ and -) on the breadboard.</li>
-                    <li>Insert the LED. Connect a 220Ω resistor from the Cathode (Short Leg) to the Negative Rail.</li>
-                    <li>Connect a wire from <strong>Pin 2</strong> to the Anode (Long Leg) of the LED.</li>
-                    <li>Insert the Push Button. Connect one leg to the <strong>5V Rail</strong>.</li>
-                    <li>Connect the diagonal leg to <strong>Pin 3</strong> via a wire.</li>
-                    <li>Add a <strong>10kΩ resistor</strong> from that same diagonal leg (Pin 3 side) to the <strong>Negative Rail</strong> (Pull-down).</li>
+                    <li>Connect the Arduino 5V and GND to the bottom Power Rails (+ and -) on the breadboard.</li>
+                    <li>Insert the LED. Connect a resistor from the Cathode (Short Leg) to the Negative Rail.</li>
+                    <li>Connect a wire from Pin 2 to the Anode (Long Leg) of the LED.</li>
+                    <li>Insert the Push Button. Connect one leg to the Positive Rail (+).</li>
+                    <li>Connect the diagonal leg to Pin 3 via a wire.</li>
+                    <li>Add a resistor from that same diagonal leg (Pin 3 side) to the Negative Rail (Pull-down).</li>
                     <li>Upload the code below.</li>
                 </ol>
             </section>
@@ -149,7 +149,7 @@ void loop() {
                     </li>
                     <li>
                         <strong>Pull-down Resistor:</strong><br>
-                        The 10kΩ resistor pulls the button pin to 0V (GND) when NOT pressed. Without this, the pin acts like an antenna and reads random noise.
+                        The resistor pulls the button pin to 0V (GND) when NOT pressed. Without this, the pin acts like an antenna and reads random noise.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
