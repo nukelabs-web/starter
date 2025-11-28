@@ -1,51 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project 8: Automatic Night Lamp | Nukelabs</title>
-  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head><body>
-<header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs Logo"><span>Nukelabs</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
-<main class="project-page"><div class="container">">
-  <div class="project-header"><h1 class="project-title">Project 8: Automatic Night Lamp</h1><p class="project-subtitle">Arduino Uno R3 project</p><div class="project-meta"><div class="project-meta-item"><i class="fas fa-bolt"></i><span>Difficulty: Easy</span></div><div class="project-meta-item"><i class="fas fa-book"></i><span>Concepts: Light detection, automatic control</span></div><div class="project-meta-item"><i class="fas fa-clock"></i><span>Time: 15-45 minutes</span></div></div></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 8: Auto Night Lamp | Nukelabs</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <span>NUKELABS</span>
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
 
-  <section class="project-section"><div class="section-header"><i class="fas fa-info-circle"></i><h2>Project Summary</h2></div><p>This project demonstrates Light detection, automatic control. Build it to learn practical aspects of light detection, automatic control.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-microchip"></i><h2>Components Required</h2></div><div class="components-grid"><div class="component-card"><div class="component-icon"><i class="fas fa-microchip"></i></div><h3>Key Components</h3><p>Arduino Uno R3, LED, LDR, 10k Resistor, Jumper Wires, Breadboard</p></div></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-project-diagram"></i><h2>Circuit Diagram</h2></div><div class="circuit-diagram"><img src="../images/project8-circuit.png" alt="Circuit Diagram for project 8"><p>Replace placeholder by adding <code>project8-circuit.png</code> to images/</p></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-plug"></i><h2>Pin Connections</h2></div><table class="pin-table"><thead><tr><th>Arduino Pin</th><th>Component Connection</th></tr></thead><tbody><tr><td>LDR</td><td>A0 (voltage divider with 10k)</td></tr><tr><td>LED</td><td>Digital PWM pin 9</td></tr></tbody></table></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-list-ol"></i><h2>Step-by-Step Instructions</h2></div><ol class="steps-list"><li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li><li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li><li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li><li>Use Serial Monitor for calibration if the sketch prints values.</li></ol></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-code"></i><h2>Arduino Code</h2></div><div class="code-block"><pre><code>/* Project 8 - Light-sensitive LED / Night Lamp
- * Hardware: Voltage divider using LDR and 10k resistor to A0. LED on pin 9.
- * Purpose: Read analog sensor and make decisions based on threshold.
+    <main class="project-page">
+        <div class="container">
+            
+            <div class="project-header">
+                <h1 class="project-title">PROJECT 08: AUTO NIGHT LAMP</h1>
+                <p class="project-subtitle">Home Automation Basics</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
+                    <div class="project-meta-item"><i class="fas fa-home"></i> Concepts: Automation</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 30 Min</div>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2>Mission Brief</h2>
+                <p>Automation is about making things happen without human intervention. In this project, you will build a smart street light prototype that detects darkness using an LDR and turns on an LED automatically.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>Key Components</h2>
+                <ul>
+                    <li>Arduino Uno R3</li>
+                    <li>LDR (Light Dependent Resistor)</li>
+                    <li>10kΩ Resistor (Voltage Divider)</li>
+                    <li>White LED</li>
+                    <li>220Ω Resistor (for LED)</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <img src="../images/project8-circuit.png" alt="Circuit Diagram for Project 8">
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Pin Connections</h2>
+                <table class="pin-table">
+                    <tr>
+                        <th>Arduino Pin</th>
+                        <th>Component Connection</th>
+                    </tr>
+                    <tr>
+                        <td>Pin A0</td>
+                        <td>Junction of LDR & 10kΩ Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>5V</td>
+                        <td>Other leg of LDR</td>
+                    </tr>
+                    <tr>
+                        <td>GND</td>
+                        <td>Other leg of 10kΩ Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 13</td>
+                        <td>Positive Leg of Street Light (LED)</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="project-section">
+                <h2>Step-by-Step Instructions</h2>
+                <ol>
+                    <li>Build the LDR Sensor circuit (Voltage Divider) exactly as you did in Project 4.</li>
+                    <li>Connect the sensor junction (middle point) to Analog Pin A0.</li>
+                    <li>Connect a White LED to Pin 13 (remember the 220Ω resistor!).</li>
+                    <li>Upload the code below.</li>
+                    <li>Open Serial Monitor to check the light values in your room.</li>
+                </ol>
+            </section>
+
+            <section class="project-section">
+                <h2>Arduino Code</h2>
+                <div class="code-block">
+/* Project 8 - Automatic Night Lamp
+ * Turns LED on when LDR sensor detects darkness.
  */
-const int ldrPin = A0;
-const int ledPin = 9;
-int threshold = 400;  // tune this value depending on ambient light
 
-void setup() {{ Serial.begin(9600); pinMode(ledPin, OUTPUT); }}
+const int sensorPin = A0;
+const int lightPin = 13;
 
-void loop() {{
-  int value = analogRead(ldrPin);        // 0..1023 proportional to light
-  Serial.println(value);                 // useful for calibration
-  if (value < threshold) {{              // darker -> turn lamp on
-    analogWrite(ledPin, 200);            // PWM brightness (0..255)
-  }} else {{
-    analogWrite(ledPin, 0);              // turn off
-  }}
-  delay(200);                            // small delay for stability
-}}
-</code></pre></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-cogs"></i><h2>How It Works</h2></div>
-    <div class="accordion"><div class="accordion-header"><span>Understanding the Code (line-by-line)</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><pre>Explanation and justification:
-1) analogRead returns 0-1023 — lets you measure light precisely.
-2) Serial.println — important for calibration; observe values under different lighting and choose threshold.
-3) analogWrite with PWM — allows dimming instead of simple on/off.
-4) threshold tuning — different LDRs and setups require adjusting threshold; include a potentiometer to make it user-adjustable.
-</pre></div></div>
-    <div class="accordion"><div class="accordion-header"><span>Digital / Analog I/O & Design Notes</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><p>Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.</p></div></div>
-  </section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-lightbulb"></i><h2>Expected Output</h2></div><p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-graduation-cap"></i><h2>What You Learned</h2></div><ul><li>How to wire circuits and use a breadboard</li><li>How to program Arduino digital and analog pins</li><li>How to debug using Serial Monitor</li></ul></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-arrow-right"></i><h2>Next Steps / Extension Ideas</h2></div><p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p></section>
-</div></main>
-<footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs Logo"><h3>Nukelabs</h3><p>Empowering makers and electronics enthusiasts</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li><li><a href="tel:+918089252039"><i class="fas fa-phone"></i> +91-8089252039</a></li><li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li></ul></div></div><div class="copyright"><div class="container"><p>&copy; 2025 Nukelabs. All rights reserved.</p></div></div></footer>
-<script src="../js/script.js"></script></body></html>
+// CHANGE THIS value based on your room's light level!
+int threshold = 400; 
+
+void setup() {
+  pinMode(lightPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read light level (0-1023)
+  int reading = analogRead(sensorPin);
+  
+  // Debugging: Show value on computer
+  Serial.print("Light Level: ");
+  Serial.println(reading);
+  
+  // Logic: Lower value means DARKER
+  if (reading < threshold) {
+    digitalWrite(lightPin, HIGH); // Turn ON Street Light
+  } else {
+    digitalWrite(lightPin, LOW);  // Turn OFF Street Light
+  }
+  
+  delay(500); // Check every half second
+}
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Calibration Logic:
+                    </li>
+                    
+                    <li>
+                        <strong>The Threshold:</strong><br>
+                        This is the most critical part. Every room has different lighting. If your LED stays on even when it's bright, your `threshold` number is too high. Decrease it.
+                    </li>
+                    <li>
+                        <strong>Serial Monitor:</strong><br>
+                        We print the `reading` so you can see exactly what number represents "Dark" vs "Bright" in your specific environment.
+                    </li>
+
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Reverse Logic:
+                    </li>
+
+                    <li>
+                        <strong>Darkness Check:</strong><br>
+                        Unlike a button where HIGH = ON, here `reading < threshold` (Low Value) means it is DARK, so we turn the light ON.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p><strong>Light:</strong> The LED stays OFF.<br><strong>Shadow/Dark:</strong> When you cover the sensor with your hand, the LED automatically snaps ON. It mimics a real street lamp.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>How to build a self-regulating automated system.</li>
+                    <li>The importance of <strong>Calibration</strong> in sensor projects.</li>
+                    <li>Using comparison operators (`<`, `>`) to make decisions based on analog data.</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps / Extension Ideas</h2>
+                <p>Add a potentiometer to allow the user to manually adjust the sensitivity (Threshold) of the night light without having to rewrite the code!</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
+                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
+                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
