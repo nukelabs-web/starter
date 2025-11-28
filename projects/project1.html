@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1: Blinking LED | Nukelabs</title>
+    <title>Project 3: Button Control | Nukelabs</title>
     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,35 +33,35 @@
         <div class="container">
             
             <div class="project-header">
-                <h1 class="project-title">PROJECT 01: BLINKING LED</h1>
-                <p class="project-subtitle">Arduino Uno R3 project</p>
+                <h1 class="project-title">PROJECT 03: BUTTON CONTROL</h1>
+                <p class="project-subtitle">Introduction to Digital Inputs</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
-                    <div class="project-meta-item"><i class="fas fa-book"></i> Concepts: Digital Output</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 15-45 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-microchip"></i> Concepts: Digital Read</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 20-30 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
-                <h2>Project Summary</h2>
-                <p>This project demonstrates Digital output and basic programming. You will build a simple circuit to control an LED on Pin 13, learning the basics of wiring and loop timing.</p>
+                <h2>Mission Brief</h2>
+                <p>So far, the Arduino has done all the talking (Output). Now it's time for it to listen (Input). In this project, you will add a push button to control the LED manually.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>Red LED</li>
-                    <li>220Ω Resistor (Red-Red-Brown)</li>
-                    <li>Red & Black Jumper Wires</li>
-                    <li>Breadboard</li>
+                    <li>Push Button</li>
+                    <li>10kΩ Resistor (Pull-down)</li>
+                    <li>LED & 220Ω Resistor</li>
+                    <li>Breadboard & Wires</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Circuit Diagram</h2>
                 <div class="circuit-diagram">
-                    <img src="../images/project1-circuit.png" alt="Circuit Diagram for Project 1">
+                    <img src="../images/project3-circuit.png" alt="Circuit Diagram for Project 3">
                 </div>
             </section>
 
@@ -73,12 +73,20 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
+                        <td>Pin 2</td>
+                        <td>Button Leg (Signal)</td>
+                    </tr>
+                    <tr>
                         <td>Pin 13</td>
-                        <td>Red Wire &rarr; Resistor &rarr; LED Anode (+)</td>
+                        <td>LED Anode (+)</td>
+                    </tr>
+                    <tr>
+                        <td>5V</td>
+                        <td>Button Leg (Power)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Black Wire &rarr; LED Cathode (-)</td>
+                        <td>10kΩ Resistor & LED Cathode</td>
                     </tr>
                 </table>
             </section>
@@ -86,32 +94,43 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Insert the LED into the breadboard. Identify the Anode (Long Leg) and Cathode (Short Leg).</li>
-                    <li>Connect the 220Ω Resistor to the same row as the LED Anode (Long Leg).</li>
-                    <li>Connect the <strong>Red Jumper Wire</strong> from <strong>Pin 13</strong> to the free end of the Resistor.</li>
-                    <li>Connect the <strong>Black Jumper Wire</strong> from the LED Cathode (Short Leg) to <strong>GND</strong>.</li>
-                    <li>Connect the Arduino via USB, paste the code below, and upload.</li>
+                    <li>Insert the push button into the breadboard.</li>
+                    <li>Connect one leg of the button to <strong>5V</strong>.</li>
+                    <li>Connect the diagonal/opposite leg to <strong>Pin 2</strong>.</li>
+                    <li>Add a <strong>10kΩ resistor</strong> from the Pin 2 leg to <strong>GND</strong> (Pull-down).</li>
+                    <li>Connect the LED to Pin 13 (Long leg) and GND (Short leg via 220Ω resistor).</li>
+                    <li>Upload the code below.</li>
                 </ol>
             </section>
 
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 1 - Blinking LED
- * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
+/* Project 3 - Button Control
+ * Reads a digital input on pin 2 and controls an LED on pin 13.
  */
 
-int ledPin = 13; // use on-board LED on many Arduino boards
+const int buttonPin = 2;     // Pushbutton pin
+const int ledPin =  13;      // LED pin
+
+int buttonState = 0;         // Variable to store reading
 
 void setup() {
-  pinMode(ledPin, OUTPUT); // configure pin as output to drive the LED
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT);
 }
 
 void loop() {
-  digitalWrite(ledPin, HIGH); // set pin HIGH -> LED ON
-  delay(500);                 // wait 500 ms
-  digitalWrite(ledPin, LOW);  // set pin LOW -> LED OFF
-  delay(500);                 // wait 500 ms
+  // Read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // Check if the pushbutton is pressed.
+  // If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    digitalWrite(ledPin, HIGH); // Turn LED on
+  } else {
+    digitalWrite(ledPin, LOW);  // Turn LED off
+  }
 }
                 </div>
             </section>
@@ -120,49 +139,46 @@ void loop() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Line-by-line justification:
+                        Hardware Logic:
                     </li>
                     
                     <li>
-                        1) <code>int ledPin = 13;</code> — stores the pin number so it's easy to change.
+                        <strong>Digital Input:</strong><br>
+                        Unlike Output (providing voltage), Input measures voltage. We use `digitalRead` to check if a pin sees 5V (HIGH) or 0V (LOW).
                     </li>
                     <li>
-                        2) <code>pinMode(ledPin, OUTPUT);</code> — sets the pin as an output so digitalWrite can drive it.
-                    </li>
-                    <li>
-                        3) <code>digitalWrite(ledPin, HIGH);</code> — applies voltage (5V) to the pin to turn LED on.
-                    </li>
-                    <li>
-                        4) <code>delay(500);</code> — a blocking wait; simple but stops microcontroller from doing other tasks.
+                        <strong>Pull-down Resistor:</strong><br>
+                        The 10kΩ resistor pulls the pin voltage to 0V (GND) when the button is NOT pressed. Without this, the pin acts like an antenna and reads random noise.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Digital / Analog I/O Notes:
+                        Code Logic:
                     </li>
 
                     <li>
-                        Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.
+                        <strong>If / Else:</strong><br>
+                        This is the most basic decision-making structure. IF the button is pressed (HIGH), do X. ELSE (if released), do Y.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>The Red LED will blink on for 0.5 seconds and off for 0.5 seconds repeatedly. If it doesn't work, check that the LED legs aren't swapped (Long leg must connect to the Resistor side).</p>
+                <p>The LED should remain off by default. When you press and hold the button, the LED lights up. When you release the button, the LED turns off immediately.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to wire a basic circuit with a Current Limiting Resistor.</li>
-                    <li>How to program Arduino digital pins (HIGH vs LOW).</li>
-                    <li>The concept of Anode (+) and Cathode (-).</li>
+                    <li>How to wire a switch with a pull-down resistor.</li>
+                    <li>The difference between Digital Input and Output.</li>
+                    <li>Using <code>digitalRead()</code> to detect physical interactions.</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Try changing the `delay(500)` to `delay(100)` to make it blink faster, or try creating a heartbeat pattern (High, Low, High, Low-Low).</p>
+                <p>Try modifying the code so the button acts like a "Toggle" switch (press once for ON, press again for OFF). This requires "Debouncing" logic!</p>
             </section>
 
         </div>
@@ -171,6 +187,7 @@ void loop() {
     <footer class="footer">
         <div class="container">
             <div class="footer-brand">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
                 <h3>NUKELABS</h3>
                 <p>Empowering makers and electronics enthusiasts</p>
             </div>
