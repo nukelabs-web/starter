@@ -1,51 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project 4: Light-sensitive LED | Nukelabs</title>
-  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head><body>
-<header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs Logo"><span>Nukelabs</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
-<main class="project-page"><div class="container">
-  <div class="project-header"><h1 class="project-title">Project 4: Light-sensitive LED</h1><p class="project-subtitle">Arduino Uno R3 project</p><div class="project-meta"><div class="project-meta-item"><i class="fas fa-bolt"></i><span>Difficulty: Easy</span></div><div class="project-meta-item"><i class="fas fa-book"></i><span>Concepts: Analog input, light sensing</span></div><div class="project-meta-item"><i class="fas fa-clock"></i><span>Time: 15-45 minutes</span></div></div></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4: Light Sensitive LED | Nukelabs</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <span>NUKELABS</span>
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
 
-  <section class="project-section"><div class="section-header"><i class="fas fa-info-circle"></i><h2>Project Summary</h2></div><p>This project demonstrates Analog input, light sensing. Build it to learn practical aspects of analog input, light sensing.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-microchip"></i><h2>Components Required</h2></div><div class="components-grid"><div class="component-card"><div class="component-icon"><i class="fas fa-microchip"></i></div><h3>Key Components</h3><p>Arduino Uno R3, LED, LDR (Photoresistor), 10k Resistor, Jumper Wires, Breadboard</p></div></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-project-diagram"></i><h2>Circuit Diagram</h2></div><div class="circuit-diagram"><img src="../images/project4-circuit.png" alt="Circuit Diagram for project 4"><p>Replace placeholder by adding <code>project4-circuit.png</code> to images/</p></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-plug"></i><h2>Pin Connections</h2></div><table class="pin-table"><thead><tr><th>Arduino Pin</th><th>Component Connection</th></tr></thead><tbody><tr><td>LDR</td><td>A0 (voltage divider with 10k)</td></tr><tr><td>LED</td><td>Digital PWM pin 9</td></tr></tbody></table></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-list-ol"></i><h2>Step-by-Step Instructions</h2></div><ol class="steps-list"><li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li><li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li><li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li><li>Use Serial Monitor for calibration if the sketch prints values.</li></ol></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-code"></i><h2>Arduino Code</h2></div><div class="code-block"><pre><code>/* Project 4 - Light-sensitive LED / Night Lamp
- * Hardware: Voltage divider using LDR and 10k resistor to A0. LED on pin 9.
- * Purpose: Read analog sensor and make decisions based on threshold.
+    <main class="project-page">
+        <div class="container">
+            
+            <div class="project-header">
+                <h1 class="project-title">PROJECT 04: LIGHT SENSOR</h1>
+                <p class="project-subtitle">Analog Inputs & Sensors (LDR)</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
+                    <div class="project-meta-item"><i class="fas fa-eye"></i> Concepts: Analog Read</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 30-40 Min</div>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2>Project Summary</h2>
+                <p>Digital pins are either ON or OFF. But the real world is analog—light, temperature, and sound vary smoothly. In this project, you will use an LDR (Light Dependent Resistor) to measure light intensity and turn on an LED automatically when it gets dark.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>Key Components</h2>
+                <ul>
+                    <li>Arduino Uno R3</li>
+                    <li>LDR (Photoresistor)</li>
+                    <li>10kΩ Resistor (Brown-Black-Orange)</li>
+                    <li>LED & 220Ω Resistor</li>
+                    <li>Jumper Wires</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <img src="../images/project4-circuit.png" alt="Circuit Diagram for Project 4">
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Pin Connections</h2>
+                <table class="pin-table">
+                    <tr>
+                        <th>Arduino Pin</th>
+                        <th>Component Connection</th>
+                    </tr>
+                    <tr>
+                        <td>Pin A0 (Analog)</td>
+                        <td>Junction between LDR and 10kΩ Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>5V</td>
+                        <td>Other leg of LDR</td>
+                    </tr>
+                    <tr>
+                        <td>GND</td>
+                        <td>Other leg of 10kΩ Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 13</td>
+                        <td>Positive Leg of LED</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="project-section">
+                <h2>Step-by-Step Instructions</h2>
+                <ol>
+                    <li><strong>Build the Voltage Divider:</strong> Connect one leg of the LDR to 5V. Connect the other leg to the 10kΩ resistor.</li>
+                    <li>Connect the other end of the 10kΩ resistor to Ground (GND).</li>
+                    <li><strong>Connect the Sensor:</strong> Add a wire from the point where the LDR and Resistor meet (the middle junction) to Analog Pin A0.</li>
+                    <li><strong>Add the Output:</strong> Connect an LED to Pin 13 (with a 220Ω series resistor) just like in Project 1.</li>
+                    <li>Upload the code and open the Serial Monitor (Magnifying glass icon) to see the light values.</li>
+                </ol>
+            </section>
+
+            <section class="project-section">
+                <h2>Arduino Code</h2>
+                <div class="code-block">
+/* Project 4 - Light Sensitive LED
+ * Reads light value from LDR connected to A0.
+ * Turns on LED if it gets dark.
  */
-const int ldrPin = A0;
-const int ledPin = 9;
-int threshold = 400;  // tune this value depending on ambient light
 
-void setup() {{ Serial.begin(9600); pinMode(ledPin, OUTPUT); }}
+const int sensorPin = A0;   // LDR connected to Analog Pin 0
+const int ledPin = 13;      // LED connected to Digital Pin 13
+int sensorValue = 0;        // Variable to store the sensor reading
 
-void loop() {{
-  int value = analogRead(ldrPin);        // 0..1023 proportional to light
-  Serial.println(value);                 // useful for calibration
-  if (value < threshold) {{              // darker -> turn lamp on
-    analogWrite(ledPin, 200);            // PWM brightness (0..255)
-  }} else {{
-    analogWrite(ledPin, 0);              // turn off
-  }}
-  delay(200);                            // small delay for stability
-}}
-</code></pre></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-cogs"></i><h2>How It Works</h2></div>
-    <div class="accordion"><div class="accordion-header"><span>Understanding the Code (line-by-line)</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><pre>Explanation and justification:
-1) analogRead returns 0-1023 — lets you measure light precisely.
-2) Serial.println — important for calibration; observe values under different lighting and choose threshold.
-3) analogWrite with PWM — allows dimming instead of simple on/off.
-4) threshold tuning — different LDRs and setups require adjusting threshold; include a potentiometer to make it user-adjustable.
-</pre></div></div>
-    <div class="accordion"><div class="accordion-header"><span>Digital / Analog I/O & Design Notes</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><p>Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.</p></div></div>
-  </section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-lightbulb"></i><h2>Expected Output</h2></div><p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-graduation-cap"></i><h2>What You Learned</h2></div><ul><li>How to wire circuits and use a breadboard</li><li>How to program Arduino digital and analog pins</li><li>How to debug using Serial Monitor</li></ul></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-arrow-right"></i><h2>Next Steps / Extension Ideas</h2></div><p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p></section>
-</div></main>
-<footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs Logo"><h3>Nukelabs</h3><p>Empowering makers and electronics enthusiasts</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li><li><a href="tel:+918089252039"><i class="fas fa-phone"></i> +91-8089252039</a></li><li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li></ul></div></div><div class="copyright"><div class="container"><p>&copy; 2025 Nukelabs. All rights reserved.</p></div></div></footer>
-<script src="../js/script.js"></script></body></html>
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);       // Start communication with computer
+}
+
+void loop() {
+  // Read the value from the sensor (0 - 1023)
+  sensorValue = analogRead(sensorPin);
+  
+  // Print value to Serial Monitor for debugging
+  Serial.print("Light Level: ");
+  Serial.println(sensorValue);
+
+  // If light level is low (Dark), turn LED ON
+  // Adjust '500' based on your room lighting!
+  if (sensorValue < 500) {
+    digitalWrite(ledPin, HIGH);
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+  
+  delay(100); // Short delay for stability
+}
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Hardware Logic (Voltage Divider):
+                    </li>
+                    
+                    <li>
+                        <strong>LDR Properties:</strong><br>
+                        An LDR changes its resistance based on light. More Light = Low Resistance. Darkness = High Resistance.
+                    </li>
+                    <li>
+                        <strong>Analog Input (A0):</strong><br>
+                        The Arduino measures voltage at the point between the LDR and the fixed 10k resistor. As the LDR resistance changes, the voltage shifts.
+                    </li>
+
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Code Logic:
+                    </li>
+
+                    <li>
+                        <strong>analogRead(A0):</strong><br>
+                        This converts the voltage (0-5V) into a number between 0 and 1023. 
+                    </li>
+                    <li>
+                        <strong>Serial Monitor:</strong><br>
+                        We use <code>Serial.println()</code> to see the actual numbers on the computer screen. This helps us calibrate the threshold.
+                    </li>
+                    <li>
+                        <strong>Threshold Logic:</strong><br>
+                        We check <code>if (sensorValue < 500)</code>. If true, it's dark -> Turn LED ON.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p>When you cover the LDR with your hand (creating darkness), the LED should turn ON. When you shine a light on it, the LED should turn OFF. You can watch the raw numbers change in the Serial Monitor.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>The difference between Digital (0/1) and Analog (0-1023) signals.</li>
+                    <li>How to wire a Voltage Divider circuit for resistive sensors.</li>
+                    <li>How to use the Serial Monitor to debug and read sensor data.</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps / Extension Ideas</h2>
+                <p>Try reversing the logic to make an "Automatic Street Light" (On when dark). Or, use <code>analogWrite()</code> to fade the LED brightness based on the light level instead of just snapping it On/Off.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
+                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
+                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
