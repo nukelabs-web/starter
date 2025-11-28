@@ -1,189 +1,277 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1: Blinking LED | Nukelabs</title>
+/* Nuke Labs Design System - Final Polish v2 */
+:root {
+    --bg-color: #000000;
+    --text-main: #ffffff;
+    --text-muted: #b0b0b0;
+    --border: #333333;
     
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <a href="../index.html" class="logo">
-                <img src="../images/logo.png" alt="Nukelabs Logo">
-                <span>NUKELABS</span>
-            </a>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../index.html#projects">Projects</a></li>
-                    <li><a href="../support.html">Support</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
-        </div>
-    </header>
-
-    <main class="project-page">
-        <div class="container">
-            
-            <div class="project-header">
-                <h1 class="project-title">PROJECT 01: BLINKING LED</h1>
-                <p class="project-subtitle">Arduino Uno R3 project</p>
-                <div class="project-meta">
-                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
-                    <div class="project-meta-item"><i class="fas fa-book"></i> Concepts: Digital Output</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 15-45 Min</div>
-                </div>
-            </div>
-
-            <section class="project-section">
-                <h2>Project Summary</h2>
-                <p>This project demonstrates Digital output and basic programming. Build it to learn practical aspects of digital output and timing logic.</p>
-            </section>
-
-            <section class="project-section">
-                <h2>Key Components</h2>
-                <ul>
-                    <li>Arduino Uno R3</li>
-                    <li>LED</li>
-                    <li>220Ω Resistor</li>
-                    <li>Jumper Wires</li>
-                    <li>Breadboard</li>
-                </ul>
-            </section>
-
-            <section class="project-section">
-                <h2>Circuit Diagram</h2>
-                <div class="circuit-diagram">
-                    <img src="../images/project1-circuit.png" alt="Circuit Diagram for Project 1">
-                </div>
-            </section>
-
-            <section class="project-section">
-                <h2>Pin Connections</h2>
-                <table class="pin-table">
-                    <tr>
-                        <th>Arduino Pin</th>
-                        <th>Component Connection</th>
-                    </tr>
-                    <tr>
-                        <td>Pin 13</td>
-                        <td>Positive Leg (Anode) of LED</td>
-                    </tr>
-                    <tr>
-                        <td>GND</td>
-                        <td>Negative Leg (Cathode) of LED</td>
-                    </tr>
-                </table>
-            </section>
-
-            <section class="project-section">
-                <h2>Step-by-Step Instructions</h2>
-                <ol>
-                    <li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li>
-                    <li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li>
-                    <li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li>
-                    <li>Use Serial Monitor for calibration if the sketch prints values.</li>
-                </ol>
-            </section>
-
-            <section class="project-section">
-                <h2>Arduino Code</h2>
-                <div class="code-block">
-/* Project 1 - Blinking LED
- * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
- * Purpose: Introduce digital output and timing using delay().
- */
-
-int ledPin = 13; // use on-board LED on many Arduino boards
-
-void setup() {
-  pinMode(ledPin, OUTPUT); // configure pin as output to drive the LED
+    /* Glass Variables */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+    --glass-glow: 0 0 30px rgba(255, 255, 255, 0.05);
+    
+    /* Fonts */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
 }
 
-void loop() {
-  digitalWrite(ledPin, HIGH); // set pin HIGH -> LED ON
-  delay(500);                 // wait 500 ms
-  digitalWrite(ledPin, LOW);  // set pin LOW -> LED OFF
-  delay(500);                 // wait 500 ms
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.7;
+    overflow-x: hidden;
 }
-                </div>
-            </section>
 
-            <section class="project-section">
-                <h2>How It Works</h2>
-                <ul class="glass-list">
-                    <li>
-                        <strong>Line-by-line justification:</strong><br>
-                        1) <code>int ledPin = 13;</code> — stores the pin number so it's easy to change.
-                    </li>
-                    <li>
-                        2) <code>pinMode(ledPin, OUTPUT);</code> — sets the pin as an output so digitalWrite can drive it.
-                    </li>
-                    <li>
-                        3) <code>digitalWrite(ledPin, HIGH);</code> — applies voltage to the pin to turn LED on.
-                    </li>
-                    <li>
-                        4) <code>delay(500);</code> — a blocking wait; simple but stops microcontroller from doing other tasks.
-                    </li>
-                    <li>
-                        <strong>Digital / Analog I/O Notes:</strong><br>
-                        Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.
-                    </li>
-                </ul>
-            </section>
+a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+ul, ol { list-style: none; }
+img { max-width: 100%; display: block; }
 
-            <section class="project-section">
-                <h2>Expected Output</h2>
-                <p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p>
-            </section>
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-            <section class="project-section">
-                <h2>What You Learned</h2>
-                <ul class="glass-list">
-                    <li>How to wire circuits and use a breadboard</li>
-                    <li>How to program Arduino digital and analog pins</li>
-                    <li>How to debug using Serial Monitor</li>
-                </ul>
-            </section>
+/* --- HEADER --- */
+.header {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    border-bottom: var(--glass-border);
+}
+.header .container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+.logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
+.logo img { height: 36px; }
+.navbar ul { display: flex; gap: 32px; }
+.navbar a { 
+    font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; 
+}
+.navbar a:hover, .navbar a.active { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-            <section class="project-section">
-                <h2>Next Steps / Extension Ideas</h2>
-                <p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p>
-            </section>
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 85vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding-top: 80px;
+    background: radial-gradient(circle at center, #111 0%, #000 70%);
+}
+.hero-content { max-width: 1000px; margin: 0 auto; }
+.hero h1 {
+    font-family: var(--font-heading); font-size: 4rem; line-height: 1.1; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px;
+    text-transform: uppercase; white-space: nowrap; 
+}
+.hero p {
+    font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; max-width: 700px; margin-inline: auto;
+}
+.hero-btns { display: flex; justify-content: center; gap: 20px; }
+.btn {
+    font-family: var(--font-heading); padding: 16px 40px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;
+    cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px;
+}
+.btn-primary { background: #fff; color: #000; border: 1px solid #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+.btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 
-        </div>
-    </main>
+/* --- PROJECTS GRID --- */
+.projects-grid { padding: 120px 0; border-top: var(--glass-border); }
+.section-header { text-align: center; margin-bottom: 80px; }
+.section-header h2 { 
+    font-family: var(--font-heading); font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
+}
+.section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-brand">
-                <img src="../images/logo.png" alt="Nukelabs Logo">
-                <h3>NUKELABS</h3>
-                <p>Empowering makers and electronics enthusiasts</p>
-            </div>
-            <div class="footer-links-group">
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
-                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
-                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+/* Project Card */
+.project-card {
+    background: var(--glass-bg); border: var(--glass-border);
+    border-radius: 12px; overflow: hidden; transition: all 0.3s ease;
+    display: flex; flex-direction: column;
+}
+.project-card:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-8px); }
+.project-thumb {
+    width: 100%; height: 220px; object-fit: contain; padding: 30px;
+    background: rgba(255,255,255,0.02); border-bottom: var(--glass-border);
+}
+.project-card-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; text-align: left; }
+.project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.project-id { font-family: var(--font-heading); color: var(--text-muted); font-size: 0.7rem; letter-spacing: 1px; }
+.difficulty { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; }
+.difficulty.easy { color: #000; background: #00ff9d; }
+.difficulty.medium { color: #000; background: #ffd700; }
+.project-card h3 { 
+    font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px;
+}
+.project-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 30px; flex-grow: 1; }
+.card-link { font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-transform: uppercase; font-family: var(--font-heading); }
 
-    <script src="../js/script.js"></script>
-</body>
-</html>
+/* --- PROJECT PAGE DETAILS --- */
+.project-page { padding: 120px 0 80px; text-align: center; } 
+.project-header { margin-bottom: 60px; padding-bottom: 40px; border-bottom: var(--glass-border); }
+.project-title { 
+    font-family: var(--font-heading); font-size: 3rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;
+}
+.project-subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
+
+/* Meta Buttons Row */
+.project-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 40px; }
+.project-meta-item {
+    background: var(--glass-bg); border: var(--glass-border);
+    padding: 12px 28px; border-radius: 50px; font-size: 0.9rem;
+    color: #fff; font-weight: 600; display: flex; align-items: center; gap: 10px;
+}
+
+/* --- GLASS CONTAINERS --- */
+.project-section { margin-bottom: 80px; }
+.project-section h2 {
+    font-family: var(--font-heading); font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* 1. General Paragraphs & Diagrams */
+.project-section p, 
+.code-container,
+.circuit-diagram {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 40px;
+    margin: 0 auto 30px;
+    max-width: 900px;
+    text-align: center; 
+    box-shadow: var(--glass-glow);
+}
+
+/* 2. PIN CONNECTIONS (Table) */
+.pin-table {
+    width: 100%; border-collapse: collapse;
+    background: var(--glass-bg); border: var(--glass-border);
+    backdrop-filter: blur(10px); border-radius: 16px;
+    max-width: 900px; margin: 0 auto 30px;
+}
+.pin-table th { 
+    font-family: var(--font-heading); background: rgba(255,255,255,0.1); 
+    padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); 
+    text-align: center; color: #fff; text-transform: uppercase;
+}
+.pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+.pin-table tr:last-child td { border-bottom: none; }
+
+/* 3. STEP BY STEP (Ordered List with Column) */
+.project-section ol {
+    background: var(--glass-bg); border: var(--glass-border);
+    backdrop-filter: blur(10px); border-radius: 16px;
+    max-width: 900px; margin: 0 auto 30px; padding: 0; counter-reset: step-counter; overflow: hidden;
+}
+.project-section ol li {
+    display: flex; align-items: flex-start; padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15); text-align: left; color: #e0e0e0;
+}
+.project-section ol li:last-child { border-bottom: none; }
+.project-section ol li::before {
+    counter-increment: step-counter; content: "0" counter(step-counter);
+    font-family: var(--font-heading); font-weight: 700; color: #fff;
+    min-width: 60px; margin-right: 20px; border-right: 2px solid rgba(255,255,255,0.15);
+    padding-right: 20px; text-align: right;
+}
+
+/* 4. KEY COMPONENTS (Chips - Targeted by default UL) */
+/* We be specific so we don't accidentally style the .glass-list */
+.project-section ul:not(.glass-list) {
+    list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 15px; padding: 20px; margin: 0 auto 30px; max-width: 900px;
+}
+.project-section ul:not(.glass-list) li {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 25px; border-radius: 50px; font-weight: 600;
+    transition: 0.3s; color: #fff;
+}
+.project-section ul:not(.glass-list) li:hover { background: #fff; color: #000; transform: translateY(-2px); }
+
+/* 5. COLUMNLESS GLASS TABLE (For How It Works) */
+.glass-list {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--glass-glow);
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    display: block !important;
+}
+
+.glass-list li {
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    color: #e0e0e0;
+    text-align: left;
+    display: block;
+    width: 100%;
+}
+
+/* Override HOVER effects for Glass List so they don't disappear */
+.glass-list li:hover {
+    background: rgba(255,255,255,0.05); /* Slight highlight */
+    color: #fff;
+    transform: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.glass-list li:last-child { border-bottom: none; }
+
+/* Circuit Diagram */
+.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
+.circuit-diagram p, .circuit-diagram div { display: none; }
+
+/* CODE BLOCK FIX */
+.code-container { padding: 0; overflow: hidden; text-align: left; }
+.code-header {
+    background: rgba(255,255,255,0.05); padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
+}
+.code-block { 
+    padding: 30px; 
+    background: transparent; 
+    border: none; 
+    margin: 0; 
+    box-shadow: none; 
+    border-radius: 0; 
+    text-align: left; 
+    white-space: pre-wrap; /* FIXES THE ONE LINE ISSUE */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* --- FOOTER --- */
+.footer { border-top: var(--glass-border); padding: 80px 0 40px; background: #050505; text-align: center; }
+.footer .container { display: flex; flex-direction: column; align-items: center; gap: 50px; }
+.footer-brand h3 { 
+    margin-bottom: 10px; font-size: 1.8rem; font-weight: 900; 
+    font-family: var(--font-heading); letter-spacing: 2px; 
+}
+.footer-brand p { color: var(--text-muted); }
+.footer-links-group { display: flex; gap: 80px; flex-wrap: wrap; justify-content: center; }
+.footer-links h4 { 
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; 
+    color: #fff; opacity: 0.6; font-family: var(--font-heading);
+}
+.footer-links ul li { margin-bottom: 15px; background: none; border: none; padding: 0; }
+.footer-links ul li:hover { background: none; transform: none; }
+.footer-links a { color: var(--text-muted); font-weight: 600; }
+.footer-links a:hover { color: #fff; }
+.copyright { margin-top: 60px; color: #444; font-size: 0.8rem; font-weight: 500; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; white-space: normal; } 
+    .project-section ol li { flex-direction: column; gap: 10px; }
+    .project-section ol li::before { border-right: none; width: 100%; text-align: left; margin-bottom: 5px; }
+    .navbar {
+        position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
+        background: #000; flex-direction: column; padding: 40px; transition: 0.3s;
+    }
+    .navbar.active { left: 0; }
+    .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
+}
+@media (min-width: 769px) { .mobile-toggle { display: none; } }
