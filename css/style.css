@@ -210,6 +210,24 @@ img { max-width: 100%; display: block; }
     width: 100%;
 }
 
+/* --- THE FIX IS HERE --- */
+/* Force text to stay WHITE and background to stay DARK on hover */
+.glass-list li:hover {
+    background: rgba(255,255,255,0.08) !important; /* Just a slight glow */
+    color: #ffffff !important;                   /* Force text white */
+    transform: none !important;                  /* No movement */
+    border: none !important;                     /* No chip borders */
+    border-bottom: 1px solid rgba(255,255,255,0.15) !important; /* Keep the line */
+}
+
+/* Ensure inner elements (like bold text or code) also stay white */
+.glass-list li:hover strong,
+.glass-list li:hover code,
+.glass-list li:hover span {
+    color: #ffffff !important;
+}
+
+.glass-list li:last-child { border-bottom: none !important; }
 /* Override HOVER effects for Glass List so they don't disappear */
 .glass-list li:hover {
     background: rgba(255,255,255,0.05); /* Slight highlight */
@@ -275,3 +293,4 @@ img { max-width: 100%; display: block; }
     .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
 }
 @media (min-width: 769px) { .mobile-toggle { display: none; } }
+
