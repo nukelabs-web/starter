@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Columnless Fix */
+/* Nuke Labs Design System - Final Polish v2 */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -125,7 +125,7 @@ img { max-width: 100%; display: block; }
     font-family: var(--font-heading); font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* 1. Standard Glass Box (Paragraphs, Code, Circuit) */
+/* 1. General Paragraphs & Diagrams */
 .project-section p, 
 .code-container,
 .circuit-diagram {
@@ -173,19 +173,20 @@ img { max-width: 100%; display: block; }
     padding-right: 20px; text-align: right;
 }
 
-/* 4. KEY COMPONENTS (Chips - Targeted by UL) */
-.project-section ul {
+/* 4. KEY COMPONENTS (Chips - Targeted by default UL) */
+/* We be specific so we don't accidentally style the .glass-list */
+.project-section ul:not(.glass-list) {
     list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
     gap: 15px; padding: 20px; margin: 0 auto 30px; max-width: 900px;
 }
-.project-section ul li {
+.project-section ul:not(.glass-list) li {
     background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
     padding: 10px 25px; border-radius: 50px; font-weight: 600;
     transition: 0.3s; color: #fff;
 }
-.project-section ul li:hover { background: #fff; color: #000; transform: translateY(-2px); }
+.project-section ul:not(.glass-list) li:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-/* 5. NEW: COLUMNLESS GLASS TABLE (For How It Works) */
+/* 5. COLUMNLESS GLASS TABLE (For How It Works) */
 .glass-list {
     background: var(--glass-bg);
     border: var(--glass-border);
@@ -197,7 +198,7 @@ img { max-width: 100%; display: block; }
     padding: 0;
     overflow: hidden;
     list-style: none;
-    display: block !important; /* Forces block layout overriding flex */
+    display: block !important;
 }
 
 .glass-list li {
@@ -205,10 +206,16 @@ img { max-width: 100%; display: block; }
     border-bottom: 1px solid rgba(255,255,255,0.15);
     color: #e0e0e0;
     text-align: left;
-    display: block; /* Removes side-by-side flex behavior */
+    display: block;
     width: 100%;
-    background: transparent !important; /* Override chip style */
-    border-radius: 0 !important; /* Override chip style */
+}
+
+/* Override HOVER effects for Glass List so they don't disappear */
+.glass-list li:hover {
+    background: rgba(255,255,255,0.05); /* Slight highlight */
+    color: #fff;
+    transform: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .glass-list li:last-child { border-bottom: none; }
@@ -217,14 +224,24 @@ img { max-width: 100%; display: block; }
 .circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
 .circuit-diagram p, .circuit-diagram div { display: none; }
 
-/* Code Block */
+/* CODE BLOCK FIX */
 .code-container { padding: 0; overflow: hidden; text-align: left; }
 .code-header {
     background: rgba(255,255,255,0.05); padding: 15px 30px;
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
 }
-.code-block { padding: 30px; background: transparent; border: none; margin: 0; box-shadow: none; border-radius: 0; text-align: left; }
+.code-block { 
+    padding: 30px; 
+    background: transparent; 
+    border: none; 
+    margin: 0; 
+    box-shadow: none; 
+    border-radius: 0; 
+    text-align: left; 
+    white-space: pre-wrap; /* FIXES THE ONE LINE ISSUE */
+    font-family: 'Courier New', Courier, monospace;
+}
 
 /* --- FOOTER --- */
 .footer { border-top: var(--glass-border); padding: 80px 0 40px; background: #050505; text-align: center; }
