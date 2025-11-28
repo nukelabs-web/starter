@@ -44,16 +44,16 @@
 
             <section class="project-section">
                 <h2>Project Summary</h2>
-                <p>This project demonstrates Digital output and basic programming. Build it to learn practical aspects of digital output and timing logic.</p>
+                <p>This project demonstrates Digital output and basic programming. You will build a simple circuit to control an LED on Pin 13, learning the basics of wiring and loop timing.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>LED</li>
-                    <li>220Ω Resistor</li>
-                    <li>Jumper Wires</li>
+                    <li>Red LED</li>
+                    <li>220Ω Resistor (Red-Red-Brown)</li>
+                    <li>Red & Black Jumper Wires</li>
                     <li>Breadboard</li>
                 </ul>
             </section>
@@ -74,11 +74,11 @@
                     </tr>
                     <tr>
                         <td>Pin 13</td>
-                        <td>Positive Leg (Anode) of LED</td>
+                        <td>Red Wire &rarr; Resistor &rarr; LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Negative Leg (Cathode) of LED</td>
+                        <td>Black Wire &rarr; LED Cathode (-)</td>
                     </tr>
                 </table>
             </section>
@@ -86,10 +86,11 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li>
-                    <li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li>
-                    <li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li>
-                    <li>Use Serial Monitor for calibration if the sketch prints values.</li>
+                    <li>Insert the LED into the breadboard. Identify the Anode (Long Leg) and Cathode (Short Leg).</li>
+                    <li>Connect the 220Ω Resistor to the same row as the LED Anode (Long Leg).</li>
+                    <li>Connect the <strong>Red Jumper Wire</strong> from <strong>Pin 13</strong> to the free end of the Resistor.</li>
+                    <li>Connect the <strong>Black Jumper Wire</strong> from the LED Cathode (Short Leg) to <strong>GND</strong>.</li>
+                    <li>Connect the Arduino via USB, paste the code below, and upload.</li>
                 </ol>
             </section>
 
@@ -98,7 +99,6 @@
                 <div class="code-block">
 /* Project 1 - Blinking LED
  * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
- * Purpose: Introduce digital output and timing using delay().
  */
 
 int ledPin = 13; // use on-board LED on many Arduino boards
@@ -116,52 +116,53 @@ void loop() {
                 </div>
             </section>
 
-           <section class="project-section">
-    <h2>How It Works</h2>
-    <ul class="glass-list">
-        <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-            Line-by-line justification:
-        </li>
-        
-        <li>
-             <code>int ledPin = 13;</code> — stores the pin number so it's easy to change.
-        </li>
-        <li>
-             <code>pinMode(ledPin, OUTPUT);</code> — sets the pin as an output so digitalWrite can drive it.
-        </li>
-        <li>
-             <code>digitalWrite(ledPin, HIGH);</code> — applies voltage to the pin to turn LED on.
-        </li>
-        <li>
-             <code>delay(500);</code> — a blocking wait; simple but stops microcontroller from doing other tasks.
-        </li>
+            <section class="project-section">
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Line-by-line justification:
+                    </li>
+                    
+                    <li>
+                        1) <code>int ledPin = 13;</code> — stores the pin number so it's easy to change.
+                    </li>
+                    <li>
+                        2) <code>pinMode(ledPin, OUTPUT);</code> — sets the pin as an output so digitalWrite can drive it.
+                    </li>
+                    <li>
+                        3) <code>digitalWrite(ledPin, HIGH);</code> — applies voltage (5V) to the pin to turn LED on.
+                    </li>
+                    <li>
+                        4) <code>delay(500);</code> — a blocking wait; simple but stops microcontroller from doing other tasks.
+                    </li>
 
-        <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-            Digital / Analog I/O Notes:
-        </li>
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Digital / Analog I/O Notes:
+                    </li>
 
-        <li>
-            Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.
-        </li>
-    </ul>
-</section>
+                    <li>
+                        Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.
+                    </li>
+                </ul>
+            </section>
+
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p>
+                <p>The Red LED will blink on for 0.5 seconds and off for 0.5 seconds repeatedly. If it doesn't work, check that the LED legs aren't swapped (Long leg must connect to the Resistor side).</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to wire circuits and use a breadboard</li>
-                    <li>How to program Arduino digital and analog pins</li>
-                    <li>How to debug using Serial Monitor</li>
+                    <li>How to wire a basic circuit with a Current Limiting Resistor.</li>
+                    <li>How to program Arduino digital pins (HIGH vs LOW).</li>
+                    <li>The concept of Anode (+) and Cathode (-).</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Enhance with displays, non-blocking timing (millis()), wireless control</p>
+                <p>Try changing the `delay(500)` to `delay(100)` to make it blink faster, or try creating a heartbeat pattern (High, Low, High, Low-Low).</p>
             </section>
 
         </div>
