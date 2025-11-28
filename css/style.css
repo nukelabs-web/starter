@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Final Table Version */
+/* Nuke Labs Design System - Columnless Fix */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -124,6 +124,8 @@ img { max-width: 100%; display: block; }
 .project-section h2 {
     font-family: var(--font-heading); font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
+
+/* 1. Standard Glass Box (Paragraphs, Code, Circuit) */
 .project-section p, 
 .code-container,
 .circuit-diagram {
@@ -138,7 +140,7 @@ img { max-width: 100%; display: block; }
     box-shadow: var(--glass-glow);
 }
 
-/* 1. PIN CONNECTIONS TABLE */
+/* 2. PIN CONNECTIONS (Table) */
 .pin-table {
     width: 100%; border-collapse: collapse;
     background: var(--glass-bg); border: var(--glass-border);
@@ -153,42 +155,25 @@ img { max-width: 100%; display: block; }
 .pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
 .pin-table tr:last-child td { border-bottom: none; }
 
-/* 2. ORDERED LISTS (Steps, How It Works) */
-/* This makes <ol> look like a Premium Table */
+/* 3. STEP BY STEP (Ordered List with Column) */
 .project-section ol {
-    background: var(--glass-bg);
-    border: var(--glass-border);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    max-width: 900px;
-    margin: 0 auto 30px;
-    padding: 0;
-    counter-reset: step-counter;
-    overflow: hidden;
+    background: var(--glass-bg); border: var(--glass-border);
+    backdrop-filter: blur(10px); border-radius: 16px;
+    max-width: 900px; margin: 0 auto 30px; padding: 0; counter-reset: step-counter; overflow: hidden;
 }
 .project-section ol li {
-    display: flex;
-    align-items: flex-start;
-    padding: 25px 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    text-align: left;
-    color: #e0e0e0;
+    display: flex; align-items: flex-start; padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15); text-align: left; color: #e0e0e0;
 }
 .project-section ol li:last-child { border-bottom: none; }
 .project-section ol li::before {
-    counter-increment: step-counter;
-    content: "0" counter(step-counter);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    color: #fff;
-    min-width: 60px;
-    margin-right: 20px;
-    border-right: 2px solid rgba(255,255,255,0.15);
-    padding-right: 20px;
-    text-align: right;
+    counter-increment: step-counter; content: "0" counter(step-counter);
+    font-family: var(--font-heading); font-weight: 700; color: #fff;
+    min-width: 60px; margin-right: 20px; border-right: 2px solid rgba(255,255,255,0.15);
+    padding-right: 20px; text-align: right;
 }
 
-/* 3. UNORDERED LISTS (Chips / Key Components) */
+/* 4. KEY COMPONENTS (Chips - Targeted by UL) */
 .project-section ul {
     list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
     gap: 15px; padding: 20px; margin: 0 auto 30px; max-width: 900px;
@@ -199,6 +184,34 @@ img { max-width: 100%; display: block; }
     transition: 0.3s; color: #fff;
 }
 .project-section ul li:hover { background: #fff; color: #000; transform: translateY(-2px); }
+
+/* 5. NEW: COLUMNLESS GLASS TABLE (For How It Works) */
+.glass-list {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--glass-glow);
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    display: block !important; /* Forces block layout overriding flex */
+}
+
+.glass-list li {
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    color: #e0e0e0;
+    text-align: left;
+    display: block; /* Removes side-by-side flex behavior */
+    width: 100%;
+    background: transparent !important; /* Override chip style */
+    border-radius: 0 !important; /* Override chip style */
+}
+
+.glass-list li:last-child { border-bottom: none; }
 
 /* Circuit Diagram */
 .circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
