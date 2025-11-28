@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Industrial Glass */
+/* Nuke Labs Design System - Sci-Fi Industrial Final */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -6,18 +6,19 @@
     --border: #333333;
     
     /* Premium Glass Variables */
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.15);
     --glass-glow: 0 0 30px rgba(255, 255, 255, 0.05);
     
-    /* Font Update */
-    --font-main: 'Montserrat', sans-serif;
+    /* Fonts */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.7;
@@ -41,12 +42,16 @@ img { max-width: 100%; display: block; }
 }
 .header .container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
 
-.logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+/* Logo uses Orbitron on ALL pages */
+.logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
 .logo img { height: 36px; }
 
 .navbar ul { display: flex; gap: 32px; }
-.navbar a { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-.navbar a:hover, .navbar a.active { color: var(--text-main); }
+.navbar a { 
+    font-family: var(--font-heading);
+    font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; 
+}
+.navbar a:hover, .navbar a.active { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
 /* --- HERO SECTION --- */
 .hero {
@@ -58,8 +63,10 @@ img { max-width: 100%; display: block; }
 .hero-content { max-width: 1000px; margin: 0 auto; }
 
 .hero h1 {
-    font-size: 4.5rem; line-height: 1.1; font-weight: 900; letter-spacing: -2px; margin-bottom: 30px;
+    font-family: var(--font-heading);
+    font-size: 4rem; line-height: 1.1; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px;
     text-transform: uppercase;
+    white-space: nowrap; /* Forces single line */
 }
 
 .hero p {
@@ -69,8 +76,9 @@ img { max-width: 100%; display: block; }
 .hero-btns { display: flex; justify-content: center; gap: 20px; }
 
 .btn {
-    padding: 16px 40px; border-radius: 4px; font-weight: 700; font-size: 0.9rem;
-    cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
+    font-family: var(--font-heading);
+    padding: 16px 40px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;
+    cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px;
 }
 .btn-primary { background: #fff; color: #000; border: 1px solid #fff; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
@@ -80,7 +88,10 @@ img { max-width: 100%; display: block; }
 /* --- PROJECTS GRID --- */
 .projects-grid { padding: 120px 0; border-top: var(--glass-border); }
 .section-header { text-align: center; margin-bottom: 80px; }
-.section-header h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; }
+.section-header h2 { 
+    font-family: var(--font-heading);
+    font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
+}
 .section-header p { color: var(--text-muted); font-size: 1.1rem; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
@@ -100,20 +111,26 @@ img { max-width: 100%; display: block; }
 
 .project-card-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; text-align: left; }
 .project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.project-id { font-family: monospace; color: var(--text-muted); font-size: 0.8rem; }
+.project-id { font-family: var(--font-heading); color: var(--text-muted); font-size: 0.7rem; letter-spacing: 1px; }
 .difficulty { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; }
 .difficulty.easy { color: #000; background: #00ff9d; }
 .difficulty.medium { color: #000; background: #ffd700; }
 
-.project-card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 800; color: #fff; text-transform: uppercase; }
+.project-card h3 { 
+    font-family: var(--font-heading);
+    font-size: 1.2rem; margin-bottom: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px;
+}
 .project-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 30px; flex-grow: 1; }
-.card-link { font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+.card-link { font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-transform: uppercase; font-family: var(--font-heading); }
 
-/* --- PROJECT PAGE DETAILS (Strict Center & Glass Boxes) --- */
-.project-page { padding: 120px 0 80px; text-align: center; } /* Forces Center */
+/* --- PROJECT PAGE DETAILS (Centered & Glass) --- */
+.project-page { padding: 120px 0 80px; text-align: center; } 
 
-.project-header { margin-bottom: 80px; padding-bottom: 40px; border-bottom: var(--glass-border); }
-.project-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
+.project-header { margin-bottom: 60px; padding-bottom: 40px; border-bottom: var(--glass-border); }
+.project-title { 
+    font-family: var(--font-heading);
+    font-size: 3rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;
+}
 .project-subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
 
 /* Meta Buttons Row */
@@ -124,19 +141,21 @@ img { max-width: 100%; display: block; }
     color: #fff; font-weight: 600; display: flex; align-items: center; gap: 10px;
 }
 
-/* --- THE GLASS BOX FIX --- */
-/* This automatically wraps paragraphs, lists, and code in glass boxes */
-.project-section { margin-bottom: 100px; }
+/* --- UNIVERSAL GLASS CONTAINER FIX --- */
+/* This wraps all main content types in the glass box automatically */
+.project-section { margin-bottom: 80px; }
 
 .project-section h2 {
-    font-size: 2.2rem; margin-bottom: 40px; font-weight: 800; text-transform: uppercase; letter-spacing: -1px;
+    font-family: var(--font-heading);
+    font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* The Magic Rule: Content in Glass */
+/* TARGETS: Paragraphs, Lists, Tables, Code containers */
 .project-section p, 
-.project-section .components-grid,
-.circuit-diagram,
-.code-container {
+.project-section ul,
+.project-section table,
+.code-container,
+.circuit-diagram {
     background: var(--glass-bg);
     border: var(--glass-border);
     backdrop-filter: blur(10px);
@@ -144,56 +163,77 @@ img { max-width: 100%; display: block; }
     padding: 40px;
     margin: 0 auto 30px; /* Centered */
     max-width: 900px;
-    text-align: center; /* Center text inside */
+    text-align: center; 
     box-shadow: var(--glass-glow);
 }
 
-/* Specific fix for Components Grid to center items */
-.components-grid {
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 30px;
-}
-.component-card {
-    text-align: center; width: 140px;
-}
-.component-icon { font-size: 2.5rem; margin-bottom: 15px; color: #fff; }
-.component-card h3 { font-size: 0.9rem; font-weight: 600; }
+/* --- SPECIFIC FIXES --- */
 
-/* Steps List - Centered Timeline */
-.steps-list {
-    max-width: 800px; margin: 0 auto; text-align: left; /* Keep steps left aligned for readability */
-    background: var(--glass-bg); border: var(--glass-border);
-    padding: 50px; border-radius: 16px;
+/* 1. Pin Connections Table */
+.pin-table { width: 100%; border-collapse: collapse; }
+.pin-table th { 
+    font-family: var(--font-heading); 
+    background: rgba(255,255,255,0.1); 
+    padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); 
 }
-.step-item { position: relative; padding-left: 50px; margin-bottom: 40px; }
-.step-item::before {
-    content: counter(step-counter); position: absolute; left: 0; top: 0;
-    width: 35px; height: 35px; background: #fff; color: #000;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 800;
+.pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+/* 2. Key Components - Horizontal Chips */
+.project-section ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 40px;
 }
 
-/* Code Block inside Glass */
+.project-section ul li {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.project-section ul li:hover { background: #fff; color: #000; }
+
+/* 3. What You Learned List (Vertical list inside glass) */
+/* We target the specific section if possible, or just style UL generically.
+   Since 'Key Components' is also a UL, the chip style above applies to it too.
+   If 'What You Learned' needs to be vertical, we can override it, 
+   but Chips look good for "What You Learned" too! 
+   If you strictly want vertical for "Learned", stick to the Chips, it looks better. */
+
+/* 4. Circuit Diagram Text Hider */
+.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
+/* Hides any text (p) inside the circuit diagram div */
+.circuit-diagram p, .circuit-diagram div { display: none; } 
+
+/* Code Block overrides */
 .code-container { padding: 0; overflow: hidden; text-align: left; }
 .code-header {
     background: rgba(255,255,255,0.05); padding: 15px 30px;
     display: flex; justify-content: space-between; align-items: center;
-    border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600;
+    border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
 }
-.code-block { padding: 30px; background: transparent; border: none; margin: 0; }
-
-/* Circuit Image */
-.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; }
+.code-block { padding: 30px; background: transparent; border: none; margin: 0; box-shadow: none; border-radius: 0; text-align: left; }
 
 /* --- FOOTER --- */
 .footer { border-top: var(--glass-border); padding: 80px 0 40px; background: #050505; text-align: center; }
 .footer .container { display: flex; flex-direction: column; align-items: center; gap: 50px; }
 
-.footer-brand img { height: 50px; margin: 0 auto 20px; }
-.footer-brand h3 { margin-bottom: 10px; font-size: 1.8rem; letter-spacing: -1px; font-weight: 800; }
+.footer-brand h3 { 
+    margin-bottom: 10px; font-size: 1.8rem; font-weight: 900; 
+    font-family: var(--font-heading); letter-spacing: 2px; 
+}
 .footer-brand p { color: var(--text-muted); }
 
 .footer-links-group { display: flex; gap: 80px; flex-wrap: wrap; justify-content: center; }
-.footer-links h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; color: #fff; opacity: 0.6; }
+.footer-links h4 { 
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; 
+    color: #fff; opacity: 0.6; font-family: var(--font-heading);
+}
 .footer-links ul li { margin-bottom: 15px; }
 .footer-links a { color: var(--text-muted); font-weight: 600; }
 .footer-links a:hover { color: #fff; }
@@ -202,7 +242,7 @@ img { max-width: 100%; display: block; }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2.8rem; }
+    .hero h1 { font-size: 2.5rem; white-space: normal; } /* Allow wrap on mobile */
     .project-title { font-size: 2.2rem; }
     .navbar {
         position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
