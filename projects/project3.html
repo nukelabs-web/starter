@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 3: LED Button Toggle | Nukelabs</title>
+    <title>Project 3: Button Control | Nukelabs</title>
     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,17 +43,17 @@
             </div>
 
             <section class="project-section">
-                <h2>Project Summary</h2>
-                <p>So far, the Arduino has done all the talking (Output). Now it's time for it to listen (Input). In this project, you will add a push button to control the LED manually.</p>
+                <h2>Mission Brief</h2>
+                <p>So far, the Arduino has done all the talking (Output). Now it's time for it to listen (Input). In this project, you will add a push button to control an LED manually.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>Push Button (Tactile Switch)</li>
-                    <li>10kΩ Resistor (Pull-down)</li>
-                    <li>LED & 220Ω Resistor</li>
+                    <li>Push Button</li>
+                    <li>Resistor (10kΩ)</li>
+                    <li>LED & Resistor (220Ω)</li>
                     <li>Breadboard & Wires</li>
                 </ul>
             </section>
@@ -74,19 +74,19 @@
                     </tr>
                     <tr>
                         <td>Pin 2</td>
-                        <td>One leg of Push Button</td>
+                        <td>Wire &rarr; Resistor &rarr; LED Anode (+)</td>
                     </tr>
                     <tr>
-                        <td>Pin 13</td>
-                        <td>Positive Leg (Anode) of LED</td>
+                        <td>Pin 3</td>
+                        <td>Wire &rarr; Button Leg (Signal)</td>
                     </tr>
                     <tr>
                         <td>5V</td>
-                        <td>Other leg of Push Button</td>
+                        <td>Wire &rarr; Button Leg (Power)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>10kΩ Resistor (connected to Pin 2 leg)</td>
+                        <td>Negative Rail (for both components)</td>
                     </tr>
                 </table>
             </section>
@@ -94,11 +94,12 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Insert the push button into the breadboard (straddling the middle gap).</li>
-                    <li>Connect one leg of the button to the 5V rail using a jumper wire.</li>
-                    <li>Connect the diagonal/opposite leg to Pin 2 on the Arduino.</li>
-                    <li>Add a 10kΩ resistor from the Pin 2 leg to Ground (This is a "Pull-down" resistor).</li>
-                    <li>Setup the LED on Pin 13 as usual (with its 220Ω resistor).</li>
+                    <li>Connect the Arduino <strong>5V</strong> and <strong>GND</strong> to the bottom Power Rails (+ and -) on the breadboard.</li>
+                    <li>Insert the LED. Connect a 220Ω resistor from the Cathode (Short Leg) to the Negative Rail.</li>
+                    <li>Connect a wire from <strong>Pin 2</strong> to the Anode (Long Leg) of the LED.</li>
+                    <li>Insert the Push Button. Connect one leg to the <strong>5V Rail</strong>.</li>
+                    <li>Connect the diagonal leg to <strong>Pin 3</strong> via a wire.</li>
+                    <li>Add a <strong>10kΩ resistor</strong> from that same diagonal leg (Pin 3 side) to the <strong>Negative Rail</strong> (Pull-down).</li>
                     <li>Upload the code below.</li>
                 </ol>
             </section>
@@ -107,28 +108,29 @@
                 <h2>Arduino Code</h2>
                 <div class="code-block">
 /* Project 3 - Button Control
- * Reads a digital input on pin 2 and controls an LED on pin 13.
+ * Reads a digital input on pin 3 and controls an LED on pin 2.
  */
 
-const int buttonPin = 2;     // the number of the pushbutton pin
-const int ledPin =  13;      // the number of the LED pin
+const int buttonPin = 3;     // Pushbutton pin
+const int ledPin =  2;       // LED pin
 
-int buttonState = 0;         // variable for reading the pushbutton status
+int buttonState = 0;         // Variable to store reading
 
 void setup() {
-  pinMode(ledPin, OUTPUT);   // initialize the LED pin as an output:
-  pinMode(buttonPin, INPUT); // initialize the pushbutton pin as an input:
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT);
 }
 
 void loop() {
-  // read the state of the pushbutton value:
+  // Read the state of the pushbutton value:
   buttonState = digitalRead(buttonPin);
 
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  // Check if the pushbutton is pressed.
+  // If it is, the buttonState is HIGH:
   if (buttonState == HIGH) {
-    digitalWrite(ledPin, HIGH); // turn LED on
+    digitalWrite(ledPin, HIGH); // Turn LED on
   } else {
-    digitalWrite(ledPin, LOW);  // turn LED off
+    digitalWrite(ledPin, LOW);  // Turn LED off
   }
 }
                 </div>
@@ -143,15 +145,11 @@ void loop() {
                     
                     <li>
                         <strong>Digital Input:</strong><br>
-                        Unlike Output (providing voltage), Input measures voltage.
+                        Unlike Output (providing voltage), Input measures voltage. We use `digitalRead` to check if a pin sees 5V (HIGH) or 0V (LOW).
                     </li>
                     <li>
                         <strong>Pull-down Resistor:</strong><br>
-                        The 10kΩ resistor pulls the pin voltage to 0V (GND) when the button is NOT pressed. Without this, the pin would "float" and give random readings.
-                    </li>
-                    <li>
-                        <strong>Closing the Circuit:</strong><br>
-                        Pressing the button connects 5V to Pin 2, overriding the resistor and sending a "HIGH" signal.
+                        The 10kΩ resistor pulls the button pin to 0V (GND) when NOT pressed. Without this, the pin acts like an antenna and reads random noise.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
@@ -159,12 +157,8 @@ void loop() {
                     </li>
 
                     <li>
-                        <strong>digitalRead(pin):</strong><br>
-                        This function checks if the pin is receiving 5V (HIGH) or 0V (LOW).
-                    </li>
-                    <li>
                         <strong>If / Else:</strong><br>
-                        We use a conditional statement: IF the button is HIGH, turn on LED. ELSE (if not pressed), turn it off.
+                        This is the most basic decision-making structure. IF the button is pressed (HIGH), do X (LED ON). ELSE (released), do Y (LED OFF).
                     </li>
                 </ul>
             </section>
@@ -178,9 +172,8 @@ void loop() {
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
                     <li>How to wire a switch with a pull-down resistor.</li>
-                    <li>The difference between Digital Input and Output.</li>
+                    <li>The difference between Digital Input (Pin 3) and Output (Pin 2).</li>
                     <li>Using <code>digitalRead()</code> to detect physical interactions.</li>
-                    <li>Using <code>if/else</code> statements for logic control.</li>
                 </ul>
             </section>
 
