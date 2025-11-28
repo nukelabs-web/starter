@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Final Fix (Accordions Added) */
+/* Nuke Labs Design System - Final Table Version */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -119,13 +119,11 @@ img { max-width: 100%; display: block; }
     color: #fff; font-weight: 600; display: flex; align-items: center; gap: 10px;
 }
 
-/* --- UNIVERSAL GLASS ELEMENTS --- */
+/* --- GLASS CONTAINERS --- */
 .project-section { margin-bottom: 80px; }
 .project-section h2 {
     font-family: var(--font-heading); font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
-
-/* 1. General Paragraphs & Diagrams */
 .project-section p, 
 .code-container,
 .circuit-diagram {
@@ -140,38 +138,7 @@ img { max-width: 100%; display: block; }
     box-shadow: var(--glass-glow);
 }
 
-/* 2. ORDERED LISTS (Step-by-Step) */
-.project-section ol {
-    background: var(--glass-bg); border: var(--glass-border);
-    backdrop-filter: blur(10px); border-radius: 16px;
-    max-width: 900px; margin: 0 auto 30px;
-    padding: 0; counter-reset: step-counter; overflow: hidden;
-}
-.project-section ol li {
-    display: flex; align-items: flex-start; padding: 25px 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.15); text-align: left; color: #e0e0e0;
-}
-.project-section ol li:last-child { border-bottom: none; }
-.project-section ol li::before {
-    counter-increment: step-counter; content: "0" counter(step-counter);
-    font-family: var(--font-heading); font-weight: 700; color: #fff;
-    min-width: 60px; margin-right: 20px; border-right: 2px solid rgba(255,255,255,0.15);
-    padding-right: 20px; text-align: right;
-}
-
-/* 3. UNORDERED LISTS (Chips) */
-.project-section ul {
-    list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 15px; padding: 20px; margin: 0 auto 30px; max-width: 900px;
-}
-.project-section ul li {
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-    padding: 10px 25px; border-radius: 50px; font-weight: 600;
-    transition: 0.3s; color: #fff;
-}
-.project-section ul li:hover { background: #fff; color: #000; transform: translateY(-2px); }
-
-/* 4. PIN CONNECTIONS TABLE */
+/* 1. PIN CONNECTIONS TABLE */
 .pin-table {
     width: 100%; border-collapse: collapse;
     background: var(--glass-bg); border: var(--glass-border);
@@ -184,45 +151,60 @@ img { max-width: 100%; display: block; }
     text-align: center; color: #fff; text-transform: uppercase;
 }
 .pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+.pin-table tr:last-child td { border-bottom: none; }
 
-/* --- ACCORDIONS (For "How It Works") --- */
-.accordion {
-    max-width: 900px; margin: 0 auto 20px;
-}
-.accordion-header {
+/* 2. ORDERED LISTS (Steps, How It Works) */
+/* This makes <ol> look like a Premium Table */
+.project-section ol {
     background: var(--glass-bg);
     border: var(--glass-border);
-    border-radius: 12px;
-    padding: 20px 30px;
-    cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--font-heading); font-weight: 700; color: #fff;
-    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0;
+    counter-reset: step-counter;
+    overflow: hidden;
 }
-.accordion-header:hover { background: rgba(255, 255, 255, 0.1); }
-.accordion-content {
-    background: rgba(255, 255, 255, 0.02);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0 0 12px 12px;
-    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
-    margin-top: -5px; 
+.project-section ol li {
+    display: flex;
+    align-items: flex-start;
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    text-align: left;
+    color: #e0e0e0;
 }
-.accordion.active .accordion-header {
-    background: #fff; color: #000; border-radius: 12px 12px 0 0;
-}
-.accordion.active .accordion-content {
-    max-height: 1000px; /* Expand */
-}
-/* Force text inside accordion to be left aligned & transparent */
-.accordion-content p, .accordion-content div {
-    text-align: left; background: transparent; border: none; box-shadow: none; padding: 20px 30px; margin: 0;
+.project-section ol li:last-child { border-bottom: none; }
+.project-section ol li::before {
+    counter-increment: step-counter;
+    content: "0" counter(step-counter);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #fff;
+    min-width: 60px;
+    margin-right: 20px;
+    border-right: 2px solid rgba(255,255,255,0.15);
+    padding-right: 20px;
+    text-align: right;
 }
 
-/* Helpers */
+/* 3. UNORDERED LISTS (Chips / Key Components) */
+.project-section ul {
+    list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 15px; padding: 20px; margin: 0 auto 30px; max-width: 900px;
+}
+.project-section ul li {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 25px; border-radius: 50px; font-weight: 600;
+    transition: 0.3s; color: #fff;
+}
+.project-section ul li:hover { background: #fff; color: #000; transform: translateY(-2px); }
+
+/* Circuit Diagram */
 .circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
 .circuit-diagram p, .circuit-diagram div { display: none; }
+
+/* Code Block */
 .code-container { padding: 0; overflow: hidden; text-align: left; }
 .code-header {
     background: rgba(255,255,255,0.05); padding: 15px 30px;
