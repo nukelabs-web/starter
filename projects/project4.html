@@ -43,7 +43,7 @@
             </div>
 
             <section class="project-section">
-                <h2>Project Summary</h2>
+                <h2>Mission Brief</h2>
                 <p>Digital pins are either ON or OFF. But the real world is analog—light, temperature, and sound vary smoothly. In this project, you will use an LDR (Light Dependent Resistor) to measure light intensity and turn on an LED automatically when it gets dark.</p>
             </section>
 
@@ -52,8 +52,8 @@
                 <ul>
                     <li>Arduino Uno R3</li>
                     <li>LDR (Photoresistor)</li>
-                    <li>10kΩ Resistor (Brown-Black-Orange)</li>
-                    <li>LED & 220Ω Resistor</li>
+                    <li>Resistors</li>
+                    <li>LED</li>
                     <li>Jumper Wires</li>
                 </ul>
             </section>
@@ -73,20 +73,20 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Pin A0 (Analog)</td>
-                        <td>Junction between LDR and 10kΩ Resistor</td>
+                        <td>Pin A0</td>
+                        <td>Junction between LDR and Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 2</td>
+                        <td>Wire to LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>5V</td>
-                        <td>Other leg of LDR</td>
+                        <td>Wire to Positive Rail</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Other leg of 10kΩ Resistor</td>
-                    </tr>
-                    <tr>
-                        <td>Pin 13</td>
-                        <td>Positive Leg of LED</td>
+                        <td>Wire to Negative Rail</td>
                     </tr>
                 </table>
             </section>
@@ -94,11 +94,13 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Build the Voltage Divider: Connect one leg of the LDR to 5V. Connect the other leg to the 10kΩ resistor.</li>
-                    <li>Connect the other end of the 10kΩ resistor to Ground (GND).</li>
-                    <li>Connect the Sensor: Add a wire from the point where the LDR and Resistor meet (the middle junction) to Analog Pin A0.</li>
-                    <li>Add the Output: Connect an LED to Pin 13 (with a 220Ω series resistor) just like in Project 1.</li>
-                    <li>Upload the code and open the Serial Monitor (Magnifying glass icon) to see the light values.</li>
+                    <li>Connect the 5V and GND pins from the Arduino to the bottom power rails on the breadboard.</li>
+                    <li>Insert the LDR into the breadboard. Connect one leg to the Positive Rail.</li>
+                    <li>Connect the other leg of the LDR to a resistor, and connect the other end of that resistor to the Negative Rail.</li>
+                    <li>Connect a wire from the "Junction" (where the LDR and resistor meet) to Pin A0.</li>
+                    <li>Insert the LED. Connect the Cathode (Short Leg) to the Negative Rail via a resistor.</li>
+                    <li>Connect the Anode (Long Leg) of the LED to Pin 2.</li>
+                    <li>Upload the code below.</li>
                 </ol>
             </section>
 
@@ -107,11 +109,11 @@
                 <div class="code-block">
 /* Project 4 - Light Sensitive LED
  * Reads light value from LDR connected to A0.
- * Turns on LED if it gets dark.
+ * Turns on LED (Pin 2) if it gets dark.
  */
 
 const int sensorPin = A0;   // LDR connected to Analog Pin 0
-const int ledPin = 13;      // LED connected to Digital Pin 13
+const int ledPin = 2;       // LED connected to Digital Pin 2
 int sensorValue = 0;        // Variable to store the sensor reading
 
 void setup() {
@@ -148,12 +150,10 @@ void loop() {
                     </li>
                     
                     <li>
-                        <strong>LDR Properties:</strong><br>
                         An LDR changes its resistance based on light. More Light = Low Resistance. Darkness = High Resistance.
                     </li>
                     <li>
-                        <strong>Analog Input (A0):</strong><br>
-                        The Arduino measures voltage at the point between the LDR and the fixed 10k resistor. As the LDR resistance changes, the voltage shifts.
+                        The Arduino measures voltage at the point between the LDR and the fixed resistor. As the LDR resistance changes, the voltage shifts.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
@@ -161,15 +161,12 @@ void loop() {
                     </li>
 
                     <li>
-                        <strong>analogRead(A0):</strong><br>
-                        This converts the voltage (0-5V) into a number between 0 and 1023. 
+                        <code>analogRead(A0);</code> converts the voltage (0-5V) into a number between 0 and 1023.
                     </li>
                     <li>
-                        <strong>Serial Monitor:</strong><br>
                         We use <code>Serial.println()</code> to see the actual numbers on the computer screen. This helps us calibrate the threshold.
                     </li>
                     <li>
-                        <strong>Threshold Logic:</strong><br>
                         We check <code>if (sensorValue < 500)</code>. If true, it's dark -> Turn LED ON.
                     </li>
                 </ul>
