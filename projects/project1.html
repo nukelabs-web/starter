@@ -34,23 +34,24 @@
             
             <div class="project-header">
                 <h1 class="project-title">PROJECT 01: BLINKING LED</h1>
-                <p class="project-subtitle">Introduction to Digital Output & Timing</p>
+                <p class="project-subtitle">Arduino Uno R3 project</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
+                    <div class="project-meta-item"><i class="fas fa-book"></i> Concepts: Digital Output</div>
                     <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 15-45 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
-                <h2>Mission Brief</h2>
-                <p>This project demonstrates Digital Output and Basic Programming. You will build a simple circuit to control an LED, learning the fundamental concepts of controlling hardware with software.</p>
+                <h2>Project Summary</h2>
+                <p>This project demonstrates Digital output and basic programming. Build it to learn practical aspects of digital output and timing logic.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>LED (Any Color)</li>
+                    <li>LED</li>
                     <li>220Ω Resistor</li>
                     <li>Jumper Wires</li>
                     <li>Breadboard</li>
@@ -58,11 +59,18 @@
             </section>
 
             <section class="project-section">
+                <h2>Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <img src="../images/project1-circuit.png" alt="Circuit Diagram for Project 1">
+                </div>
+            </section>
+
+            <section class="project-section">
                 <h2>Pin Connections</h2>
                 <table class="pin-table">
                     <tr>
                         <th>Arduino Pin</th>
-                        <th>Component</th>
+                        <th>Component Connection</th>
                     </tr>
                     <tr>
                         <td>Pin 13</td>
@@ -76,30 +84,106 @@
             </section>
 
             <section class="project-section">
-                <h2>Circuit Diagram</h2>
-                <div class="circuit-diagram">
-                    <img src="../images/project1-circuit.png" alt="Circuit Diagram for Project 1">
+                <h2>Step-by-Step Instructions</h2>
+                <ol>
+                    <li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li>
+                    <li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li>
+                    <li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li>
+                    <li>Use Serial Monitor for calibration if the sketch prints values.</li>
+                </ol>
+            </section>
+
+            <section class="project-section">
+                <h2>Arduino Code</h2>
+                <div class="code-block">
+/* Project 1 - Blinking LED
+ * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
+ * Purpose: Introduce digital output and timing using delay().
+ */
+
+int ledPin = 13; // use on-board LED on many Arduino boards
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // configure pin as output to drive the LED
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH); // set pin HIGH -> LED ON
+  delay(500);                 // wait 500 ms
+  digitalWrite(ledPin, LOW);  // set pin LOW -> LED OFF
+  delay(500);                 // wait 500 ms
+}
                 </div>
             </section>
 
             <section class="project-section">
-                <h2>Source Code</h2>
-                <div class="code-block">
-/* Project 1 - Blinking LED
- * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
- */
-
-int ledPin = 13; // LED connected to digital pin 13
-
-void setup() {
-  pinMode(ledPin, OUTPUT); // sets the digital pin as output
-}
-
-void loop() {
-  digitalWrite(ledPin, HIGH); // sets the LED on
-  delay(500);                 // waits for a second
-  digitalWrite(ledPin, LOW);  // sets the LED off
-  delay(500);                 // waits for a second
-}
-                </div>
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li>
+                        <strong>Line-by-line justification:</strong><br>
+                        1) <code>int ledPin = 13;</code> — stores the pin number so it's easy to change.
+                    </li>
+                    <li>
+                        2) <code>pinMode(ledPin, OUTPUT);</code> — sets the pin as an output so digitalWrite can drive it.
+                    </li>
+                    <li>
+                        3) <code>digitalWrite(ledPin, HIGH);</code> — applies voltage to the pin to turn LED on.
+                    </li>
+                    <li>
+                        4) <code>delay(500);</code> — a blocking wait; simple but stops microcontroller from doing other tasks.
+                    </li>
+                    <li>
+                        <strong>Digital / Analog I/O Notes:</strong><br>
+                        Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.
+                    </li>
+                </ul>
             </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>How to wire circuits and use a breadboard</li>
+                    <li>How to program Arduino digital and analog pins</li>
+                    <li>How to debug using Serial Monitor</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps / Extension Ideas</h2>
+                <p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
+                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
+                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
