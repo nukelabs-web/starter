@@ -38,7 +38,9 @@ function generateProjectCards() {
     const imgPath = `images/project${project.id}-circuit.png`;
 
     card.innerHTML = `
-      <img src="${imgPath}" alt="${project.title}" class="project-thumb">
+      <div class="project-thumb-container">
+          <img src="${imgPath}" alt="${project.title}" class="project-thumb">
+      </div>
       <div class="project-card-content">
         <div class="project-meta">
             <span class="project-id">MISSION / ${formattedId}</span>
@@ -55,6 +57,7 @@ function generateProjectCards() {
   });
 }
 
+// Fixed Mobile Menu
 function setupMobileMenu() {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navbar = document.querySelector('.navbar');
@@ -73,60 +76,55 @@ function setupMobileMenu() {
   });
 }
 
-// Function to Make Code Blocks Copyable & Glassy
+// --- FIXED ACCORDION FUNCTION ---
+function setupAccordions() {
+  // Find all headers
+  const headers = document.querySelectorAll('.accordion-header');
+  
+  headers.forEach(header => {
+    header.addEventListener('click', function() {
+      // 1. Toggle active state on the header itself
+      this.classList.toggle('active');
+      
+      // 2. Find the content panel (it's usually the next element)
+      const content = this.nextElementSibling;
+      
+      // 3. Find the parent wrapper (optional, for styling)
+      const parent = this.parentElement;
+      parent.classList.toggle('active');
+
+      // 4. Toggle the content display
+      if (content.style.maxHeight) {
+        // If open, close it
+        content.style.maxHeight = null;
+      } else {
+        // If closed, open it to its full scroll height
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+}
+
+// Code Copy Function
 function enhanceCodeBlocks() {
     const codeBlocks = document.querySelectorAll('.code-block');
-    
     codeBlocks.forEach(block => {
-        // Create the container
         const container = document.createElement('div');
         container.className = 'code-container';
-        
-        // Create header with language label and copy button
         const header = document.createElement('div');
         header.className = 'code-header';
         header.innerHTML = `<span>Arduino / C++</span>`;
-        
         const copyBtn = document.createElement('button');
         copyBtn.className = 'copy-btn';
         copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+        copyBtn.style.background = 'transparent';
+        copyBtn.style.border = '1px solid #fff';
+        copyBtn.style.color = '#fff';
+        copyBtn.style.padding = '5px 10px';
+        copyBtn.style.cursor = 'pointer';
         
-        // Copy Functionality
         copyBtn.addEventListener('click', () => {
             const codeText = block.innerText;
             navigator.clipboard.writeText(codeText).then(() => {
                 copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                }, 2000);
-            });
-        });
-
-        header.appendChild(copyBtn);
-        
-        // Insert container before code block, then move code block inside
-        block.parentNode.insertBefore(container, block);
-        container.appendChild(header);
-        container.appendChild(block);
-    });
-}
-
-function highlightActiveNav() {
-  const navLinks = document.querySelectorAll('.navbar a');
-  const currentPath = window.location.pathname.split("/").pop();
-
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    const linkPath = link.getAttribute('href');
-    if ((currentPath === "" && linkPath.includes("index.html")) || currentPath === linkPath) {
-      link.classList.add('active');
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  generateProjectCards();
-  setupMobileMenu();
-  highlightActiveNav();
-  enhanceCodeBlocks(); // Run the new code enhancer
-});
+                setTimeout(() => { copyBtn.innerHTML = '<i class="fas fa-
