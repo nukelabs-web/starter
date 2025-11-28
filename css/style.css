@@ -238,8 +238,27 @@ img { max-width: 100%; display: block; }
 
 .glass-list li:last-child { border-bottom: none; }
 
-/* Circuit Diagram */
-.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
+/* Circuit Diagram - White Background Mode */
+.circuit-diagram {
+    background: #ffffff; /* Force White Background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px; /* Add padding so image doesn't touch edges */
+    margin: 0 auto 30px;
+    max-width: 900px;
+    text-align: center; 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.circuit-diagram img { 
+    border-radius: 8px; 
+    /* Remove border from image itself since container is white */
+    border: none; 
+    margin: 0 auto; 
+    display: block; 
+    max-height: 400px; /* Optional: prevent it from getting too huge */
+}
+
 .circuit-diagram p, .circuit-diagram div { display: none; }
 
 /* CODE BLOCK FIX */
@@ -293,4 +312,5 @@ img { max-width: 100%; display: block; }
     .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
 }
 @media (min-width: 769px) { .mobile-toggle { display: none; } }
+
 
