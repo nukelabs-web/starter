@@ -51,9 +51,9 @@
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>5x LEDs (Red or Mixed)</li>
-                    <li>5x 220Ω Resistors</li>
-                    <li>10+ Jumper Wires</li>
+                    <li>5x LEDs</li>
+                    <li>5x Resistors</li>
+                    <li>Jumper Wires</li>
                     <li>Breadboard</li>
                 </ul>
             </section>
@@ -73,12 +73,12 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Pins 2, 3, 4, 5, 6</td>
-                        <td>Positive Legs (Anodes) of 5 LEDs</td>
+                        <td>Pins 13, 12, 11, 10, 9</td>
+                        <td>Wires &rarr; LED Anodes (+)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>All Negative Legs (via separate resistors or common rail)</td>
+                        <td>Wire &rarr; Negative Rail &rarr; Resistors &rarr; LED Cathodes (-)</td>
                     </tr>
                 </table>
             </section>
@@ -86,11 +86,11 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Place 5 LEDs on the breadboard in a row, spacing them out slightly.</li>
-                    <li>Connect a 220Ω resistor to the cathode (short leg) of EACH LED, going to the negative rail.</li>
-                    <li>Connect the negative rail of the breadboard to the Arduino GND pin.</li>
-                    <li>Connect jumper wires from the Anode (long leg) of each LED to pins 2, 3, 4, 5, and 6 respectively.</li>
-                    <li>Open Arduino IDE, paste the code below, and upload.</li>
+                    <li>Insert 5 LEDs into the breadboard in a row.</li>
+                    <li>Connect a resistor from the Cathode (Short Leg) of <strong>each</strong> LED to the top Negative Rail.</li>
+                    <li>Connect a jumper wire from the Arduino <strong>GND</strong> to the Negative Rail.</li>
+                    <li>Connect jumper wires from the Anode (Long Leg) of each LED to Arduino Pins <strong>13, 12, 11, 10, and 9</strong>.</li>
+                    <li>Connect the USB cable, paste the code below, and upload.</li>
                 </ol>
             </section>
 
@@ -98,26 +98,27 @@
                 <h2>Arduino Code</h2>
                 <div class="code-block">
 /* Project 2 - LED Sequencer
- * Hardware: 5 LEDs connected to pins 2 through 6.
- * Purpose: Demonstrate For Loops and Arrays.
+ * Hardware: 5 LEDs connected to pins 13, 12, 11, 10, 9.
+ * Purpose: Demonstrate For Loops.
  */
 
 void setup() {
-  // Use a for loop to initialize pins 2 through 6 as outputs
-  for (int pin = 2; pin <= 6; pin++) {
+  // Use a for loop to configure pins 9 to 13 as outputs
+  for (int pin = 9; pin <= 13; pin++) {
     pinMode(pin, OUTPUT);
   }
 }
 
 void loop() {
-  // Turn LEDs on one by one
-  for (int pin = 2; pin <= 6; pin++) {
+  // Turn LEDs on one by one from Pin 13 down to 9
+  for (int pin = 13; pin >= 9; pin--) {
     digitalWrite(pin, HIGH); // Turn LED on
     delay(100);              // Wait fast
     digitalWrite(pin, LOW);  // Turn LED off
   }
   
-  // Optional: Reverse direction loop could be added here
+  // To make it bounce back, you can add another loop here
+  // counting from 9 to 13!
 }
                 </div>
             </section>
@@ -131,15 +132,15 @@ void loop() {
                     
                     <li>
                         <strong>For Loops:</strong><br>
-                        Instead of writing <code>digitalWrite</code> 5 separate times, we use a loop: <code>for (int pin = 2; pin <= 6; pin++)</code>.
+                        Instead of writing <code>digitalWrite</code> 5 separate times, we use a loop: <code>for (int pin = 13; pin >= 9; pin--)</code>.
                     </li>
                     <li>
                         <strong>Automation:</strong><br>
-                        The variable <code>pin</code> increases by 1 every time the loop runs, allowing us to control the next LED in the line automatically.
+                        The variable <code>pin</code> starts at 13 and decreases by 1 (<code>pin--</code>) every cycle until it hits 9.
                     </li>
                     <li>
                         <strong>Delay Speed:</strong><br>
-                        Changing <code>delay(100)</code> to a smaller number makes the light "run" faster.
+                        Changing <code>delay(100)</code> to a smaller number makes the light "run" faster across the board.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
@@ -147,8 +148,8 @@ void loop() {
                     </li>
 
                     <li>
-                        <strong>Current Limiting:</strong><br>
-                        Each LED must have its own resistor. Sharing one resistor for all 5 LEDs will result in uneven brightness or failure.
+                        <strong>Common Ground:</strong><br>
+                        All LEDs share a single connection to the Arduino GND via the "Negative Rail" on the breadboard. This simplifies wiring.
                     </li>
                 </ul>
             </section>
@@ -161,7 +162,7 @@ void loop() {
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to wire multiple components sharing a common Ground connection.</li>
+                    <li>How to use the Breadboard Power Rails to share connections.</li>
                     <li>How to use <code>for loops</code> to automate repetitive tasks in code.</li>
                     <li>How to manipulate variables to control hardware pins dynamically.</li>
                 </ul>
