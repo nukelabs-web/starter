@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Final Polish */
+/* Nuke Labs Design System - Stable Fix */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -26,7 +26,7 @@ body {
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s ease; }
-ul { list-style: none; }
+ul, ol { list-style: none; }
 img { max-width: 100%; display: block; }
 
 .container {
@@ -42,7 +42,6 @@ img { max-width: 100%; display: block; }
 }
 .header .container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
 
-/* Logo uses Orbitron on ALL pages */
 .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
 .logo img { height: 36px; }
 
@@ -66,7 +65,7 @@ img { max-width: 100%; display: block; }
     font-family: var(--font-heading);
     font-size: 4rem; line-height: 1.1; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px;
     text-transform: uppercase;
-    white-space: nowrap; /* Forces single line */
+    white-space: nowrap; 
 }
 
 .hero p {
@@ -141,21 +140,15 @@ img { max-width: 100%; display: block; }
     color: #fff; font-weight: 600; display: flex; align-items: center; gap: 10px;
 }
 
-/* --- UNIVERSAL GLASS CONTAINER FIX --- */
+/* --- GLASS CONTAINERS --- */
 .project-section { margin-bottom: 80px; }
-
 .project-section h2 {
     font-family: var(--font-heading);
     font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* The Glass Wrapper Rule 
-   Targets: Paragraphs, Unordered Lists, Ordered Lists, Tables, Code
-*/
+/* 1. Standard Glass Box (Paragraphs, Code, Circuit) */
 .project-section p, 
-.project-section ul,
-.project-section ol,
-.project-section table,
 .code-container,
 .circuit-diagram {
     background: var(--glass-bg);
@@ -163,151 +156,155 @@ img { max-width: 100%; display: block; }
     backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 40px;
-    margin: 0 auto 30px; /* Centered */
+    margin: 0 auto 30px;
     max-width: 900px;
     text-align: center; 
     box-shadow: var(--glass-glow);
 }
 
-/* --- UNIVERSAL PREMIUM LISTS & TABLES SYSTEM --- */
-
-/* 1. The Container (Glass Box) */
-/* Applies to Pin Table, Steps List, and How It Works List */
-.project-section table,
-.project-section ol,
-.project-section ul {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 40px;
+/* 2. TABLE STYLE LISTS (Steps & How It Works) - Targeted via OL */
+.project-section ol {
     background: var(--glass-bg);
     border: var(--glass-border);
     backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: var(--glass-glow);
-    overflow: hidden; /* Rounds the corners */
-    padding: 0; /* Reset padding */
-    border-collapse: collapse; /* For tables */
-    list-style: none; /* For lists */
-    counter-reset: list-counter; /* For numbered lists */
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0;
+    overflow: hidden;
+    counter-reset: step-counter;
 }
 
-/* 2. The Rows (Horizontal Lines) */
-.project-section table tr,
-.project-section ol li,
-.project-section ul li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex; /* Makes lists behave like tables */
-    align-items: stretch; /* Ensures divider line goes top to bottom */
+.project-section ol li {
+    display: flex;
+    align-items: flex-start;
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    text-align: left;
+    color: #e0e0e0;
 }
 
-/* Fix for actual Tables to keep display:table-row */
-.project-section table tr {
-    display: table-row;
-}
+.project-section ol li:last-child { border-bottom: none; }
 
-/* Remove border from the last item so it looks clean */
-.project-section table tr:last-child,
-.project-section ol li:last-child,
-.project-section ul li:last-child {
-    border-bottom: none;
-}
-
-/* 3. The Left Column (Vertical Divider & Bold Font) */
-/* Targets: Table First Column & List Counters */
-.project-section table td:first-child,
-.project-section table th:first-child,
+/* The Vertical Divider Column for Lists */
 .project-section ol li::before {
+    counter-increment: step-counter;
+    content: "0" counter(step-counter);
     font-family: var(--font-heading);
     font-weight: 700;
     color: #fff;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    
-    /* The Vertical Divider Line */
-    border-right: 2px solid rgba(255, 255, 255, 0.15);
-    
-    /* Spacing */
-    padding: 20px 25px;
-    width: 160px; /* Fixed width for alignment */
-    min-width: 160px;
-    text-align: right; /* Aligns text near the divider */
+    min-width: 80px;
+    margin-right: 30px;
+    border-right: 2px solid rgba(255,255,255,0.15);
+    padding-right: 20px;
+    text-align: right;
 }
 
-/* 4. The Right Column (Content) */
-.project-section table td:last-child,
-.project-section table th:last-child,
-.project-section ol li {
-    padding: 20px 25px;
-    text-align: left;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    align-self: center; /* Vertically center list text */
+/* 3. PIN CONNECTIONS TABLE (Matches the List Style) */
+.pin-table {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--glass-glow);
+    max-width: 900px;
+    margin: 0 auto 30px;
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
 }
 
-/* Specific Fix for Lists to handle content correctly */
-.project-section ol li {
-    display: flex;
-    padding: 0; /* Reset parent padding, let children handle it */
-}
-
-/* The Counter Generator for Lists (Steps / How It Works) */
-.project-section ol li::before {
-    counter-increment: list-counter;
-    content: "0" counter(list-counter); /* Adds 01, 02... */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-/* Add content padding for list items */
-.project-section ol li span, /* If you have spans */
-.project-section ol li {
-    color: #e0e0e0;
-} 
-
-/* 5. Special Handling for Table Headers (Pin Connections) */
-.project-section table th {
-    background: rgba(255,255,255,0.05); /* Slightly lighter header */
+.pin-table th {
+    font-family: var(--font-heading);
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
     color: #fff;
     text-transform: uppercase;
-    font-size: 0.8rem;
 }
 
-/* 6. Key Components Chips (Override the Table look for this specific list) */
-/* We target UL specifically if it contains components */
+.pin-table td {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-muted);
+}
+/* The Vertical Divider for Table First Column */
+.pin-table td:first-child {
+    border-right: 2px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-weight: 700;
+    width: 40%;
+}
+
+/* 4. KEY COMPONENTS (Horizontal Chips) - Targeted via UL */
 .project-section ul {
     display: flex;
-    flex-direction: row; /* Horizontal */
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    padding: 40px !important; /* Restore padding */
-    align-items: center;
+    padding: 0;
+    margin: 0 auto 30px;
+    max-width: 900px;
 }
 
 .project-section ul li {
-    border-bottom: none; /* Remove table lines */
+    background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.05);
+    padding: 12px 24px;
     border-radius: 50px;
-    padding: 10px 25px;
-    display: inline-block;
-    width: auto;
+    font-weight: 600;
+    transition: 0.3s;
+    color: #fff;
 }
+.project-section ul li:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-/* Remove the "Left Column" style from Component Chips */
-.project-section ul li::before {
-    content: none;
-    border: none;
+/* Circuit Diagram Image & Hider */
+.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
+.circuit-diagram p, .circuit-diagram div { display: none; }
+
+/* Code Block Cleanup */
+.code-container { padding: 0; overflow: hidden; text-align: left; }
+.code-header {
+    background: rgba(255,255,255,0.05); padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
 }
+.code-block { padding: 30px; background: transparent; border: none; margin: 0; box-shadow: none; border-radius: 0; text-align: left; }
 
-/* Responsive Fix */
+/* --- FOOTER --- */
+.footer { border-top: var(--glass-border); padding: 80px 0 40px; background: #050505; text-align: center; }
+.footer .container { display: flex; flex-direction: column; align-items: center; gap: 50px; }
+
+.footer-brand h3 { 
+    margin-bottom: 10px; font-size: 1.8rem; font-weight: 900; 
+    font-family: var(--font-heading); letter-spacing: 2px; 
+}
+.footer-brand p { color: var(--text-muted); }
+
+.footer-links-group { display: flex; gap: 80px; flex-wrap: wrap; justify-content: center; }
+.footer-links h4 { 
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; 
+    color: #fff; opacity: 0.6; font-family: var(--font-heading);
+}
+.footer-links ul li { margin-bottom: 15px; }
+.footer-links a { color: var(--text-muted); font-weight: 600; }
+.footer-links a:hover { color: #fff; }
+
+.copyright { margin-top: 60px; color: #444; font-size: 0.8rem; font-weight: 500; }
+
+/* Responsive */
 @media (max-width: 768px) {
-    .project-section table td:first-child, 
-    .project-section ol li::before {
-        width: 100px;
-        min-width: 100px;
-        padding: 15px;
-        font-size: 0.75rem;
+    .hero h1 { font-size: 2.5rem; white-space: normal; } 
+    .project-section ol li { flex-direction: column; gap: 10px; }
+    .project-section ol li::before { border-right: none; width: 100%; text-align: left; margin-bottom: 5px; }
+    .pin-table td:first-child { border-right: none; }
+    
+    .navbar {
+        position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
+        background: #000; flex-direction: column; padding: 40px; transition: 0.3s;
     }
+    .navbar.active { left: 0; }
+    .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
 }
+@media (min-width: 769px) { .mobile-toggle { display: none; } }
