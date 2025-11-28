@@ -169,140 +169,145 @@ img { max-width: 100%; display: block; }
     box-shadow: var(--glass-glow);
 }
 
-/* --- SPECIFIC SECTION STYLING --- */
+/* --- UNIVERSAL PREMIUM LISTS & TABLES SYSTEM --- */
 
-/* 1. Pin Connections Table */
-.pin-table { width: 100%; border-collapse: collapse; }
-.pin-table th { 
-    font-family: var(--font-heading); 
-    background: rgba(255,255,255,0.1); 
-    padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); 
-    text-align: center;
-}
-.pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-/* 2. Key Components - Horizontal Chips */
+/* 1. The Container (Glass Box) */
+/* Applies to Pin Table, Steps List, and How It Works List */
+.project-section table,
+.project-section ol,
 .project-section ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 40px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--glass-glow);
+    overflow: hidden; /* Rounds the corners */
+    padding: 0; /* Reset padding */
+    border-collapse: collapse; /* For tables */
+    list-style: none; /* For lists */
+    counter-reset: list-counter; /* For numbered lists */
 }
 
+/* 2. The Rows (Horizontal Lines) */
+.project-section table tr,
+.project-section ol li,
 .project-section ul li {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-.project-section ul li:hover { background: #fff; color: #000; }
-
-/* 3. Step by Step - TABLE LOOK (Simulated using standard OL) */
-
-/* The Container (Table Border) */
-.project-section ol {
-    text-align: left; /* Text stays left aligned */
-    padding: 0 !important; /* Remove default padding */
-    list-style: none; /* Hide default numbers */
-    counter-reset: step-counter; /* Initialize counter */
-    overflow: hidden; /* rounded corners fix */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex; /* Makes lists behave like tables */
+    align-items: stretch; /* Ensures divider line goes top to bottom */
 }
 
-/* The Rows */
-.project-section ol li {
-    display: flex;
-    align-items: flex-start;
-    padding: 25px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Row Divider Line */
-    margin: 0;
-    color: #e0e0e0;
+/* Fix for actual Tables to keep display:table-row */
+.project-section table tr {
+    display: table-row;
 }
 
-/* Remove border from the last item */
-.project-section ol li:last-child {
+/* Remove border from the last item so it looks clean */
+.project-section table tr:last-child,
+.project-section ol li:last-child,
+.project-section ul li:last-child {
     border-bottom: none;
 }
 
-/* The Left Column ("STEP 1") */
+/* 3. The Left Column (Vertical Divider & Bold Font) */
+/* Targets: Table First Column & List Counters */
+.project-section table td:first-child,
+.project-section table th:first-child,
 .project-section ol li::before {
-    counter-increment: step-counter;
-    content: "STEP " counter(step-counter);
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.85rem;
     color: #fff;
-    min-width: 120px; /* Width of the left column */
-    margin-right: 30px;
-    border-right: 2px solid rgba(255, 255, 255, 0.15); /* Vertical Divider Line */
-    padding-right: 20px;
+    font-size: 0.85rem;
     letter-spacing: 1px;
-}
-
-/* Mobile Responsive Fix for Table */
-@media (max-width: 768px) {
-    .project-section ol li {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .project-section ol li::before {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        width: 100%;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-    }
-}
-
-/* 4. Circuit Diagram */
-.circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
-.circuit-diagram p, .circuit-diagram div { display: none; } /* Hide placeholder text */
-
-/* Code Block overrides */
-.code-container { padding: 0; overflow: hidden; text-align: left; }
-.code-header {
-    background: rgba(255,255,255,0.05); padding: 15px 30px;
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: var(--glass-border); font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
-}
-.code-block { padding: 30px; background: transparent; border: none; margin: 0; box-shadow: none; border-radius: 0; text-align: left; }
-
-/* --- FOOTER --- */
-.footer { border-top: var(--glass-border); padding: 80px 0 40px; background: #050505; text-align: center; }
-.footer .container { display: flex; flex-direction: column; align-items: center; gap: 50px; }
-
-.footer-brand h3 { 
-    margin-bottom: 10px; font-size: 1.8rem; font-weight: 900; 
-    font-family: var(--font-heading); letter-spacing: 2px; 
-}
-.footer-brand p { color: var(--text-muted); }
-
-.footer-links-group { display: flex; gap: 80px; flex-wrap: wrap; justify-content: center; }
-.footer-links h4 { 
-    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; 
-    color: #fff; opacity: 0.6; font-family: var(--font-heading);
-}
-.footer-links ul li { margin-bottom: 15px; }
-.footer-links a { color: var(--text-muted); font-weight: 600; }
-.footer-links a:hover { color: #fff; }
-
-.copyright { margin-top: 60px; color: #444; font-size: 0.8rem; font-weight: 500; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; white-space: normal; } 
-    .step-item { flex-direction: column; gap: 10px; }
-    .step-item::before { border-right: none; margin-bottom: 5px; }
     
-    .navbar {
-        position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
-        background: #000; flex-direction: column; padding: 40px; transition: 0.3s;
-    }
-    .navbar.active { left: 0; }
-    .mobile-toggle { display: block; font-size: 1.5rem; cursor: pointer; color: #fff; }
+    /* The Vertical Divider Line */
+    border-right: 2px solid rgba(255, 255, 255, 0.15);
+    
+    /* Spacing */
+    padding: 20px 25px;
+    width: 160px; /* Fixed width for alignment */
+    min-width: 160px;
+    text-align: right; /* Aligns text near the divider */
 }
-@media (min-width: 769px) { .mobile-toggle { display: none; } }
 
+/* 4. The Right Column (Content) */
+.project-section table td:last-child,
+.project-section table th:last-child,
+.project-section ol li {
+    padding: 20px 25px;
+    text-align: left;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    align-self: center; /* Vertically center list text */
+}
+
+/* Specific Fix for Lists to handle content correctly */
+.project-section ol li {
+    display: flex;
+    padding: 0; /* Reset parent padding, let children handle it */
+}
+
+/* The Counter Generator for Lists (Steps / How It Works) */
+.project-section ol li::before {
+    counter-increment: list-counter;
+    content: "0" counter(list-counter); /* Adds 01, 02... */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Add content padding for list items */
+.project-section ol li span, /* If you have spans */
+.project-section ol li {
+    color: #e0e0e0;
+} 
+
+/* 5. Special Handling for Table Headers (Pin Connections) */
+.project-section table th {
+    background: rgba(255,255,255,0.05); /* Slightly lighter header */
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* 6. Key Components Chips (Override the Table look for this specific list) */
+/* We target UL specifically if it contains components */
+.project-section ul {
+    display: flex;
+    flex-direction: row; /* Horizontal */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 40px !important; /* Restore padding */
+    align-items: center;
+}
+
+.project-section ul li {
+    border-bottom: none; /* Remove table lines */
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+    border-radius: 50px;
+    padding: 10px 25px;
+    display: inline-block;
+    width: auto;
+}
+
+/* Remove the "Left Column" style from Component Chips */
+.project-section ul li::before {
+    content: none;
+    border: none;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .project-section table td:first-child, 
+    .project-section ol li::before {
+        width: 100px;
+        min-width: 100px;
+        padding: 15px;
+        font-size: 0.75rem;
+    }
+}
