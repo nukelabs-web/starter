@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs"><span>NUKELABS</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="../support.html">Support</a></li></ul></nav></div></header>
+    <header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs"><span>NUKELABS</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="../index.html#projects">Projects</a></li><li><a href="../support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
 
     <main class="project-page">
         <div class="container">
@@ -80,9 +80,28 @@ void loop() {
                     <li><strong>The Logic:</strong><br>We use two loops. One counts UP to 255 (Fade In), the other counts DOWN to 0 (Fade Out).</li>
                 </ul>
             </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p>The LED should gently "breathe," fading from off to full brightness and back down again continuously.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>How Pulse Width Modulation (PWM) simulates analog voltage.</li>
+                    <li>Using <code>analogWrite()</code> instead of <code>digitalWrite()</code>.</li>
+                    <li>How to increment variables inside a loop to create animation.</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps</h2>
+                <p>Try connecting 3 LEDs to 3 different PWM pins and making them fade in a wave pattern!</p>
+            </section>
         </div>
     </main>
-    <footer class="footer"><div class="container"><div class="copyright"><p>&copy; 2025 Nukelabs.</p></div></div></footer>
+    <footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs"><h3>NUKELABS</h3><p>Empowering makers.</p></div><div class="copyright"><p>&copy; 2025 Nukelabs.</p></div></div></footer>
     <script src="../js/script.js"></script>
 </body>
 </html>
