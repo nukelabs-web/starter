@@ -1,4 +1,4 @@
-/* Nuke Labs Design System - Sci-Fi Industrial Final */
+/* Nuke Labs Design System - Final Polish */
 :root {
     --bg-color: #000000;
     --text-main: #ffffff;
@@ -123,7 +123,7 @@ img { max-width: 100%; display: block; }
 .project-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 30px; flex-grow: 1; }
 .card-link { font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-transform: uppercase; font-family: var(--font-heading); }
 
-/* --- PROJECT PAGE DETAILS (Centered & Glass) --- */
+/* --- PROJECT PAGE DETAILS --- */
 .project-page { padding: 120px 0 80px; text-align: center; } 
 
 .project-header { margin-bottom: 60px; padding-bottom: 40px; border-bottom: var(--glass-border); }
@@ -142,7 +142,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* --- UNIVERSAL GLASS CONTAINER FIX --- */
-/* This wraps all main content types in the glass box automatically */
 .project-section { margin-bottom: 80px; }
 
 .project-section h2 {
@@ -150,9 +149,12 @@ img { max-width: 100%; display: block; }
     font-size: 2rem; margin-bottom: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* TARGETS: Paragraphs, Lists, Tables, Code containers */
+/* The Glass Wrapper Rule 
+   Targets: Paragraphs, Unordered Lists, Ordered Lists, Tables, Code
+*/
 .project-section p, 
 .project-section ul,
+.project-section ol,
 .project-section table,
 .code-container,
 .circuit-diagram {
@@ -167,7 +169,7 @@ img { max-width: 100%; display: block; }
     box-shadow: var(--glass-glow);
 }
 
-/* --- SPECIFIC FIXES --- */
+/* --- SPECIFIC SECTION STYLING --- */
 
 /* 1. Pin Connections Table */
 .pin-table { width: 100%; border-collapse: collapse; }
@@ -175,6 +177,7 @@ img { max-width: 100%; display: block; }
     font-family: var(--font-heading); 
     background: rgba(255,255,255,0.1); 
     padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); 
+    text-align: center;
 }
 .pin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
@@ -198,17 +201,38 @@ img { max-width: 100%; display: block; }
 }
 .project-section ul li:hover { background: #fff; color: #000; }
 
-/* 3. What You Learned List (Vertical list inside glass) */
-/* We target the specific section if possible, or just style UL generically.
-   Since 'Key Components' is also a UL, the chip style above applies to it too.
-   If 'What You Learned' needs to be vertical, we can override it, 
-   but Chips look good for "What You Learned" too! 
-   If you strictly want vertical for "Learned", stick to the Chips, it looks better. */
+/* 3. Step by Step - TABLE LOOK (Simulated using Ordered List) */
+.steps-list {
+    text-align: left; /* Keep text left aligned inside the box */
+    padding: 0 !important; /* Reset generic padding */
+    overflow: hidden;
+}
 
-/* 4. Circuit Diagram Text Hider */
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin: 0;
+}
+
+.step-item:last-child { border-bottom: none; }
+
+/* This creates the "STEP X" column */
+.step-item::before {
+    content: "STEP " counter(step-counter);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #fff;
+    min-width: 100px; /* Fixed width for the "Column" */
+    margin-right: 30px;
+    border-right: 1px solid rgba(255,255,255,0.1); /* Vertical divider */
+    padding-right: 20px;
+}
+
+/* 4. Circuit Diagram */
 .circuit-diagram img { border-radius: 8px; border: 1px solid #333; margin: 0 auto; display: block; }
-/* Hides any text (p) inside the circuit diagram div */
-.circuit-diagram p, .circuit-diagram div { display: none; } 
+.circuit-diagram p, .circuit-diagram div { display: none; } /* Hide placeholder text */
 
 /* Code Block overrides */
 .code-container { padding: 0; overflow: hidden; text-align: left; }
@@ -242,8 +266,10 @@ img { max-width: 100%; display: block; }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; white-space: normal; } /* Allow wrap on mobile */
-    .project-title { font-size: 2.2rem; }
+    .hero h1 { font-size: 2.5rem; white-space: normal; } 
+    .step-item { flex-direction: column; gap: 10px; }
+    .step-item::before { border-right: none; margin-bottom: 5px; }
+    
     .navbar {
         position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
         background: #000; flex-direction: column; padding: 40px; transition: 0.3s;
