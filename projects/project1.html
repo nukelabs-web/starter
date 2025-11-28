@@ -51,9 +51,9 @@
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>Red LED</li>
-                    <li>220Ω Resistor (Red-Red-Brown)</li>
-                    <li>Red & Black Jumper Wires</li>
+                    <li>LED</li>
+                    <li>Resistor</li>
+                    <li>Jumper Wires</li>
                     <li>Breadboard</li>
                 </ul>
             </section>
@@ -74,11 +74,11 @@
                     </tr>
                     <tr>
                         <td>Pin 13</td>
-                        <td>Red Wire &rarr; Resistor &rarr; LED Anode (+)</td>
+                        <td>Wire &rarr; Resistor &rarr; LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Black Wire &rarr; LED Cathode (-)</td>
+                        <td>Wire &rarr; LED Cathode (-)</td>
                     </tr>
                 </table>
             </section>
@@ -87,9 +87,9 @@
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
                     <li>Insert the LED into the breadboard. Identify the Anode (Long Leg) and Cathode (Short Leg).</li>
-                    <li>Connect the 220Ω Resistor to the same row as the LED Anode (Long Leg).</li>
-                    <li>Connect the <strong>Red Jumper Wire</strong> from <strong>Pin 13</strong> to the free end of the Resistor.</li>
-                    <li>Connect the <strong>Black Jumper Wire</strong> from the LED Cathode (Short Leg) to <strong>GND</strong>.</li>
+                    <li>Connect the Resistor to the same row as the LED Anode (Long Leg).</li>
+                    <li>Connect a <strong>Jumper Wire</strong> from <strong>Pin 13</strong> to the free end of the Resistor.</li>
+                    <li>Connect a <strong>Jumper Wire</strong> from the LED Cathode (Short Leg) to <strong>GND</strong>.</li>
                     <li>Connect the Arduino via USB, paste the code below, and upload.</li>
                 </ol>
             </section>
@@ -98,7 +98,7 @@
                 <h2>Arduino Code</h2>
                 <div class="code-block">
 /* Project 1 - Blinking LED
- * Hardware: LED with 220Ω resistor connected from pin 13 to GND.
+ * Hardware: LED with resistor connected from pin 13 to GND.
  */
 
 int ledPin = 13; // use on-board LED on many Arduino boards
@@ -148,7 +148,7 @@ void loop() {
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>The Red LED will blink on for 0.5 seconds and off for 0.5 seconds repeatedly. If it doesn't work, check that the LED legs aren't swapped (Long leg must connect to the Resistor side).</p>
+                <p>The LED will blink on for 0.5 seconds and off for 0.5 seconds repeatedly. If it doesn't work, check that the LED legs aren't swapped (Long leg must connect to the Resistor side).</p>
             </section>
 
             <section class="project-section">
@@ -171,6 +171,7 @@ void loop() {
     <footer class="footer">
         <div class="container">
             <div class="footer-brand">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
                 <h3>NUKELABS</h3>
                 <p>Empowering makers and electronics enthusiasts</p>
             </div>
