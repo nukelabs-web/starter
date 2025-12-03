@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 5: LED Fading | Nukelabs</title>
+    <title>Project 5: Dual LED Fading | Nukelabs</title>
     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,26 +33,26 @@
         <div class="container">
             
             <div class="project-header">
-                <h1 class="project-title">PROJECT 05: LED FADING</h1>
-                <p class="project-subtitle">Analog Output via PWM</p>
+                <h1 class="project-title">PROJECT 05: DUAL LED FADING</h1>
+                <p class="project-subtitle">Multi-Channel Analog Output</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
-                    <div class="project-meta-item"><i class="fas fa-wave-square"></i> Concepts: PWM</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 20 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-wave-square"></i> Concepts: PWM Control</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 25 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
-                <h2>Project Summary</h2>
-                <p>Digital pins are usually 0V (OFF) or 5V (ON). But what if you want 2.5V to make an LED half-bright? In this project, we use <strong>Pulse Width Modulation (PWM)</strong> to simulate analog voltages and create a breathing light effect.</p>
+                <h2>Mission Brief</h2>
+                <p>Digital pins are usually just On or Off. In this project, we utilize Pulse Width Modulation (PWM) on two separate pins to create a smooth fading animation between two different LEDs.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>LED (Any Color)</li>
-                    <li>220Ω Resistor</li>
+                    <li>2x LEDs</li>
+                    <li>2x Resistors</li>
                     <li>Jumper Wires</li>
                     <li>Breadboard</li>
                 </ul>
@@ -73,12 +73,16 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Pin 9 (PWM ~)</td>
-                        <td>Positive Leg (Anode) of LED</td>
+                        <td>Pin 3</td>
+                        <td>Wire to First LED Anode (+)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 5</td>
+                        <td>Wire to Second LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Negative Leg (Cathode) via Resistor</td>
+                        <td>Wire to Negative Rail (Common Ground)</td>
                     </tr>
                 </table>
             </section>
@@ -86,10 +90,11 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Place the LED on the breadboard.</li>
-                    <li>Connect the 220Ω resistor to the cathode (short leg) and connect it to GND.</li>
-                    <li>Connect a jumper wire from the Anode (long leg) to <strong>Pin 9</strong>.</li>
-                    <li><strong>Important:</strong> Pin 9 is a PWM pin (marked with a ~ symbol on the board). Standard pins like 13 cannot fade.</li>
+                    <li>Connect the Arduino GND pin to the blue Negative Rail on the breadboard.</li>
+                    <li>Insert two LEDs into the breadboard.</li>
+                    <li>Connect a resistor from the Cathode (Short Leg) of <strong>each</strong> LED to the Negative Rail.</li>
+                    <li>Connect the Anode (Long Leg) of the first LED to Pin 3.</li>
+                    <li>Connect the Anode (Long Leg) of the second LED to Pin 5.</li>
                     <li>Upload the code below.</li>
                 </ol>
             </section>
@@ -97,31 +102,39 @@
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 5 - LED Fading
- * Uses analogWrite() to fade an LED on pin 9.
+/* Project 5 - Dual Fading
+ * Fades two LEDs on PWM pins 3 and 5.
  */
 
-int ledPin = 9;    // LED connected to digital pin 9
+int led1 = 3;  // First LED on PWM pin
+int led2 = 5;  // Second LED on PWM pin
 
 void setup() {
-  // nothing happens in setup
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
 }
 
 void loop() {
-  // fade in from min to max in increments of 5 points:
-  for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += 5) {
-    // sets the value (range from 0 to 255):
-    analogWrite(ledPin, fadeValue);
-    // wait for 30 milliseconds to see the dimming effect
-    delay(30);
+  // Fade LED 1 IN
+  for (int i = 0; i <= 255; i += 5) {
+    analogWrite(led1, i);
+    delay(15);
   }
-
-  // fade out from max to min in increments of 5 points:
-  for (int fadeValue = 255 ; fadeValue >= 0; fadeValue -= 5) {
-    // sets the value (range from 0 to 255):
-    analogWrite(ledPin, fadeValue);
-    // wait for 30 milliseconds to see the dimming effect
-    delay(30);
+  // Fade LED 1 OUT
+  for (int i = 255; i >= 0; i -= 5) {
+    analogWrite(led1, i);
+    delay(15);
+  }
+  
+  // Fade LED 2 IN
+  for (int i = 0; i <= 255; i += 5) {
+    analogWrite(led2, i);
+    delay(15);
+  }
+  // Fade LED 2 OUT
+  for (int i = 255; i >= 0; i -= 5) {
+    analogWrite(led2, i);
+    delay(15);
   }
 }
                 </div>
@@ -135,12 +148,12 @@ void loop() {
                     </li>
                     
                     <li>
-                        <strong>The ~ Symbol:</strong><br>
-                        On the Arduino, pins marked with `~` (3, 5, 6, 9, 10, 11) support fading. They switch ON and OFF so fast that the eye sees it as "dimming."
+                        <strong>PWM Pins:</strong><br>
+                        Not all pins can fade. We must use pins marked with `~`. We selected pins 3 and 5 because they both support PWM output.
                     </li>
                     <li>
                         <strong>analogWrite(pin, value):</strong><br>
-                        Unlike `digitalWrite` (HIGH/LOW), this function takes a number between 0 (Fully OFF) and 255 (Fully ON).
+                        This function sends a rapid pulse signal. 0 is always off, 255 is always on, and 127 is 50% duty cycle (half brightness).
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
@@ -148,34 +161,29 @@ void loop() {
                     </li>
 
                     <li>
-                        <strong>The Fade In Loop:</strong><br>
-                        <code>for (int i = 0; i <= 255; i += 5)</code><br>
-                        This loop starts at 0 brightness and adds 5 every cycle until it hits 255.
-                    </li>
-                    <li>
-                        <strong>The Fade Out Loop:</strong><br>
-                        The second loop does the opposite, subtracting 5 until it reaches 0.
+                        <strong>Sequential Loops:</strong><br>
+                        The code runs 4 distinct loops in order. First it fades LED 1 Up, then Down. Once that finishes, it moves to LED 2 Up, then Down.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>The LED should gently "breathe," fading smoothly from off to full brightness and back down again continuously. It should not flicker.</p>
+                <p>The first LED will gently fade on and off. Immediately after it finishes, the second LED will fade on and off. This cycle repeats indefinitely.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How Pulse Width Modulation (PWM) simulates analog voltage.</li>
-                    <li>Using <code>analogWrite()</code> for variable output.</li>
-                    <li>How to increment variables inside a loop to create animation.</li>
+                    <li>How to wire multiple output devices with a common ground.</li>
+                    <li>Using multiple PWM pins simultaneously.</li>
+                    <li>Sequencing animations using code loops.</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Try connecting 3 LEDs to 3 different PWM pins (9, 10, 11) and making them fade in a wave pattern, or use a random number generator to create a flickering candle effect.</p>
+                <p>Try modifying the code so BOTH LEDs fade in at the same time, or make one fade IN while the other fades OUT (Cross-fading).</p>
             </section>
 
         </div>
