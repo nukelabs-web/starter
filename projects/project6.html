@@ -34,27 +34,27 @@
             
             <div class="project-header">
                 <h1 class="project-title">PROJECT 06: BUTTON COUNTER</h1>
-                <p class="project-subtitle">State Change Detection Logic</p>
+                <p class="project-subtitle">7-Segment Display & Counting Logic</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
-                    <div class="project-meta-item"><i class="fas fa-calculator"></i> Concepts: Counting</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 30 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-calculator"></i> Concepts: Arrays & Display</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 35 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
                 <h2>Mission Brief</h2>
-                <p>Computers need to know exactly <em>when</em> a button is pushed, not just if it <em>is currently</em> pushed. This project teaches "State Change Detection" to count exactly how many times a button has been clicked.</p>
+                <p>Computers are great at counting. In this project, you will build a digital counter using a 7-segment display. Every time you press the button, the number on the screen will increase by one.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>Push Button (Tactile Switch)</li>
-                    <li>10kΩ Resistor (Pull-down)</li>
+                    <li>7-Segment Display (Common Cathode)</li>
+                    <li>Push Button</li>
+                    <li>2x Resistors (for display & button)</li>
                     <li>Jumper Wires</li>
-                    <li>Breadboard</li>
                 </ul>
             </section>
 
@@ -73,16 +73,20 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Pin 2</td>
-                        <td>One leg of Push Button</td>
+                        <td>Pins 2 - 8</td>
+                        <td>Segments a, b, c, d, e, f, g of Display</td>
                     </tr>
                     <tr>
-                        <td>5V</td>
-                        <td>Diagonal leg of Push Button</td>
+                        <td>Pin 9</td>
+                        <td>Push Button Leg</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>10kΩ Resistor (connected to Pin 2 leg)</td>
+                        <td>Display Common Pin & Button Resistor</td>
+                    </tr>
+                    <tr>
+                        <td>5V</td>
+                        <td>Button Power Leg</td>
                     </tr>
                 </table>
             </section>
@@ -90,55 +94,68 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Insert the push button into the breadboard.</li>
-                    <li>Connect one leg to 5V.</li>
-                    <li>Connect the diagonal leg to Pin 2.</li>
-                    <li>Add the 10kΩ pull-down resistor from the Pin 2 leg to GND.</li>
-                    <li>Connect the Arduino to your computer via USB.</li>
-                    <li>Upload the code and open the Serial Monitor (Ctrl+Shift+M).</li>
+                    <li>Insert the 7-Segment Display into the breadboard.</li>
+                    <li>Connect the Common pin (usually center top/bottom) to GND via a resistor.</li>
+                    <li>Connect the segment pins (a, b, c, d, e, f, g) to Arduino pins 2 through 8 in order.</li>
+                    <li>Insert the Push Button. Connect one leg to 5V.</li>
+                    <li>Connect the diagonal leg to Pin 9 and also to GND via a 10k resistor (Pull-down).</li>
+                    <li>Upload the code below.</li>
                 </ol>
             </section>
 
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 6 - Button Counter
- * Counts the number of times a button is pressed.
+/* Project 6 - Button Counter (7-Segment)
+ * Counts button presses and displays 0-9.
  */
 
-const int buttonPin = 2;    
+// Pin definitions for 7-segment (a-g)
+int segmentPins[] = {2, 3, 4, 5, 6, 7, 8};
+int buttonPin = 9;
 
-int buttonPushCounter = 0;   // counter for the number of button presses
-int buttonState = 0;         // current state of the button
-int lastButtonState = 0;     // previous state of the button
+// Binary patterns for digits 0-9
+byte digits[10][7] = {
+  {1,1,1,1,1,1,0}, // 0
+  {0,1,1,0,0,0,0}, // 1
+  {1,1,0,1,1,0,1}, // 2
+  {1,1,1,1,0,0,1}, // 3
+  {0,1,1,0,0,1,1}, // 4
+  {1,0,1,1,0,1,1}, // 5
+  {1,0,1,1,1,1,1}, // 6
+  {1,1,1,0,0,0,0}, // 7
+  {1,1,1,1,1,1,1}, // 8
+  {1,1,1,1,0,1,1}  // 9
+};
+
+int count = 0;
+int lastButtonState = 0;
 
 void setup() {
+  for(int i=0; i<7; i++) {
+    pinMode(segmentPins[i], OUTPUT);
+  }
   pinMode(buttonPin, INPUT);
-  Serial.begin(9600);        // Initialize serial communication
 }
 
 void loop() {
-  // read the pushbutton input pin:
-  buttonState = digitalRead(buttonPin);
-
-  // compare the buttonState to its previous state
-  if (buttonState != lastButtonState) {
-    // if the state has changed, increment the counter
-    if (buttonState == HIGH) {
-      // if the current state is HIGH then the button went from off to on:
-      buttonPushCounter++;
-      Serial.println("on");
-      Serial.print("number of button pushes: ");
-      Serial.println(buttonPushCounter);
-    } else {
-      // if the current state is LOW then the button went from on to off:
-      Serial.println("off");
-    }
-    // Delay a little bit to avoid bouncing
-    delay(50);
+  int buttonState = digitalRead(buttonPin);
+  
+  // Detect button press (Rising Edge)
+  if(buttonState == HIGH && lastButtonState == LOW) {
+    count++;
+    if(count > 9) count = 0; // Reset after 9
+    delay(200); // Debounce
   }
-  // save the current state as the last state, for next time through the loop
   lastButtonState = buttonState;
+  
+  displayDigit(count);
+}
+
+void displayDigit(int num) {
+  for(int i=0; i<7; i++) {
+    digitalWrite(segmentPins[i], digits[num][i]);
+  }
 }
                 </div>
             </section>
@@ -147,49 +164,50 @@ void loop() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        The Problem:
+                        Hardware Logic:
                     </li>
                     
                     <li>
-                        If you just use <code>if(digitalRead(button) == HIGH) count++</code>, the Arduino is so fast it will count thousands of times in a split second while you hold the button.
+                        <strong>7-Segment Display:</strong><br>
+                        It is basically 7 LEDs packaged together in the shape of an '8'. By turning specific segments on or off, we can form numbers.
+                    </li>
+                    <li>
+                        <strong>Common Cathode:</strong><br>
+                        All the negative legs of the internal LEDs are connected together to one pin, which goes to GND.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        The Solution (State Change):
+                        Code Logic:
                     </li>
 
                     <li>
-                        <strong>Compare States:</strong><br>
-                        We compare the <code>buttonState</code> (current) with <code>lastButtonState</code> (previous loop).
+                        <strong>Arrays:</strong><br>
+                        We use a "2D Array" to store the ON/OFF pattern for every digit from 0 to 9. `digits[0]` holds the pattern for '0', etc.
                     </li>
                     <li>
-                        <strong>Edge Detection:</strong><br>
-                        We only count when the state <em>changes</em> from LOW to HIGH. This is called the "Rising Edge."
-                    </li>
-                    <li>
-                        <strong>Debounce:</strong><br>
-                        <code>delay(50);</code> waits for the mechanical vibrations inside the button to settle so we don't get double-counts.
+                        <strong>State Change:</strong><br>
+                        Just like the previous project, we only count when the button state <em>changes</em> from LOW to HIGH.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>Open the Serial Monitor. Nothing happens until you press the button. When you click it once, it says "1". Click again, "2". Holding it down does NOT increase the number.</p>
+                <p>The display starts at '0'. Each time you press the button, the number increments: 0 -> 1 -> 2 ... -> 9. After 9, it loops back to 0.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>The difference between "State" (Is it Pressed?) and "State Change" (Did it just get pressed?).</li>
-                    <li>How to use variables to remember history (`lastButtonState`).</li>
-                    <li>How to increment variables using `variable++`.</li>
+                    <li>How to control a 7-Segment Display using arrays.</li>
+                    <li>Mapping variable data (`count`) to physical outputs.</li>
+                    <li>Combining Input logic with complex Output visualization.</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Use the modulo operator <code>%</code> to reset the counter every 4 clicks. Use this logic to cycle through different LED patterns (Mode 1, Mode 2, Mode 3, Off) with a single button!</p>
+                <p>Add a second button to count DOWN. Or, try making a digital dice that rolls a random number when you press the button!</p>
             </section>
 
         </div>
