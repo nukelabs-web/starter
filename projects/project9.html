@@ -52,7 +52,7 @@
                 <ul>
                     <li>Arduino Uno R3</li>
                     <li>LDR (Light Sensor)</li>
-                    <li>10kΩ Resistor</li>
+                    <li>Resistor (10kΩ)</li>
                     <li>Piezo Buzzer</li>
                     <li>Jumper Wires</li>
                 </ul>
@@ -74,15 +74,15 @@
                     </tr>
                     <tr>
                         <td>Pin A0</td>
-                        <td>LDR Sensor Signal (Voltage Divider)</td>
+                        <td>Wire to LDR/Resistor Junction</td>
                     </tr>
                     <tr>
-                        <td>Pin 8</td>
-                        <td>Positive Leg (+) of Buzzer</td>
+                        <td>Pin 9</td>
+                        <td>Wire to Buzzer Positive Leg (+)</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Negative Leg (-) of Buzzer</td>
+                        <td>Wire to Buzzer Negative Leg (-)</td>
                     </tr>
                 </table>
             </section>
@@ -90,10 +90,10 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Build the LDR Voltage Divider circuit (LDR + 10kΩ Resistor) connected to A0.</li>
+                    <li>Build the LDR Voltage Divider circuit (LDR + Resistor) connected to A0.</li>
                     <li>Place the Piezo Buzzer on the breadboard.</li>
                     <li>Connect the Negative leg (usually shorter or marked -) to GND.</li>
-                    <li>Connect the Positive leg (+) to Digital Pin 8.</li>
+                    <li>Connect the Positive leg (+) to Digital Pin 9 using a jumper wire.</li>
                     <li>Upload the code below.</li>
                     <li>Test by covering the sensor with your hand (Silence) and exposing it to light (Alarm).</li>
                 </ol>
@@ -103,11 +103,11 @@
                 <h2>Arduino Code</h2>
                 <div class="code-block">
 /* Project 9 - Light Alarm
- * Triggers a buzzer when light is detected.
+ * Triggers a buzzer on Pin 9 when light is detected.
  */
 
 const int sensorPin = A0;
-const int buzzerPin = 8;
+const int buzzerPin = 9; // Buzzer connected to Pin 9
 
 // Threshold for "Darkness". Adjust as needed!
 int threshold = 600; 
