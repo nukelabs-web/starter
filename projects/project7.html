@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 7: Code Lock | Nukelabs</title>
+    <title>Project 7: Password Lock | Nukelabs</title>
     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,29 +33,29 @@
         <div class="container">
             
             <div class="project-header">
-                <h1 class="project-title">PROJECT 07: CODE LOCK</h1>
-                <p class="project-subtitle">Logic & Security Systems</p>
+                <h1 class="project-title">PROJECT 07: PASSWORD LOCK</h1>
+                <p class="project-subtitle">Sequence Detection Logic</p>
                 <div class="project-meta">
-                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
-                    <div class="project-meta-item"><i class="fas fa-lock"></i> Concepts: Logic Gates</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 30-40 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Hard</div>
+                    <div class="project-meta-item"><i class="fas fa-key"></i> Concepts: Sequence Arrays</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 45 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
                 <h2>Mission Brief</h2>
-                <p>Build a digital security system! The Red LED (Locked) will stay on by default. The Green LED (Unlocked) will only turn on if you trigger the correct "key" combination using two buttons simultaneously.</p>
+                <p>Simple locks use one key. Smart locks use a code. In this project, you will build a digital lock that only opens (turns on the LED) if you press three buttons in the exact correct order (1 -> 3 -> 2).</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>2x Push Buttons</li>
-                    <li>1x Red LED</li>
-                    <li>1x Green LED</li>
-                    <li>2x 10kΩ Resistors (Pull-down)</li>
-                    <li>2x 220Ω Resistors (LEDs)</li>
+                    <li>3x Push Buttons</li>
+                    <li>1x LED</li>
+                    <li>3x Resistors (for buttons)</li>
+                    <li>1x Resistor (for LED)</li>
+                    <li>Jumper Wires</li>
                 </ul>
             </section>
 
@@ -74,20 +74,20 @@
                         <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Pin 2</td>
-                        <td>Button A (Input)</td>
+                        <td>Pin 9</td>
+                        <td>Button 1 (Left)</td>
                     </tr>
                     <tr>
-                        <td>Pin 3</td>
-                        <td>Button B (Input)</td>
+                        <td>Pin 7</td>
+                        <td>Button 2 (Middle)</td>
                     </tr>
                     <tr>
-                        <td>Pin 12</td>
-                        <td>Red LED (Locked Status)</td>
+                        <td>Pin 5</td>
+                        <td>Button 3 (Right)</td>
                     </tr>
                     <tr>
-                        <td>Pin 13</td>
-                        <td>Green LED (Unlocked Status)</td>
+                        <td>Pin 8</td>
+                        <td>LED Anode (via Resistor)</td>
                     </tr>
                 </table>
             </section>
@@ -95,48 +95,96 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Place both buttons on the breadboard with space between them.</li>
-                    <li>Connect 10kΩ pull-down resistors to one leg of EACH button (connected to GND).</li>
-                    <li>Connect the other leg of EACH button to 5V.</li>
-                    <li>Connect the signal leg (same side as resistor) of Button A to Pin 2, and Button B to Pin 3.</li>
-                    <li>Wire the Red LED to Pin 12 and Green LED to Pin 13 (don't forget 220Ω resistors!).</li>
-                    <li>Upload the code logic below.</li>
+                    <li>Place three buttons on the breadboard.</li>
+                    <li>Connect one side of all buttons to 5V.</li>
+                    <li>Connect the other side of each button to a 10k resistor going to GND (Pull-down).</li>
+                    <li>Connect the signal wire from Button 1 to Pin 9.</li>
+                    <li>Connect the signal wire from Button 2 to Pin 7.</li>
+                    <li>Connect the signal wire from Button 3 to Pin 5.</li>
+                    <li>Connect an LED to Pin 8 (with a 220Ω resistor).</li>
+                    <li>Upload the code below.</li>
                 </ol>
             </section>
 
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 7 - Code Lock
- * Requires Button A (Pin 2) and Button B (Pin 3) 
- * to be pressed TOGETHER to unlock.
+/* PASSWORD LOCK (Sequence: 1 -> 3 -> 2)
+ * Button 1: Pin 9
+ * Button 2: Pin 7
+ * Button 3: Pin 5
+ * LED: Pin 8 (Active LOW logic used in logic but wired for Active HIGH here)
  */
 
-int btnA = 2;
-int btnB = 3;
-int redLed = 12;   // Locked Indicator
-int greenLed = 13; // Unlocked Indicator
+const int BTN1_PIN = 9;
+const int BTN2_PIN = 7;
+const int BTN3_PIN = 5;
+const int LED_PIN  = 8;
+
+// Password sequence: Button 1, then 3, then 2
+const int password[] = {1, 3, 2};
+const int PASS_LEN = 3;
+
+int position = 0; // Current progress
+
+// State variables
+int lastB1 = LOW;
+int lastB2 = LOW;
+int lastB3 = LOW;
 
 void setup() {
-  pinMode(btnA, INPUT);
-  pinMode(btnB, INPUT);
-  pinMode(redLed, OUTPUT);
-  pinMode(greenLed, OUTPUT);
+  pinMode(BTN1_PIN, INPUT);
+  pinMode(BTN2_PIN, INPUT);
+  pinMode(BTN3_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+
+  digitalWrite(LED_PIN, LOW); // Start Locked (LED OFF)
+  Serial.begin(9600);
+  Serial.println("System Ready: Enter Code 1-3-2");
 }
 
 void loop() {
-  // Logic: IF Button A is pressed AND (&&) Button B is pressed
-  if (digitalRead(btnA) == HIGH && digitalRead(btnB) == HIGH) {
-    
-    // Access Granted
-    digitalWrite(greenLed, HIGH); 
-    digitalWrite(redLed, LOW);
-    
+  int b1 = digitalRead(BTN1_PIN);
+  int b2 = digitalRead(BTN2_PIN);
+  int b3 = digitalRead(BTN3_PIN);
+
+  // Detect Presses (Rising Edge)
+  if (b1 == HIGH && lastB1 == LOW) { handleButton(1); delay(50); }
+  if (b2 == HIGH && lastB2 == LOW) { handleButton(2); delay(50); }
+  if (b3 == HIGH && lastB3 == LOW) { handleButton(3); delay(50); }
+
+  lastB1 = b1;
+  lastB2 = b2;
+  lastB3 = b3;
+}
+
+void handleButton(int btnNumber) {
+  Serial.print("Pressed: ");
+  Serial.println(btnNumber);
+
+  // Check if correct button for current step
+  if (password[position] == btnNumber) {
+    position++;
+    Serial.print("Correct! Progress: ");
+    Serial.println(position);
+
+    // Check if unlocked
+    if (position == PASS_LEN) {
+      Serial.println("UNLOCKED!");
+      digitalWrite(LED_PIN, HIGH); // LED ON
+      delay(5000);                 // Wait 5 Seconds
+      digitalWrite(LED_PIN, LOW);  // Lock again
+      position = 0;                // Reset
+    }
   } else {
-    
-    // Access Denied (Locked)
-    digitalWrite(greenLed, LOW);
-    digitalWrite(redLed, HIGH);
+    // Wrong button
+    Serial.println("WRONG! Resetting...");
+    position = 0;
+    // Error Blink
+    for(int i=0; i<3; i++){
+        digitalWrite(LED_PIN, HIGH); delay(100);
+        digitalWrite(LED_PIN, LOW); delay(100);
+    }
   }
 }
                 </div>
@@ -146,46 +194,46 @@ void loop() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Programming Logic (AND Gate):
+                        Sequence Tracking:
                     </li>
                     
                     <li>
-                        <strong>The && Operator:</strong><br>
-                        In coding, <code>&&</code> means "AND". The statement <code>if (A && B)</code> only runs if BOTH conditions are true at the exact same time.
+                        <strong>Arrays:</strong><br>
+                        We store the secret code in an array: <code>int password[] = {1, 3, 2};</code>.
                     </li>
                     <li>
-                        <strong>Default State (Else):</strong><br>
-                        If you press just one button (or no buttons), the <code>else</code> block runs, keeping the Red LED on (Locked).
+                        <strong>Position Variable:</strong><br>
+                        The variable <code>position</code> starts at 0. If you press the correct button for slot 0, it increases to 1. If you press the wrong button, it resets to 0.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Security Concept:
+                        State Machines:
                     </li>
 
                     <li>
-                        <strong>Dual Authentication:</strong><br>
-                        This mimics real-world systems like nuclear launch keys or safe deposit boxes where two keys must be turned simultaneously.
+                        <strong>Reset on Error:</strong><br>
+                        Security systems must be strict. Any wrong press immediately wipes your progress, forcing you to start over.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p><strong>Standard State:</strong> Red LED is ON. <br><strong>Press Button A only:</strong> Red stays ON. <br><strong>Press Button B only:</strong> Red stays ON. <br><strong>Press BOTH Buttons:</strong> Red turns OFF, Green turns ON.</p>
+                <p>The LED is OFF. Press Button 1, nothing visible happens (but internal counter advances). Press Button 3, still nothing. Press Button 2, and the LED turns ON for 5 seconds. If you press any wrong button, the LED blinks rapidly to indicate error.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to use Logical Operators (AND `&&`, OR `||`).</li>
-                    <li>Building basic security logic with hardware.</li>
-                    <li>Handling multiple inputs simultaneously in a single <code>if</code> statement.</li>
+                    <li>How to compare user input against a stored array (password).</li>
+                    <li>Using variables to track the "State" or progress of a system.</li>
+                    <li>Handling multiple inputs to trigger a single timed output.</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Create a "Sequence Lock" where you must press Button A, release it, and <em>then</em> press Button B to unlock. This requires using variables to remember the "State" of the lock!</p>
+                <p>Add a buzzer that beeps once for a correct press and gives a harsh "Buzz" for a wrong press. Or, change the code to require a 4-digit PIN!</p>
             </section>
 
         </div>
