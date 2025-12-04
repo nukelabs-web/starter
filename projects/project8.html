@@ -51,10 +51,10 @@
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>LDR (Light Dependent Resistor)</li>
-                    <li>10kΩ Resistor (Voltage Divider)</li>
-                    <li>White LED</li>
-                    <li>220Ω Resistor (for LED)</li>
+                    <li>LDR (Light Sensor)</li>
+                    <li>Resistors</li>
+                    <li>LED</li>
+                    <li>Jumper Wires</li>
                 </ul>
             </section>
 
@@ -74,19 +74,19 @@
                     </tr>
                     <tr>
                         <td>Pin A0</td>
-                        <td>Junction of LDR & 10kΩ Resistor</td>
+                        <td>Wire to LDR/Resistor Junction</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 7</td>
+                        <td>Wire to LED Anode (+)</td>
                     </tr>
                     <tr>
                         <td>5V</td>
-                        <td>Other leg of LDR</td>
+                        <td>Wire to Positive Rail</td>
                     </tr>
                     <tr>
                         <td>GND</td>
-                        <td>Other leg of 10kΩ Resistor</td>
-                    </tr>
-                    <tr>
-                        <td>Pin 13</td>
-                        <td>Positive Leg of Street Light (LED)</td>
+                        <td>Wire to Negative Rail</td>
                     </tr>
                 </table>
             </section>
@@ -94,11 +94,14 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Build the LDR Sensor circuit (Voltage Divider) exactly as you did in Project 4.</li>
-                    <li>Connect the sensor junction (middle point) to Analog Pin A0.</li>
-                    <li>Connect a White LED to Pin 13 (remember the 220Ω resistor!).</li>
+                    <li>Connect the Arduino 5V and GND to the breadboard power rails.</li>
+                    <li>Insert the LDR and a resistor in series (one leg of LDR connects to one leg of resistor).</li>
+                    <li>Connect the free leg of the LDR to the Positive Rail.</li>
+                    <li>Connect the free leg of the resistor to the Negative Rail.</li>
+                    <li>Connect a wire from the middle junction (where LDR and resistor meet) to <strong>Pin A0</strong>.</li>
+                    <li>Insert the LED. Connect the Cathode (Short Leg) to the Negative Rail via a resistor.</li>
+                    <li>Connect the Anode (Long Leg) of the LED to <strong>Pin 7</strong>.</li>
                     <li>Upload the code below.</li>
-                    <li>Open Serial Monitor to check the light values in your room.</li>
                 </ol>
             </section>
 
@@ -106,11 +109,11 @@
                 <h2>Arduino Code</h2>
                 <div class="code-block">
 /* Project 8 - Automatic Night Lamp
- * Turns LED on when LDR sensor detects darkness.
+ * Turns LED on Pin 7 ON when LDR sensor on A0 detects darkness.
  */
 
 const int sensorPin = A0;
-const int lightPin = 13;
+const int lightPin = 7;  // LED connected to Pin 7
 
 // CHANGE THIS value based on your room's light level!
 int threshold = 400; 
