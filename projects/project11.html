@@ -54,7 +54,7 @@
                     <li>HC-SR04 Ultrasonic Sensor</li>
                     <li>Piezo Buzzer</li>
                     <li>Red LED</li>
-                    <li>220Ω Resistor</li>
+                    <li>Resistors</li>
                     <li>Jumper Wires</li>
                 </ul>
             </section>
@@ -74,28 +74,28 @@
                         <th>Arduino Connection</th>
                     </tr>
                     <tr>
-                        <td>HC-SR04 VCC</td>
+                        <td>Sensor VCC</td>
                         <td>5V</td>
                     </tr>
                     <tr>
-                        <td>HC-SR04 GND</td>
+                        <td>Sensor GND</td>
                         <td>GND</td>
                     </tr>
                     <tr>
-                        <td>HC-SR04 Trig</td>
-                        <td>Pin 9</td>
+                        <td>Sensor Trig</td>
+                        <td>Pin 3</td>
                     </tr>
                     <tr>
-                        <td>HC-SR04 Echo</td>
-                        <td>Pin 10</td>
+                        <td>Sensor Echo</td>
+                        <td>Pin 2</td>
                     </tr>
                     <tr>
                         <td>Buzzer (+)</td>
-                        <td>Pin 8</td>
+                        <td>Pin 4</td>
                     </tr>
                     <tr>
                         <td>LED Anode (+)</td>
-                        <td>Pin 7</td>
+                        <td>Pin 5</td>
                     </tr>
                 </table>
             </section>
@@ -103,10 +103,12 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Insert the HC-SR04 sensor into the breadboard (facing outward).</li>
-                    <li>Connect the sensor pins (VCC->5V, GND->GND, Trig->9, Echo->10).</li>
+                    <li>Insert the HC-SR04 sensor into the breadboard.</li>
+                    <li>Connect Sensor VCC to 5V and GND to GND.</li>
+                    <li>Connect Sensor Trig to Pin 3 and Echo to Pin 2.</li>
                     <li>Place the Buzzer and LED on the breadboard.</li>
-                    <li>Connect the Buzzer to Pin 8 and the LED to Pin 7 (use a resistor for the LED!).</li>
+                    <li>Connect the Buzzer Positive leg to Pin 4.</li>
+                    <li>Connect the LED Anode (Long leg) to Pin 5 via a resistor.</li>
                     <li>Connect the negative legs of both the Buzzer and LED to GND.</li>
                     <li>Upload the code below.</li>
                 </ol>
@@ -117,13 +119,13 @@
                 <div class="code-block">
 /* Project 11 - Obstacle Detector
  * Uses HC-SR04 to measure distance. 
- * Triggers alarm if object is closer than 15cm.
+ * Triggers alarm (Pin 4) and LED (Pin 5) if object is closer than 15cm.
  */
 
-const int trigPin = 9;
-const int echoPin = 10;
-const int buzzer = 8;
-const int led = 7;
+const int trigPin = 3;
+const int echoPin = 2;
+const int buzzer = 4;
+const int led = 5;
 
 long duration;
 int distance;
@@ -227,6 +229,7 @@ void loop() {
     <footer class="footer">
         <div class="container">
             <div class="footer-brand">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
                 <h3>NUKELABS</h3>
                 <p>Empowering makers and electronics enthusiasts</p>
             </div>
