@@ -11,7 +11,7 @@ const projectsData = [
   { id: 9, title: "Light Alarm", difficulty: "Medium", concept: "Threshold detection, alarm" },
   { id: 10, title: "Simple Light Meter", difficulty: "Medium", concept: "Analog reading, calibration" },
   { id: 11, title: "Obstacle Detector", difficulty: "Medium", concept: "Distance measurement" },
-  { id: 12, title: "Distance Measurement", difficulty: "Medium", concept: "Sensor interfacing" },
+  { id: 12, title: "Distance Indicator", difficulty: "Medium", concept: "Sensor interfacing" },
   { id: 13, title: "Parking Sensor", difficulty: "Medium", concept: "Proximity alert, sound" },
   { id: 14, title: "Water Level Detector", difficulty: "Medium", concept: "Real-world sensor app" },
   { id: 15, title: "Melody Player", difficulty: "Medium", concept: "Sound output, timing" },
@@ -133,3 +133,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
