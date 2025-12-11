@@ -34,26 +34,26 @@
             
             <div class="project-header">
                 <h1 class="project-title">PROJECT 10: LIGHT METER</h1>
-                <p class="project-subtitle">Visualizing Sensor Data</p>
+                <p class="project-subtitle">5-Segment Visual Bar Graph</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
-                    <div class="project-meta-item"><i class="fas fa-chart-bar"></i> Concepts: Data Viz</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 30-45 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-chart-bar"></i> Concepts: Data Mapping</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 40 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
                 <h2>Mission Brief</h2>
-                <p>Instead of a simple ON/OFF switch, we will build a smart meter that visualizes <em>how much</em> light there is. We will use three LEDs (Red, Yellow, Green) to represent Low, Medium, and High light levels.</p>
+                <p>A single LED can only say "Yes" or "No". A bar graph can say "How Much". In this project, you will build a 5-segment light meter that acts like a volume visualizer for light intensity.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>LDR Sensor + 10kΩ Resistor</li>
-                    <li>3x LEDs (Red, Yellow, Green)</li>
-                    <li>3x 220Ω Resistors</li>
+                    <li>LDR Sensor</li>
+                    <li>5x LEDs (Mixed Colors)</li>
+                    <li>Resistors</li>
                     <li>Jumper Wires</li>
                 </ul>
             </section>
@@ -78,15 +78,23 @@
                     </tr>
                     <tr>
                         <td>Pin 2</td>
-                        <td>Red LED (Low Light)</td>
+                        <td>LED 1 (Red/Low)</td>
                     </tr>
                     <tr>
                         <td>Pin 3</td>
-                        <td>Yellow LED (Medium Light)</td>
+                        <td>LED 2 (Orange)</td>
                     </tr>
                     <tr>
                         <td>Pin 4</td>
-                        <td>Green LED (High Light)</td>
+                        <td>LED 3 (Yellow)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 5</td>
+                        <td>LED 4 (Yellow)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 6</td>
+                        <td>LED 5 (Green/High)</td>
                     </tr>
                 </table>
             </section>
@@ -94,55 +102,54 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Build the LDR Voltage Divider circuit (from Project 4) connected to A0.</li>
-                    <li>Connect the Red LED to Pin 2, Yellow to Pin 3, and Green to Pin 4.</li>
-                    <li><strong>Crucial:</strong> Ensure every LED has its own 220Ω series resistor connected to GND.</li>
+                    <li>Build the LDR Voltage Divider circuit connected to Pin A0.</li>
+                    <li>Place 5 LEDs in a row on the breadboard.</li>
+                    <li>Connect the Cathode (Short Leg) of <strong>every</strong> LED to the Negative Rail via a resistor.</li>
+                    <li>Connect the Anodes (Long Legs) to Pins 2, 3, 4, 5, and 6 in order.</li>
+                    <li>Connect the Arduino GND to the breadboard Negative Rail.</li>
                     <li>Upload the code below.</li>
-                    <li>Use the Serial Monitor to check your room's light values if the LEDs don't light up as expected.</li>
                 </ol>
             </section>
 
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 10 - Light Level Meter
- * Visualizes light intensity using 3 LEDs.
+/* Project 10 - 5-Segment Light Meter
+ * Maps light intensity (0-1023) to a bar graph (0-5 LEDs).
  */
 
 const int sensorPin = A0;
-const int redLed = 2;
-const int yellowLed = 3;
-const int greenLed = 4;
+// Array of LED pins: {2, 3, 4, 5, 6}
+const int ledPins[] = {2, 3, 4, 5, 6};
+const int ledCount = 5;
 
 void setup() {
-  pinMode(redLed, OUTPUT);
-  pinMode(yellowLed, OUTPUT);
-  pinMode(greenLed, OUTPUT);
+  // Initialize all LED pins as outputs
+  for (int i = 0; i < ledCount; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
   Serial.begin(9600);
 }
 
 void loop() {
-  int val = analogRead(sensorPin);
-  Serial.print("Value: ");
-  Serial.println(val);
-  
-  // Reset all LEDs to OFF first
-  digitalWrite(redLed, LOW);
-  digitalWrite(yellowLed, LOW);
-  digitalWrite(greenLed, LOW);
+  int sensorReading = analogRead(sensorPin);
+  Serial.println(sensorReading);
 
-  // Logic: Bucketing the values
-  if (val < 300) {
-    digitalWrite(redLed, HIGH);    // Dark (Low)
-  } 
-  else if (val >= 300 && val < 700) {
-    digitalWrite(yellowLed, HIGH); // Dim (Medium)
-  } 
-  else {
-    digitalWrite(greenLed, HIGH);  // Bright (High)
+  // Map the sensor range (approx 0-800) to the number of LEDs (0-5)
+  // You might need to adjust the '800' based on your room brightness
+  int ledLevel = map(sensorReading, 0, 800, 0, ledCount);
+
+  // Loop over the LED array
+  for (int i = 0; i < ledCount; i++) {
+    // If the LED's index is less than the calculated level, turn it ON
+    if (i < ledLevel) {
+      digitalWrite(ledPins[i], HIGH);
+    } else {
+      // Otherwise turn it OFF
+      digitalWrite(ledPins[i], LOW);
+    }
   }
-  
-  delay(100);
+  delay(50); // Fast update
 }
                 </div>
             </section>
@@ -151,19 +158,16 @@ void loop() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Programming Logic (Bucketing):
+                        The map() Function:
                     </li>
                     
                     <li>
-                        <strong>Range Splitting:</strong><br>
-                        The sensor gives us 0-1023. We split this huge range into three small "buckets":
-                        <br>1. 0 to 300 (Dark)
-                        <br>2. 300 to 700 (Medium)
-                        <br>3. 700+ (Bright)
+                        <strong>Scaling Data:</strong><br>
+                        The sensor gives 0-1023. We have 5 LEDs. The function <code>map(value, 0, 800, 0, 5)</code> automatically does the math to convert the big number into a small scale (0 to 5).
                     </li>
                     <li>
-                        <strong>Else If:</strong><br>
-                        This structure is crucial. We check the first condition. If false, we check the second. If that is also false, the `else` (default) runs.
+                        <strong>Dynamic Loop:</strong><br>
+                        Instead of writing `if/else` for every single LED, we use a `for loop` to scan through the array. If the loop index is lower than the signal level, turn that LED on.
                     </li>
 
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
@@ -171,29 +175,29 @@ void loop() {
                     </li>
 
                     <li>
-                        <strong>Visual Feedback:</strong><br>
-                        Humans aren't good at reading raw numbers like "642". We are very good at seeing colors. This project translates raw data into a human-readable format.
+                        <strong>Bar Graph:</strong><br>
+                        This is the same logic used in battery indicators on phones or volume bars on stereos. More signal = More lights.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p><strong>Dark Room:</strong> Red LED turns ON.<br><strong>Normal Light:</strong> Yellow LED turns ON.<br><strong>Flashlight:</strong> Green LED turns ON.<br>Only one LED should be lit at a time, acting like a gauge.</p>
+                <p><strong>Dark Room:</strong> All LEDs OFF.<br><strong>Dim Light:</strong> 1 or 2 LEDs ON (Red/Orange).<br><strong>Bright Light:</strong> All 5 LEDs ON (up to Green).<br>The bar moves up and down responsively as you wave your hand over the sensor.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>Using `else if` to create multiple logical conditions.</li>
-                    <li>Visualizing analog data using digital outputs.</li>
-                    <li>How to define numerical ranges in code (`val >= 300 && val < 700`).</li>
+                    <li>How to use the powerful `map()` function to scale data.</li>
+                    <li>Controlling arrays of components efficiently.</li>
+                    <li>Creating visual feedback systems for analog data.</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Add 5 LEDs to create a more precise bar graph (like a battery indicator). Or use the `map()` function to convert the sensor data directly into an LED count.</p>
+                <p>Invert the logic to make a "Shadow Meter" (lights go up as it gets darker). Or replace the LEDs with a piezo buzzer where the pitch gets higher as the light gets brighter!</p>
             </section>
 
         </div>
