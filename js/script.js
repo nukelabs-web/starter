@@ -16,7 +16,7 @@ const projectsData = [
   { id: 14, title: "Water Level Detector", difficulty: "Medium", concept: "Real-world sensor app" },
   { id: 15, title: "Melody Player", difficulty: "Medium", concept: "Sound output, timing" },
   { id: 16, title: "Button Buzzer", difficulty: "Easy", concept: "Input to output mapping" },
-  { id: 17, title: "7-Segment Counter", difficulty: "Medium", concept: "Display control, counting" },
+  { id: 17, title: "Random Number Generator", difficulty: "Medium", concept: "Display control, counting" },
   { id: 18, title: "Stopwatch", difficulty: "Medium", concept: "Timing, counting, display" },
   { id: 19, title: "Traffic Light Sim", difficulty: "Medium", concept: "Sequencing, logic" },
   { id: 20, title: "Obstacle Avoidance", difficulty: "Medium", concept: "Sensor control, alerts" },
@@ -133,4 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
 
