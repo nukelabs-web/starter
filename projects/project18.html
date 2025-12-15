@@ -1,31 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project 18: Timer / Stopwatch | Nukelabs</title>
-  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head><body>
-<header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs Logo"><span>Nukelabs</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
-<main class="project-page"><div class="container">
-  <div class="project-header"><h1 class="project-title">Project 18: Timer / Stopwatch</h1><p class="project-subtitle">Arduino Uno R3 project</p><div class="project-meta"><div class="project-meta-item"><i class="fas fa-bolt"></i><span>Difficulty: Medium</span></div><div class="project-meta-item"><i class="fas fa-book"></i><span>Concepts: Timing, counting, display</span></div><div class="project-meta-item"><i class="fas fa-clock"></i><span>Time: 15-45 minutes</span></div></div></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 18: Digital Tug of War | Nukelabs</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <span>NUKELABS</span>
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
 
-  <section class="project-section"><div class="section-header"><i class="fas fa-info-circle"></i><h2>Project Summary</h2></div><p>This project demonstrates Timing, counting, display. Build it to learn practical aspects of timing, counting, display.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-microchip"></i><h2>Components Required</h2></div><div class="components-grid"><div class="component-card"><div class="component-icon"><i class="fas fa-microchip"></i></div><h3>Key Components</h3><p>Arduino Uno R3, Push Button(s), 7-Segment Display or LCD, Resistors, Jumper Wires, Breadboard</p></div></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-project-diagram"></i><h2>Circuit Diagram</h2></div><div class="circuit-diagram"><img src="../images/project18-circuit.png" alt="Circuit Diagram for project 18"><p>Replace placeholder by adding <code>project18-circuit.png</code> to images/</p></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-plug"></i><h2>Pin Connections</h2></div><table class="pin-table"><thead><tr><th>Arduino Pin</th><th>Component Connection</th></tr></thead><tbody><tr><td>Segments</td><td>Digital pins 2-8 (via resistors)</td></tr><tr><td>Common</td><td>GND or VCC</td></tr></tbody></table></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-list-ol"></i><h2>Step-by-Step Instructions</h2></div><ol class="steps-list"><li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li><li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li><li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li><li>Use Serial Monitor for calibration if the sketch prints values.</li></ol></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-code"></i><h2>Arduino Code</h2></div><div class="code-block"><pre><code>/* Project 18 - Timer / Stopwatch (basic sketch)
- * Replace placeholders and expand as needed.
+    <main class="project-page">
+        <div class="container">
+            
+            <div class="project-header">
+                <h1 class="project-title">PROJECT 18: DIGITAL TUG OF WAR</h1>
+                <p class="project-subtitle">1D Competitive Gaming</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
+                    <div class="project-meta-item"><i class="fas fa-gamepad"></i> Concepts: Game Logic</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 45 Min</div>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2>Mission Brief</h2>
+                <p>It's time to settle scores. In this project, you will build a digital version of Tug of War. The center light acts as the "flag" on the rope. Two players must mash their buttons as fast as possible to pull the light to their side. First to reach the edge wins!</p>
+            </section>
+
+            <section class="project-section">
+                <h2>Key Components</h2>
+                <ul>
+                    <li>Arduino Uno R3</li>
+                    <li>2x Push Buttons</li>
+                    <li>5x LEDs</li>
+                    <li>7x Resistors (5 for LEDs, 2 for Buttons)</li>
+                    <li>Jumper Wires</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <img src="../images/project18-circuit.png" alt="Circuit Diagram for Project 18">
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Pin Connections</h2>
+                <table class="pin-table">
+                    <tr>
+                        <th>Component</th>
+                        <th>Arduino Pin</th>
+                    </tr>
+                    <tr>
+                        <td>Left Button</td>
+                        <td>Pin 2</td>
+                    </tr>
+                    <tr>
+                        <td>Right Button</td>
+                        <td>Pin 12</td>
+                    </tr>
+                    <tr>
+                        <td>LED 1 (Left)</td>
+                        <td>Pin 3</td>
+                    </tr>
+                    <tr>
+                        <td>LED 2</td>
+                        <td>Pin 5</td>
+                    </tr>
+                    <tr>
+                        <td>LED 3 (Center)</td>
+                        <td>Pin 6</td>
+                    </tr>
+                    <tr>
+                        <td>LED 4</td>
+                        <td>Pin 9</td>
+                    </tr>
+                    <tr>
+                        <td>LED 5 (Right)</td>
+                        <td>Pin 10</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="project-section">
+                <h2>Step-by-Step Instructions</h2>
+                <ol>
+                    <li>Place two buttons on opposite ends of the breadboard.</li>
+                    <li>Connect the <strong>Left Button</strong> to <strong>Pin 2</strong> and the <strong>Right Button</strong> to <strong>Pin 12</strong> (Use 10k resistors for pull-down to GND).</li>
+                    <li>Place 5 LEDs in a row between the buttons.</li>
+                    <li>Connect the LEDs (Left to Right) to pins <strong>3, 5, 6, 9, 10</strong>.</li>
+                    <li>Ensure all LED cathodes connect to GND via resistors.</li>
+                    <li>Connect 5V and GND rails.</li>
+                    <li>Upload the code below.</li>
+                </ol>
+            </section>
+
+            <section class="project-section">
+                <h2>Arduino Code</h2>
+                <div class="code-block">
+/* Project 18 - Digital Tug of War
+ * P1 (Left Button) on Pin 2
+ * P2 (Right Button) on Pin 12
+ * LEDs on Pins 3, 5, 6, 9, 10
  */
-void setup() {{ Serial.begin(9600); }}
-void loop() {{ Serial.println("Project 18 - Timer / Stopwatch"); delay(1000); }}
-</code></pre></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-cogs"></i><h2>How It Works</h2></div>
-    <div class="accordion"><div class="accordion-header"><span>Understanding the Code (line-by-line)</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><pre>This is a placeholder sketch. Replace with project-specific code as required.</pre></div></div>
-    <div class="accordion"><div class="accordion-header"><span>Digital / Analog I/O & Design Notes</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><p>Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.</p></div></div>
-  </section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-lightbulb"></i><h2>Expected Output</h2></div><p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-graduation-cap"></i><h2>What You Learned</h2></div><ul><li>How to wire circuits and use a breadboard</li><li>How to program Arduino digital and analog pins</li><li>How to debug using Serial Monitor</li></ul></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-arrow-right"></i><h2>Next Steps / Extension Ideas</h2></div><p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p></section>
-</div></main>
-<footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs Logo"><h3>Nukelabs</h3><p>Empowering makers and electronics enthusiasts</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li><li><a href="tel:+918089252039"><i class="fas fa-phone"></i> +91-8089252039</a></li><li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li></ul></div></div><div class="copyright"><div class="container"><p>&copy; 2025 Nukelabs. All rights reserved.</p></div></div></footer>
-<script src="../js/script.js"></script></body></html>
+
+const int buttonLeft = 2;
+const int buttonRight = 12;
+
+// Array of LED pins from Left to Right
+const int leds[] = {3, 5, 6, 9, 10};
+const int totalLeds = 5;
+
+// Game State
+int position = 2; // Start in the middle (0, 1, 2, 3, 4)
+int lastLeftState = LOW;
+int lastRightState = LOW;
+bool gameOver = false;
+
+void setup() {
+  pinMode(buttonLeft, INPUT);
+  pinMode(buttonRight, INPUT);
+  
+  for(int i=0; i<totalLeds; i++) {
+    pinMode(leds[i], OUTPUT);
+  }
+  
+  // Show start animation
+  resetGame();
+}
+
+void loop() {
+  if (gameOver) {
+    // Blink the winner's side
+    digitalWrite(leds[position], HIGH);
+    delay(200);
+    digitalWrite(leds[position], LOW);
+    delay(200);
+    
+    // Press both buttons to reset
+    if (digitalRead(buttonLeft) == HIGH && digitalRead(buttonRight) == HIGH) {
+      resetGame();
+    }
+    return;
+  }
+
+  // Read Buttons
+  int leftState = digitalRead(buttonLeft);
+  int rightState = digitalRead(buttonRight);
+
+  // Check P1 (Left) Click - Rising Edge only
+  if (leftState == HIGH && lastLeftState == LOW) {
+    position--; // Move light left
+    delay(50);  // Debounce
+  }
+
+  // Check P2 (Right) Click - Rising Edge only
+  if (rightState == HIGH && lastRightState == LOW) {
+    position++; // Move light right
+    delay(50);  // Debounce
+  }
+
+  // Save states for next loop
+  lastLeftState = leftState;
+  lastRightState = rightState;
+
+  // Constrain position (Don't let it go out of bounds yet)
+  if (position < 0) position = 0;
+  if (position > 4) position = 4;
+
+  // Update LEDs
+  updateLeds();
+
+  // Win Condition
+  if (position == 0) {
+    // Left Won!
+    gameOver = true;
+  } else if (position == 4) {
+    // Right Won!
+    gameOver = true;
+  }
+}
+
+void updateLeds() {
+  for(int i=0; i<totalLeds; i++) {
+    if (i == position) {
+      digitalWrite(leds[i], HIGH);
+    } else {
+      digitalWrite(leds[i], LOW);
+    }
+  }
+}
+
+void resetGame() {
+  position = 2; // Center
+  gameOver = false;
+  
+  // Flash all 3 times
+  for(int k=0; k<3; k++){
+    for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], HIGH);
+    delay(200);
+    for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], LOW);
+    delay(200);
+  }
+  updateLeds();
+}
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Edge Detection:
+                    </li>
+                    
+                    <li>
+                        <strong>Rising Edge:</strong><br>
+                        In a mashing game, we can't just check `if(button == HIGH)`. If we did, holding the button down would instantly move the light. We need to detect <em>when</em> the button changes from LOW to HIGH. We do this by comparing `currentState` vs `lastState`.
+                    </li>
+                    <li>
+                        <strong>The Array:</strong><br>
+                        The 5 LEDs are mapped to `{3, 5, 6, 9, 10}`. The variable `position` acts as the index. If `position` is 2, we light up `leds[2]` (Pin 6).
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p>When the game starts, all lights flash. Then the center light turns on. As Player 1 presses the Left button, the light jumps left. As Player 2 presses Right, it jumps right. When the light hits either edge, it flashes to signal victory.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>How to create game logic using variables (`position`).</li>
+                    <li>Implementing "State Change Detection" for button presses.</li>
+                    <li>Using arrays to map logical order (0-4) to physical pins.</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps / Extension Ideas</h2>
+                <p>Add the Buzzer! Make it beep every time the rope moves, and play a "Win Song" when the game ends.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
+                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
+                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
