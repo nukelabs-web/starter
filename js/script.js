@@ -18,7 +18,7 @@ const projectsData = [
   { id: 16, title: "Button Buzzer", difficulty: "Easy", concept: "Input to output mapping" },
   { id: 17, title: "Digital Dice", difficulty: "Medium", concept: "Display control, counting" },
   { id: 18, title: "Traffic Light Sim", difficulty: "Medium", concept: "Sequencing, logic" },
-  { id: 19, title: "Obstacle Avoidance", difficulty: "Medium", concept: "Sensor control, alerts" },
+  { id: 19, title: "Traffic Light Simulation", difficulty: "Medium", concept: "Sensor control, alerts" },
   { id: 20, title: "Parking Assistant", difficulty: "Medium", concept: "Combined sensor system" },
 ];
 
@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
 
 
 
