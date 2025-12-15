@@ -1,49 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project 15: Melody Player | Nukelabs</title>
-  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head><body>
-<header class="header"><div class="container"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Nukelabs Logo"><span>Nukelabs</span></a><nav class="navbar"><ul><li><a href="../index.html">Home</a></li><li><a href="support.html">Support</a></li></ul></nav><div class="mobile-toggle"><i class="fas fa-bars"></i></div></div></header>
-<main class="project-page"><div class="container">
-  <div class="project-header"><h1 class="project-title">Project 15: Melody Player</h1><p class="project-subtitle">Arduino Uno R3 project</p><div class="project-meta"><div class="project-meta-item"><i class="fas fa-bolt"></i><span>Difficulty: Medium</span></div><div class="project-meta-item"><i class="fas fa-book"></i><span>Concepts: Sound output, timing</span></div><div class="project-meta-item"><i class="fas fa-clock"></i><span>Time: 15-45 minutes</span></div></div></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 15: Melody Maker | Nukelabs</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.png" alt="Nukelabs Logo">
+                <span>NUKELABS</span>
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
 
-  <section class="project-section"><div class="section-header"><i class="fas fa-info-circle"></i><h2>Project Summary</h2></div><p>This project demonstrates Sound output, timing. Build it to learn practical aspects of sound output, timing.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-microchip"></i><h2>Components Required</h2></div><div class="components-grid"><div class="component-card"><div class="component-icon"><i class="fas fa-microchip"></i></div><h3>Key Components</h3><p>Arduino Uno R3, Active Buzzer or Piezo, Jumper Wires, Breadboard</p></div></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-project-diagram"></i><h2>Circuit Diagram</h2></div><div class="circuit-diagram"><img src="../images/project15-circuit.png" alt="Circuit Diagram for project 15"><p>Replace placeholder by adding <code>project15-circuit.png</code> to images/</p></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-plug"></i><h2>Pin Connections</h2></div><table class="pin-table"><thead><tr><th>Arduino Pin</th><th>Component Connection</th></tr></thead><tbody><tr><td>Buzzer</td><td>Digital pin 8</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-list-ol"></i><h2>Step-by-Step Instructions</h2></div><ol class="steps-list"><li>Gather the components and assemble on a breadboard as shown in the circuit diagram.</li><li>Double-check wiring and resistor connections; ensure correct polarity for LEDs.</li><li>Open Arduino IDE, paste the sketch, select board/port, and upload.</li><li>Use Serial Monitor for calibration if the sketch prints values.</li></ol></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-code"></i><h2>Arduino Code</h2></div><div class="code-block"><pre><code>/* Project 15 - Melody Player
- * Hardware: Piezo buzzer on pin 8. Use tone() to generate notes.
- * Purpose: Demonstrate timing and arrays for audio generation.
+    <main class="project-page">
+        <div class="container">
+            
+            <div class="project-header">
+                <h1 class="project-title">PROJECT 15: MELODY MAKER</h1>
+                <p class="project-subtitle">Digital Audio Synthesis</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Easy</div>
+                    <div class="project-meta-item"><i class="fas fa-music"></i> Concepts: Tone & Frequency</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 20 Min</div>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2>Mission Brief</h2>
+                <p>Computers make sound by vibrating a speaker at specific frequencies. In this project, you will use the Arduino `tone()` function to play the classic tune "Mary Had a Little Lamb" through a piezo buzzer.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>Key Components</h2>
+                <ul>
+                    <li>Arduino Uno R3</li>
+                    <li>Piezo Buzzer (Passive or Active)</li>
+                    <li>Jumper Wires</li>
+                    <li>Breadboard</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <img src="../images/project15-circuit.png" alt="Circuit Diagram for Project 15">
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Pin Connections</h2>
+                <table class="pin-table">
+                    <tr>
+                        <th>Arduino Pin</th>
+                        <th>Component Connection</th>
+                    </tr>
+                    <tr>
+                        <td>Pin 8</td>
+                        <td>Buzzer Positive (+) Leg</td>
+                    </tr>
+                    <tr>
+                        <td>GND</td>
+                        <td>Buzzer Negative (-) Leg</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="project-section">
+                <h2>Step-by-Step Instructions</h2>
+                <ol>
+                    <li>Insert the Piezo Buzzer into the breadboard.</li>
+                    <li>Connect the **Negative Leg** (usually shorter) to the Arduino **GND** pin.</li>
+                    <li>Connect the **Positive Leg** (usually longer or marked with a + sticker) to Arduino **Pin 8**.</li>
+                    <li>Upload the code below.</li>
+                </ol>
+            </section>
+
+            <section class="project-section">
+                <h2>Arduino Code</h2>
+                <div class="code-block">
+/* Project 15 - Mary Had a Little Lamb
+ * Plays a melody on Pin 8 using note frequencies.
+ * Original code by Tom Igoe / R. Irons
  */
-const int buzzer = 8;
-int melody[] = {{262,294,330,349,392,440}}; // C D E F G A
-int noteDurations[] = {{4,4,4,4,4,4}};     // quarter notes
-int notes = sizeof(melody)/sizeof(melody[0]);
 
-void setup() {{ /* nothing needed */ }}
+/*************************************************
+ * Public Constants (Note Frequencies)
+ *************************************************/
+#define NOTE_B0  31
+#define NOTE_C1  33
+#define NOTE_CS1 35
+#define NOTE_D1  37
+#define NOTE_DS1 39
+#define NOTE_E1  41
+#define NOTE_F1  44
+#define NOTE_FS1 46
+#define NOTE_G1  49
+#define NOTE_GS1 52
+#define NOTE_A1  55
+#define NOTE_AS1 58
+#define NOTE_B1  62
+#define NOTE_C2  65
+#define NOTE_CS2 69
+#define NOTE_D2  73
+#define NOTE_DS2 78
+#define NOTE_E2  82
+#define NOTE_F2  87
+#define NOTE_FS2 93
+#define NOTE_G2  98
+#define NOTE_GS2 104
+#define NOTE_A2  110
+#define NOTE_AS2 117
+#define NOTE_B2  123
+#define NOTE_C3  131
+#define NOTE_CS3 139
+#define NOTE_D3  147
+#define NOTE_DS3 156
+#define NOTE_E3  165
+#define NOTE_F3  175
+#define NOTE_FS3 185
+#define NOTE_G3  196
+#define NOTE_GS3 208
+#define NOTE_A3  220
+#define NOTE_AS3 233
+#define NOTE_B3  247
+#define NOTE_C4  262
+#define NOTE_CS4 277
+#define NOTE_D4  294
+#define NOTE_DS4 311
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_FS4 370
+#define NOTE_G4  392
+#define NOTE_GS4 415
+#define NOTE_A4  440
+#define NOTE_AS4 466
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_CS5 554
+#define NOTE_D5  587
+#define NOTE_DS5 622
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_FS5 740
+#define NOTE_G5  784
+#define NOTE_GS5 831
+#define NOTE_A5  880
+#define NOTE_AS5 932
+#define NOTE_B5  988
+#define NOTE_C6  1047
+#define NOTE_CS6 1109
+#define NOTE_D6  1175
+#define NOTE_DS6 1245
+#define NOTE_E6  1319
+#define NOTE_F6  1397
+#define NOTE_FS6 1480
+#define NOTE_G6  1568
+#define NOTE_GS6 1661
+#define NOTE_A6  1760
+#define NOTE_AS6 1865
+#define NOTE_B6  1976
+#define NOTE_C7  2093
+#define NOTE_CS7 2217
+#define NOTE_D7  2349
+#define NOTE_DS7 2489
+#define NOTE_E7  2637
+#define NOTE_F7  2794
+#define NOTE_FS7 2960
+#define NOTE_G7  3136
+#define NOTE_GS7 3322
+#define NOTE_A7  3520
+#define NOTE_AS7 3729
+#define NOTE_B7  3951
+#define NOTE_C8  4186
+#define NOTE_CS8 4435
+#define NOTE_D8  4699
+#define NOTE_DS8 4978
+#define PAUSE    0
 
-void loop() {{
-  for(int i=0;i<notes;i++) {{ 
-    int duration = 1000 / noteDurations[i];
-    tone(buzzer, melody[i], duration * 0.9);
-    delay(duration);
-  }}
-  delay(500);
-}}
-</code></pre></div></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-cogs"></i><h2>How It Works</h2></div>
-    <div class="accordion"><div class="accordion-header"><span>Understanding the Code (line-by-line)</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><pre>Notes:
-1) tone() generates a square wave at given frequency; duration controls note length.
-2) arrays let you define melodies compactly; map durations to rhythmic values.
-3) use noTone(buzzer) if you need to stop sound early.
-</pre></div></div>
-    <div class="accordion"><div class="accordion-header"><span>Digital / Analog I/O & Design Notes</span><i class="fas fa-chevron-down"></i></div><div class="accordion-content"><p>Digital pins set with pinMode() drive outputs (HIGH/LOW). AnalogRead reads sensors (0-1023). PWM via analogWrite uses timers to simulate analog voltages.</p></div></div>
-  </section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-lightbulb"></i><h2>Expected Output</h2></div><p>The project will perform the described behavior (LEDs/buzzer/display) when wired and uploaded correctly. Use Serial Monitor for debugging and calibration.</p></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-graduation-cap"></i><h2>What You Learned</h2></div><ul><li>How to wire circuits and use a breadboard</li><li>How to program Arduino digital and analog pins</li><li>How to debug using Serial Monitor</li></ul></section>
-  <section class="project-section"><div class="section-header"><i class="fas fa-arrow-right"></i><h2>Next Steps / Extension Ideas</h2></div><p>Enhance with displays, non-blocking timing (millis()), wireless control, or state machines for more complex behaviour.</p></section>
-</div></main>
-<footer class="footer"><div class="container"><div class="footer-brand"><img src="../images/logo.png" alt="Nukelabs Logo"><h3>Nukelabs</h3><p>Empowering makers and electronics enthusiasts</p></div><div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t"><i class="fab fa-whatsapp"></i> WhatsApp Group</a></li><li><a href="tel:+918089252039"><i class="fas fa-phone"></i> +91-8089252039</a></li><li><a href="mailto:makers.nukelabs@gmail.com"><i class="fas fa-envelope"></i> makers.nukelabs@gmail.com</a></li></ul></div></div><div class="copyright"><div class="container"><p>&copy; 2025 Nukelabs. All rights reserved.</p></div></div></footer>
-<script src="../js/script.js"></script></body></html>
+// Melody Array: The sequence of notes to play
+int melody[] = {
+  NOTE_E4, NOTE_D4, NOTE_C4, NOTE_D4, NOTE_E4, NOTE_E4, NOTE_E4, PAUSE,
+  NOTE_D4, NOTE_D4, NOTE_D4, PAUSE, NOTE_E4, NOTE_G4, NOTE_G4, PAUSE,
+  NOTE_E4, NOTE_D4, NOTE_C4, NOTE_D4, NOTE_E4, NOTE_E4, NOTE_E4, PAUSE,
+  NOTE_E4, NOTE_D4, NOTE_D4, NOTE_E4, NOTE_D4, NOTE_C4
+};
+
+// Note Durations: 4 = quarter note, 8 = eighth note, etc.
+int noteDurations[] = {
+  1,4,4,4,4,4,4,8,
+  4,4,4,8,4,4,4,8,
+  1,4,4,4,4,4,4,8,
+  4,4,4,4,4,2  
+};
+
+void setup() {
+  // Iterate over the notes of the melody:
+  for (int thisNote = 0; thisNote < 30; thisNote++) {
+
+    // Calculate duration: 1000ms / note type
+    int noteDuration = 1000 / noteDurations[thisNote];
+    
+    // Play the note on Pin 8
+    tone(8, melody[thisNote], noteDuration);
+
+    // Set a minimum pause between notes to distinguish them
+    int pauseBetweenNotes = 400;
+    delay(pauseBetweenNotes);
+    
+    // Stop the tone playing
+    noTone(8);
+  }
+}
+
+void loop() {
+  // Logic is in setup() to play once. 
+  // Move it here if you want it to repeat forever!
+}
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>How It Works</h2>
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Frequency Generation:
+                    </li>
+                    
+                    <li>
+                        <strong>tone(pin, frequency):</strong><br>
+                        The Arduino sends a square wave signal to the buzzer. For example, `NOTE_A4` is 440Hz, meaning the pin turns High/Low 440 times per second. The buzzer vibrates at this speed, creating the pitch "A".
+                    </li>
+                    <li>
+                        <strong>Arrays:</strong><br>
+                        We use two arrays: `melody[]` stores the pitch, and `noteDurations[]` stores the timing. The loop reads both arrays simultaneously to play the song.
+                    </li>
+
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Code Structure:
+                    </li>
+
+                    <li>
+                        <strong>Definitions:</strong><br>
+                        The long list of `#define` at the top is like a dictionary. It maps human-readable names (like NOTE_C4) to the actual number (262).
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Expected Output</h2>
+                <p>As soon as the code uploads, the Arduino will play "Mary Had a Little Lamb" once. To hear it again, simply press the <strong>RESET</strong> button on the Arduino board.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>What You Learned</h2>
+                <ul class="glass-list">
+                    <li>How to convert musical notes into digital frequencies.</li>
+                    <li>Using arrays to store complex sequences of data.</li>
+                    <li>The difference between `setup()` (run once) and `loop()` (run forever).</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>Next Steps / Extension Ideas</h2>
+                <p>Try writing your own song! Look up the sheet music for "Star Wars" or "Super Mario", find the matching notes in the list, and create your own `melody[]` array.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://chat.whatsapp.com/GcHUwOANmyWHte99ob7tWL?mode=ac_t">WhatsApp Group</a></li>
+                        <li><a href="tel:+918089252039">+91-8089252039</a></li>
+                        <li><a href="mailto:makers.nukelabs@gmail.com">makers.nukelabs@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
