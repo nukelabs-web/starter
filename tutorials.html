@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Training | Nukelabs</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Nukelabs Logo">
+                <span>NUKELABS</span>
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tutorials.html" class="active">Training</a></li> <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <main class="project-page">
+        <div class="container">
+            
+            <div class="project-header">
+                <h1 class="project-title">BASIC TRAINING</h1>
+                <p class="project-subtitle">Essential Knowledge for New Recruits</p>
+            </div>
+
+            <section class="project-section">
+                <h2>1. Electronics Basics</h2>
+                <p>Electricity is invisible, but it behaves exactly like water flowing through a pipe. To build circuits, you only need to understand three main concepts:</p>
+                
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        The Three Pillars of Electronics:
+                    </li>
+                    <li>
+                        <strong>Voltage (V):</strong><br>
+                        Think of this as <strong>Water Pressure</strong>. It's the "push" that makes electricity move. A 9V battery pushes harder than a 1.5V battery.
+                    </li>
+                    <li>
+                        <strong>Current (I):</strong><br>
+                        Think of this as <strong>Water Flow</strong>. It's the actual amount of electrons moving through the wire. We measure it in Amps.
+                    </li>
+                    <li>
+                        <strong>Resistance (R):</strong><br>
+                        Think of this as <strong>Pipe Width</strong>. A resistor creates a "squeeze" in the pipe, slowing down the flow (Current). We measure it in Ohms (Ω).
+                    </li>
+                    <li>
+                        <strong>The Rule (Ohm's Law):</strong><br>
+                        Voltage = Current x Resistance. If you increase Resistance (thinner pipe), Current goes down (less flow).
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>2. The Breadboard</h2>
+                <p>The Breadboard is your construction base. It lets you connect wires without soldering. The holes are connected underneath in a specific pattern.</p>
+                
+                <div class="circuit-diagram" style="background: #fff; padding: 20px; border-radius: 16px;">
+                    <i class="fas fa-microchip" style="font-size: 5rem; color: #333;"></i>
+                    <p style="color: #000; display: block; margin-top: 10px;">(Breadboard Internal Connections)</p>
+                </div>
+
+                <ul class="glass-list">
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        How Connections Work:
+                    </li>
+                    <li>
+                        <strong>Power Rails (The Long Lines):</strong><br>
+                        On the top and bottom (Red and Blue lines), all holes are connected <strong>Horizontally</strong>. We use these for 5V (Red) and GND (Blue) so power is available everywhere.
+                    </li>
+                    <li>
+                        <strong>Terminal Strips (The Middle Area):</strong><br>
+                        In the middle, holes are connected in <strong>Vertical Columns</strong> of 5 holes (e.g., column 1a-1e is connected).
+                    </li>
+                    <li>
+                        <strong>The Divider (Middle Gap):</strong><br>
+                        The gap in the center separates the left side from the right side. This allows us to plug in chips (ICs) without shorting their pins together.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>3. Installing the Software</h2>
+                <p>The "Arduino IDE" is the tool we use to write code and upload it to the board. Follow these steps to get your computer ready.</p>
+
+                <ol class="steps-list">
+                    <li>
+                        <strong>Download:</strong><br>
+                        Go to <a href="https://www.arduino.cc/en/software" target="_blank" style="color:#00ff9d;">arduino.cc/software</a> and download the IDE for your OS (Windows, Mac, or Linux).
+                    </li>
+                    <li>
+                        <strong>Install Drivers (Important!):</strong><br>
+                        If you have a generic (clone) board and the computer doesn't recognize it, you may need to install the <strong>CH340 Driver</strong>.
+                    </li>
+                    <li>
+                        <strong>Select Board:</strong><br>
+                        Open the IDE. Go to <strong>Tools > Board > Arduino AVR Boards > Arduino Uno</strong>.
+                    </li>
+                    <li>
+                        <strong>Select Port:</strong><br>
+                        Plug in your Arduino. Go to <strong>Tools > Port</strong> and select the one that appears (e.g., COM3 or /dev/cu.usbmodem...).
+                    </li>
+                    <li>
+                        <strong>Test Upload:</strong><br>
+                        Go to <strong>File > Examples > 01.Basics > Blink</strong>. Click the arrow button (Upload). If the board's built-in light blinks, you are ready!
+                    </li>
+                </ol>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="Nukelabs Logo">
+                <h3>NUKELABS</h3>
+                <p>Empowering makers and electronics enthusiasts</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nukelabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
