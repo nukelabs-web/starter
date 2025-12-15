@@ -17,7 +17,7 @@ const projectsData = [
   { id: 15, title: "Melody Player", difficulty: "Medium", concept: "Sound output, timing" },
   { id: 16, title: "Button Buzzer", difficulty: "Easy", concept: "Input to output mapping" },
   { id: 17, title: "Digital Dice", difficulty: "Medium", concept: "Display control, counting" },
-  { id: 18, title: "Tug of War", difficulty: "Medium", concept: "Sequencing, logic" },
+  { id: 18, title: "Tug of War", difficulty: "Medium", concept: "Game timing logic" },
   { id: 19, title: "Traffic Light Simulation", difficulty: "Medium", concept: "Sequencing, logic" },
   { id: 20, title: "Parking Assistant", difficulty: "Medium", concept: "Combined sensor system" },
 ];
@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
 
 
 
