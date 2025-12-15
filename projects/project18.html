@@ -34,17 +34,17 @@
             
             <div class="project-header">
                 <h1 class="project-title">PROJECT 18: DIGITAL TUG OF WAR</h1>
-                <p class="project-subtitle">1D Competitive Gaming</p>
+                <p class="project-subtitle">High-Speed Button Masher</p>
                 <div class="project-meta">
                     <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
-                    <div class="project-meta-item"><i class="fas fa-gamepad"></i> Concepts: Game Logic</div>
+                    <div class="project-meta-item"><i class="fas fa-gamepad"></i> Concepts: State Machines</div>
                     <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 45 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
                 <h2>Mission Brief</h2>
-                <p>It's time to settle scores. In this project, you will build a digital version of Tug of War. The center light acts as the "flag" on the rope. Two players must mash their buttons as fast as possible to pull the light to their side. First to reach the edge wins!</p>
+                <p>It's time to settle the score. In this 2-player game, the center LED acts as the "flag" on a rope. Player 1 (Left) and Player 2 (Right) must mash their buttons as fast as possible to pull the light to their side. The first to pull the light off the edge wins!</p>
             </section>
 
             <section class="project-section">
@@ -52,8 +52,8 @@
                 <ul>
                     <li>Arduino Uno R3</li>
                     <li>2x Push Buttons</li>
-                    <li>5x LEDs</li>
-                    <li>7x Resistors (5 for LEDs, 2 for Buttons)</li>
+                    <li>5x LEDs (Red, Red, Green, Red, Red)</li>
+                    <li>7x Resistors (220Ω for LEDs, 10kΩ for Buttons)</li>
                     <li>Jumper Wires</li>
                 </ul>
             </section>
@@ -73,31 +73,31 @@
                         <th>Arduino Pin</th>
                     </tr>
                     <tr>
-                        <td>Left Button</td>
+                        <td><strong>Left Button</strong> (Player 1)</td>
                         <td>Pin 2</td>
                     </tr>
                     <tr>
-                        <td>Right Button</td>
+                        <td><strong>Right Button</strong> (Player 2)</td>
                         <td>Pin 12</td>
                     </tr>
                     <tr>
-                        <td>LED 1 (Left)</td>
+                        <td>Left LED (1)</td>
                         <td>Pin 3</td>
                     </tr>
                     <tr>
-                        <td>LED 2</td>
+                        <td>Mid-Left LED (2)</td>
                         <td>Pin 5</td>
                     </tr>
                     <tr>
-                        <td>LED 3 (Center)</td>
+                        <td>Center LED (3)</td>
                         <td>Pin 6</td>
                     </tr>
                     <tr>
-                        <td>LED 4</td>
+                        <td>Mid-Right LED (4)</td>
                         <td>Pin 9</td>
                     </tr>
                     <tr>
-                        <td>LED 5 (Right)</td>
+                        <td>Right LED (5)</td>
                         <td>Pin 10</td>
                     </tr>
                 </table>
@@ -106,12 +106,11 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li>Place two buttons on opposite ends of the breadboard.</li>
-                    <li>Connect the <strong>Left Button</strong> to <strong>Pin 2</strong> and the <strong>Right Button</strong> to <strong>Pin 12</strong> (Use 10k resistors for pull-down to GND).</li>
-                    <li>Place 5 LEDs in a row between the buttons.</li>
-                    <li>Connect the LEDs (Left to Right) to pins <strong>3, 5, 6, 9, 10</strong>.</li>
-                    <li>Ensure all LED cathodes connect to GND via resistors.</li>
-                    <li>Connect 5V and GND rails.</li>
+                    <li>Place the 5 LEDs in a row. Connect their Cathodes (short legs) to GND via resistors.</li>
+                    <li>Connect the Anodes (long legs) to Pins 3, 5, 6, 9, 10 in order.</li>
+                    <li>Place the Buttons on opposite sides of the breadboard.</li>
+                    <li>Connect the Left Button to Pin 2 and the Right Button to Pin 12.</li>
+                    <li><strong>Crucial:</strong> Ensure both buttons have a 10kΩ resistor connecting the signal leg to GND (Pull-Down), or the game will glitch!</li>
                     <li>Upload the code below.</li>
                 </ol>
             </section>
@@ -119,91 +118,90 @@
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 18 - Digital Tug of War
- * P1 (Left Button) on Pin 2
- * P2 (Right Button) on Pin 12
- * LEDs on Pins 3, 5, 6, 9, 10
+/* Project 18 - Digital Tug of War (Pro Timing)
+ * Players must mash buttons to pull the light.
+ * Optimized for fast human reaction times.
  */
 
-const int buttonLeft = 2;
-const int buttonRight = 12;
-
-// Array of LED pins from Left to Right
-const int leds[] = {3, 5, 6, 9, 10};
+// --- CONFIGURATION ---
+const int btnLeft = 2;   // Player 1
+const int btnRight = 12; // Player 2
+// LED Pins from Left to Right
+const int leds[] = {3, 5, 6, 9, 10}; 
 const int totalLeds = 5;
 
-// Game State
-int position = 2; // Start in the middle (0, 1, 2, 3, 4)
+// --- GAME VARIABLES ---
+int position = 2; // Start at Center (Indices: 0, 1, 2, 3, 4)
 int lastLeftState = LOW;
 int lastRightState = LOW;
 bool gameOver = false;
 
 void setup() {
-  pinMode(buttonLeft, INPUT);
-  pinMode(buttonRight, INPUT);
+  pinMode(btnLeft, INPUT);
+  pinMode(btnRight, INPUT);
   
   for(int i=0; i<totalLeds; i++) {
     pinMode(leds[i], OUTPUT);
   }
-  
-  // Show start animation
+
+  // Start Animation
   resetGame();
 }
 
 void loop() {
   if (gameOver) {
-    // Blink the winner's side
+    // Flash the winner's light
     digitalWrite(leds[position], HIGH);
-    delay(200);
+    delay(100);
     digitalWrite(leds[position], LOW);
-    delay(200);
+    delay(100);
     
-    // Press both buttons to reset
-    if (digitalRead(buttonLeft) == HIGH && digitalRead(buttonRight) == HIGH) {
+    // Check if players want to restart (Press BOTH buttons)
+    if (digitalRead(btnLeft) == HIGH && digitalRead(btnRight) == HIGH) {
       resetGame();
     }
     return;
   }
 
-  // Read Buttons
-  int leftState = digitalRead(buttonLeft);
-  int rightState = digitalRead(buttonRight);
+  // --- READ INPUTS ---
+  int currLeft = digitalRead(btnLeft);
+  int currRight = digitalRead(btnRight);
 
-  // Check P1 (Left) Click - Rising Edge only
-  if (leftState == HIGH && lastLeftState == LOW) {
-    position--; // Move light left
-    delay(50);  // Debounce
+  // --- PLAYER 1 LOGIC (Left) ---
+  // We look for the "Rising Edge" (Moment the button is pressed down)
+  if (currLeft == HIGH && lastLeftState == LOW) {
+    position--; // Pull Left
+    delay(20);  // Tiny delay to prevent electrical noise (Debounce)
   }
 
-  // Check P2 (Right) Click - Rising Edge only
-  if (rightState == HIGH && lastRightState == LOW) {
-    position++; // Move light right
-    delay(50);  // Debounce
+  // --- PLAYER 2 LOGIC (Right) ---
+  if (currRight == HIGH && lastRightState == LOW) {
+    position++; // Pull Right
+    delay(20);  // Tiny delay to prevent electrical noise (Debounce)
   }
 
   // Save states for next loop
-  lastLeftState = leftState;
-  lastRightState = rightState;
+  lastLeftState = currLeft;
+  lastRightState = currRight;
 
-  // Constrain position (Don't let it go out of bounds yet)
-  if (position < 0) position = 0;
-  if (position > 4) position = 4;
-
-  // Update LEDs
+  // --- UPDATE DISPLAY ---
   updateLeds();
 
-  // Win Condition
-  if (position == 0) {
-    // Left Won!
-    gameOver = true;
-  } else if (position == 4) {
-    // Right Won!
-    gameOver = true;
+  // --- WIN CONDITION ---
+  if (position < 0) {
+    // Left Overflow -> P1 Wins
+    position = 0; 
+    victoryAnimation();
+  } 
+  else if (position >= totalLeds) {
+    // Right Overflow -> P2 Wins
+    position = totalLeds - 1;
+    victoryAnimation();
   }
 }
 
 void updateLeds() {
-  for(int i=0; i<totalLeds; i++) {
+  for (int i = 0; i < totalLeds; i++) {
     if (i == position) {
       digitalWrite(leds[i], HIGH);
     } else {
@@ -212,17 +210,23 @@ void updateLeds() {
   }
 }
 
-void resetGame() {
-  position = 2; // Center
-  gameOver = false;
-  
-  // Flash all 3 times
-  for(int k=0; k<3; k++){
-    for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], HIGH);
-    delay(200);
-    for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], LOW);
-    delay(200);
+void victoryAnimation() {
+  gameOver = true;
+  // Rapid flash to celebrate
+  for(int k=0; k<5; k++) {
+    digitalWrite(leds[position], HIGH); delay(50);
+    digitalWrite(leds[position], LOW); delay(50);
   }
+}
+
+void resetGame() {
+  position = 2; // Back to center
+  gameOver = false;
+  // "Ready? Go!" Animation
+  for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], HIGH);
+  delay(500);
+  for(int i=0; i<totalLeds; i++) digitalWrite(leds[i], LOW);
+  delay(200);
   updateLeds();
 }
                 </div>
@@ -232,37 +236,46 @@ void resetGame() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Edge Detection:
+                        Edge Detection vs. Polling:
                     </li>
                     
                     <li>
-                        <strong>Rising Edge:</strong><br>
-                        In a mashing game, we can't just check `if(button == HIGH)`. If we did, holding the button down would instantly move the light. We need to detect <em>when</em> the button changes from LOW to HIGH. We do this by comparing `currentState` vs `lastState`.
+                        <strong>The Problem:</strong><br>
+                        If we just check `if(button == HIGH)`, the code runs so fast that a single button press would count as 100 clicks, sending the light flying instantly.
                     </li>
                     <li>
-                        <strong>The Array:</strong><br>
-                        The 5 LEDs are mapped to `{3, 5, 6, 9, 10}`. The variable `position` acts as the index. If `position` is 2, we light up `leds[2]` (Pin 6).
+                        <strong>The Solution (Rising Edge):</strong><br>
+                        We compare the <em>current</em> state to the <em>previous</em> state. We only move the rope when the button transitions from <strong>LOW to HIGH</strong>. This counts exactly one "Tug" per press.
+                    </li>
+
+                    <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
+                        Debouncing:
+                    </li>
+
+                    <li>
+                        <strong>Mechanical Noise:</strong><br>
+                        Real buttons vibrate when pressed. We added `delay(20)` inside the press logic. This ignores the tiny vibrations that occur for 20 milliseconds after a press, ensuring clean gameplay.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p>When the game starts, all lights flash. Then the center light turns on. As Player 1 presses the Left button, the light jumps left. As Player 2 presses Right, it jumps right. When the light hits either edge, it flashes to signal victory.</p>
+                <p>The center light glows. As Player 1 mashes the left button, the light jumps left. As Player 2 mashes the right button, it jumps right. If both press at the exact same time, the forces cancel out!</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to create game logic using variables (`position`).</li>
-                    <li>Implementing "State Change Detection" for button presses.</li>
-                    <li>Using arrays to map logical order (0-4) to physical pins.</li>
+                    <li>How to build a responsive input system for gaming.</li>
+                    <li>Using logic to resolve conflicts (what happens if both players press at once?).</li>
+                    <li>Creating "States" (Game On vs. Game Over).</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>Add the Buzzer! Make it beep every time the rope moves, and play a "Win Song" when the game ends.</p>
+                <p>Add a handicap! Give Player 1 a "Power Up" where their button counts for 2 steps instead of 1, or make the "rope" longer by adding more LEDs.</p>
             </section>
 
         </div>
