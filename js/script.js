@@ -17,13 +17,9 @@ const projectsData = [
   { id: 15, title: "Melody Player", difficulty: "Medium", concept: "Sound output, timing" },
   { id: 16, title: "Button Buzzer", difficulty: "Easy", concept: "Input to output mapping" },
   { id: 17, title: "Digital Dice", difficulty: "Medium", concept: "Display control, counting" },
-  { id: 18, title: "Stopwatch", difficulty: "Medium", concept: "Timing, counting, display" },
-  { id: 19, title: "Traffic Light Sim", difficulty: "Medium", concept: "Sequencing, logic" },
-  { id: 20, title: "Obstacle Avoidance", difficulty: "Medium", concept: "Sensor control, alerts" },
-  { id: 21, title: "Night Light Alarm", difficulty: "Medium", concept: "Multi-sensor integration" },
-  { id: 22, title: "Reaction Timer", difficulty: "Medium", concept: "Timing, user interaction" },
-  { id: 23, title: "Distance Brightness", difficulty: "Medium", concept: "PWM, distance sensing" },
-  { id: 24, title: "Parking Assistant", difficulty: "Medium", concept: "Combined sensor system" },
+  { id: 18, title: "Traffic Light Sim", difficulty: "Medium", concept: "Sequencing, logic" },
+  { id: 19, title: "Obstacle Avoidance", difficulty: "Medium", concept: "Sensor control, alerts" },
+  { id: 20, title: "Parking Assistant", difficulty: "Medium", concept: "Combined sensor system" },
 ];
 
 function generateProjectCards() {
@@ -132,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
 
 
 
