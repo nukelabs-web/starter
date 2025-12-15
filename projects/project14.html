@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 14: Multi-Sensor Hub | Nukelabs</title>
+    <title>Project 14: Water Level Indicator | Nukelabs</title>
     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,28 +33,27 @@
         <div class="container">
             
             <div class="project-header">
-                <h1 class="project-title">PROJECT 14: MULTI-SENSOR HUB</h1>
-                <p class="project-subtitle">Advanced Integrated System</p>
+                <h1 class="project-title">PROJECT 14: WATER LEVEL INDICATOR</h1>
+                <p class="project-subtitle">Tank Overflow Alarm System</p>
                 <div class="project-meta">
-                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Hard</div>
-                    <div class="project-meta-item"><i class="fas fa-network-wired"></i> Concepts: System Integration</div>
-                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 60 Min</div>
+                    <div class="project-meta-item"><i class="fas fa-bolt"></i> Difficulty: Medium</div>
+                    <div class="project-meta-item"><i class="fas fa-tint"></i> Concepts: Analog Thresholds</div>
+                    <div class="project-meta-item"><i class="fas fa-clock"></i> Time: 45 Min</div>
                 </div>
             </div>
 
             <section class="project-section">
                 <h2>Mission Brief</h2>
-                <p>Real-world robots use multiple sensors simultaneously. In this capstone project, you will build a smart dashboard that monitors both distance (Sonar) and environmental light (LDR), displaying the status on LEDs and alerting via a buzzer.</p>
+                <p>Preveting water tanks from overflowing saves water and prevents damage. In this project, you will build a monitoring system that visualizes the water level using 3 LEDs (Low, Medium, High) and triggers an audio alarm (Buzzer) when the tank is full.</p>
             </section>
 
             <section class="project-section">
                 <h2>Key Components</h2>
                 <ul>
                     <li>Arduino Uno R3</li>
-                    <li>HC-SR04 Ultrasonic Sensor</li>
-                    <li>LDR Light Sensor</li>
+                    <li>LDR (Simulating Water Level Sensor)</li>
                     <li>Piezo Buzzer</li>
-                    <li>3x LEDs (Red, Yellow, Green)</li>
+                    <li>3x LEDs (Green, Yellow, Red)</li>
                     <li>Resistors</li>
                     <li>Jumper Wires</li>
                 </ul>
@@ -71,36 +70,28 @@
                 <h2>Pin Connections</h2>
                 <table class="pin-table">
                     <tr>
-                        <th>Component Pin</th>
-                        <th>Arduino Connection</th>
+                        <th>Arduino Pin</th>
+                        <th>Component Connection</th>
                     </tr>
                     <tr>
-                        <td>Sensor Trig</td>
-                        <td>Pin 12</td>
-                    </tr>
-                    <tr>
-                        <td>Sensor Echo</td>
-                        <td>Pin 11</td>
-                    </tr>
-                    <tr>
-                        <td>Buzzer (+)</td>
-                        <td>Pin 8</td>
-                    </tr>
-                    <tr>
-                        <td>Green LED</td>
-                        <td>Pin 2</td>
-                    </tr>
-                    <tr>
-                        <td>Yellow LED</td>
-                        <td>Pin 3</td>
-                    </tr>
-                    <tr>
-                        <td>Red LED</td>
-                        <td>Pin 4</td>
-                    </tr>
-                    <tr>
-                        <td>LDR Signal</td>
                         <td>Pin A0</td>
+                        <td>LDR Sensor Signal</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 2</td>
+                        <td>Green LED (Low Level)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 3</td>
+                        <td>Yellow LED (Medium Level)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 4</td>
+                        <td>Red LED (High Level)</td>
+                    </tr>
+                    <tr>
+                        <td>Pin 5</td>
+                        <td>Buzzer Positive (+)</td>
                     </tr>
                 </table>
             </section>
@@ -108,11 +99,10 @@
             <section class="project-section">
                 <h2>Step-by-Step Instructions</h2>
                 <ol>
-                    <li><strong>Power Bus:</strong> Connect 5V and GND to the breadboard rails.</li>
-                    <li><strong>Sonar:</strong> Connect Trig to Pin 12, Echo to Pin 11, VCC/GND to rails.</li>
-                    <li><strong>Light:</strong> Build the LDR Voltage Divider and connect the signal to Pin A0.</li>
-                    <li><strong>Outputs:</strong> Connect LEDs to Pins 2, 3, 4 (with resistors). Connect Buzzer to Pin 8.</li>
-                    <li><strong>Verify:</strong> Double-check all ground connections are shared.</li>
+                    <li><strong>Sensor Input:</strong> Connect the LDR and a resistor as a voltage divider. Connect the junction point (signal) to <strong>Pin A0</strong>.</li>
+                    <li><strong>Visual Output:</strong> Connect the Green LED to <strong>Pin 2</strong>, Yellow to <strong>Pin 3</strong>, and Red to <strong>Pin 4</strong>. Don't forget the resistors for each!</li>
+                    <li><strong>Audio Output:</strong> Connect the Buzzer Positive leg (Longer/Marked +) to <strong>Pin 5</strong> and the Negative leg to GND.</li>
+                    <li><strong>Power:</strong> Ensure your breadboard power rails are connected to Arduino 5V and GND.</li>
                     <li>Upload the code below.</li>
                 </ol>
             </section>
@@ -120,73 +110,58 @@
             <section class="project-section">
                 <h2>Arduino Code</h2>
                 <div class="code-block">
-/* Project 14 - Multi-Sensor Hub
- * 1. Checks Distance: Lights up LEDs based on proximity.
- * 2. Checks Light: If too dark, turns on "Night Mode" (All LEDs Blink).
- * 3. Buzzer: Beeps if object is very close.
+/* Project 14 - Water Level Indicator
+ * Uses LDR on A0 to simulate water level reading.
+ * Green LED (2) = Safe Level
+ * Yellow LED (3) = Medium Level
+ * Red LED (4) + Buzzer (5) = Overflow Warning
  */
 
-const int trigPin = 12;
-const int echoPin = 11;
-const int buzzer = 8;
+const int sensorPin = A0;
 const int greenLed = 2;
 const int yellowLed = 3;
 const int redLed = 4;
-const int ldrPin = A0;
+const int buzzer = 5;
 
 void setup() {
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(buzzer, OUTPUT);
   pinMode(greenLed, OUTPUT);
   pinMode(yellowLed, OUTPUT);
   pinMode(redLed, OUTPUT);
+  pinMode(buzzer, OUTPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  // --- PART 1: READ SENSORS ---
-  int lightLevel = analogRead(ldrPin);
+  // Read the "Water Level" (Simulated by Light Intensity)
+  // Brighter Light = Higher Water Level reading
+  int waterLevel = analogRead(sensorPin);
   
-  digitalWrite(trigPin, LOW); delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH); delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  long duration = pulseIn(echoPin, HIGH);
-  int distance = duration * 0.034 / 2;
+  // Print value to Serial Monitor for calibration
+  Serial.print("Water Level: ");
+  Serial.println(waterLevel);
 
-  Serial.print("Dist: "); Serial.print(distance);
-  Serial.print("cm | Light: "); Serial.println(lightLevel);
-
-  // --- PART 2: LOGIC ---
-  
-  // If it's pitch black, Panic Mode!
-  if (lightLevel < 200) {
-    digitalWrite(greenLed, HIGH);
-    digitalWrite(yellowLed, HIGH);
-    digitalWrite(redLed, HIGH);
-    delay(100);
-    digitalWrite(greenLed, LOW);
-    digitalWrite(yellowLed, LOW);
-    digitalWrite(redLed, LOW);
-    delay(100);
-    return; // Skip the rest of the loop
-  }
-
-  // Normal Distance Logic
+  // Reset all outputs first
   digitalWrite(greenLed, LOW);
   digitalWrite(yellowLed, LOW);
   digitalWrite(redLed, LOW);
   noTone(buzzer);
 
-  if (distance < 10) {
-    digitalWrite(redLed, HIGH);
-    tone(buzzer, 1000);
-  } else if (distance < 20) {
-    digitalWrite(yellowLed, HIGH);
-  } else {
-    digitalWrite(greenLed, HIGH);
+  // LOGIC: Check levels
+  // Adjust these numbers (200, 500, 800) based on your LDR readings!
+  
+  if (waterLevel > 200) {
+    digitalWrite(greenLed, HIGH); // Level 1 Reached
   }
   
+  if (waterLevel > 500) {
+    digitalWrite(yellowLed, HIGH); // Level 2 Reached
+  }
+  
+  if (waterLevel > 800) {
+    digitalWrite(redLed, HIGH);   // Level 3 (FULL) Reached
+    tone(buzzer, 1000);           // ALARM!
+  }
+
   delay(100);
 }
                 </div>
@@ -196,37 +171,40 @@ void loop() {
                 <h2>How It Works</h2>
                 <ul class="glass-list">
                     <li style="font-weight: 700; color: #fff; background: rgba(255,255,255,0.1);">
-                        Priority Logic:
+                        Accumulative Logic:
                     </li>
                     
                     <li>
-                        <strong>Interrupting Behavior:</strong><br>
-                        The code checks light levels first. If it is "pitch black" (`lightLevel < 200`), it enters a flashing panic mode and uses `return` to skip the distance check entirely. This mimics a system override.
+                        <strong>Bar Graph Effect:</strong><br>
+                        Unlike the parking sensor (where only one light was on at a time), water fills from the bottom up. So if the level is High, the Medium and Low lights should <em>also</em> stay on. We achieve this by using separate `if` statements instead of `else if`.
                     </li>
                     <li>
-                        <strong>Normal Operation:</strong><br>
-                        If the light is normal, the system proceeds to measure distance and act as a standard parking sensor (Green/Yellow/Red logic).
+                        <strong>Thresholds:</strong><br>
+                        We divide the analog range (0-1023) into zones. <br>
+                        > 200 = Low water.<br>
+                        > 500 = Half full.<br>
+                        > 800 = Dangerously full.
                     </li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Expected Output</h2>
-                <p><strong>Daytime:</strong> The LEDs change based on how close your hand is (Green -> Yellow -> Red + Beep).<br><strong>Darkness:</strong> If you cover the LDR completely, all three LEDs will flash rapidly in a panic pattern.</p>
+                <p>As you expose the LDR to more light (simulating rising water), the LEDs will turn on one by one: Green -> Green+Yellow -> Green+Yellow+Red. Once the Red LED turns on, the buzzer will start beeping to warn you of an overflow.</p>
             </section>
 
             <section class="project-section">
                 <h2>What You Learned</h2>
                 <ul class="glass-list">
-                    <li>How to read multiple sensors in a single loop cycle.</li>
-                    <li>Using `return` to exit a loop early based on priority conditions.</li>
-                    <li>Managing complex wiring with shared power rails.</li>
+                    <li>How to create a multi-stage visual indicator (Bar Graph).</li>
+                    <li>Integrating audio alarms with sensor thresholds.</li>
+                    <li>Using Analog Inputs to monitor continuous variables (like fluid levels).</li>
                 </ul>
             </section>
 
             <section class="project-section">
                 <h2>Next Steps / Extension Ideas</h2>
-                <p>You have mastered the basics! Now try creating a "Smart Security System" that only alarms if distance measuring detects movement AND the room is dark (using `&&` logic).</p>
+                <p>Try changing the code so the buzzer beeps <strong>intermittently</strong> (Beep... Silence... Beep) instead of one continuous tone when the tank is full. This is less annoying and sounds more like a real alarm!</p>
             </section>
 
         </div>
