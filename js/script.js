@@ -24,7 +24,6 @@ const projectsData = [
   { id: 22, title: "Reaction Timer", difficulty: "Medium", concept: "Timing, user interaction" },
   { id: 23, title: "Distance Brightness", difficulty: "Medium", concept: "PWM, distance sensing" },
   { id: 24, title: "Parking Assistant", difficulty: "Medium", concept: "Combined sensor system" },
-  { id: 25, title: "LED Chase", difficulty: "Easy", concept: "Looping, sequencing" }
 ];
 
 function generateProjectCards() {
@@ -133,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   enhanceCodeBlocks();
 });
+
 
 
 
